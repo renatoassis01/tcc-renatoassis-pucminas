@@ -1,0 +1,54 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Folha de rosto
+%% Autor: Fábio Leandro Rodrigues Cordeiro
+%% Version: 1.0
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Usando o comando \folhaderosto
+\setcounter{page}{1}
+	\thispagestyle{empty}
+  
+	\begin{center}
+		\por% Autor
+	\end{center}
+	
+	\vfill % Espacamento vertical
+	
+	\begin{center}
+		\textbf{\monog}\\ % Titulo
+		\textbf{\subtitulo} % Subtitulo
+	\end{center}
+	
+	\vfill % Espacamento vertical
+	
+	\begin{flushright}
+		\begin{minipage}{9cm} % 7cm (recuo) + 9cm (texto) + 5cm (margens) = 21cm (largura A4)
+			 {\tipo apresentada ao \curso~da \univ, como requisito parcial para obtenção do título de \grau.} \par % Nota de apresentacao
+			\vspace{1cm}
+			Orientador: {\profOrientador} \\ % Orientador 
+			Coorientador: {\profA}
+			
+			\bigskip
+			Área de concentração: {\areaConcentracao}
+
+		\end{minipage}
+	\end{flushright}
+	
+	\vfill % Espacamento vertical
+	
+	\begin{center}
+		\cidade\\ % Cidade
+		\ano % Ano
+	\end{center}
+	
+	\newpage % Quebra de pagina
+
+
+% ou...
+% fazendo a mao
+%
+% \begin{titlepage}
+%
+%   ... codigo da folha de rosto
+%  
+% \end{titlepage}

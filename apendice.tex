@@ -1,0 +1,265 @@
+% \thispagestyle{empty}
+
+\onehalfspacing 
+
+
+\appendix
+\setcounter{page}{87}
+% APÊNDICE A – Título
+
+%  \chapter{\hspace{-0.05cm}PÊNDICE  A - Instalação e Configuração do GlusterFS}
+\section*{APÊNDICE A - Instalação e Configuração do GlusterFS}
+
+\section*{Requisitos}
+
+Este trabalho foi configurado com as seguintes versões de \textit{software} conforme visto no Quadro \ref{tab:software}.
+No entanto recomenda-se essas versões ou superiores.
+
+\section*{Preparação do Ambiente}
+
+Configurar os arquivos de rede que deve ser feito em todos os nodos que receberam o Gluster \textit{Server}.
+
+Configurar os nomes dos \textit{host}, habilitar a rede e rota de acesso externo:
+
+  \noindent{\textbf{\$ sudo vim /etc/sysconfig/network}}
+
+ \noindent{\textit{NETWORKING=yes}}  \\
+ \textit{HOSTNAME=node01.ctdb}  \\
+ \textit{GATEWAY=10.0.1.250 } \\
+ 
+ Configurar interface primária de rede:
+ 
+ \noindent{\textbf{\$ sudo vim /etc/sysconfig/network-scripts/ifcfg-eth0}}
+ 
+\noindent{\textit{DEVICE="eth0}}" \\
+\textit{BOOTPROTO="static"} \\
+\textit{HWADDR="08:00:27:39:11:27"} \\
+\textit{NM\_CONTROLLED="yes"} \\
+\textit{ONBOOT="yes"} \\
+\textit{TYPE="Ethernet"} \\
+\textit{IPADDR="10.0.1.1"} \\
+\textit{NETMASK="255.255.255.0"} \\
+
+Desabilitar o \textit{firewall} padrão das distribuições Linux baseadas em Red Hat. 
+Essa configuração não é recomendada para ambientes em produção, sendo necessário que sejam feitas 
+as devidas configurações de permissividade no \textit{Firewall} SELinux e no Iptables nesses ambientes.
+Como este experimento foi feito de forma controlada e isolada, isso não foi uma precaução 
+bastando desativar esses serviços:
+
+Editar o arquivo do SELinux.
+
+\noindent{\textbf{\$vim /etc/sysconfig/selinux}}
+
+\noindent{\textit{SELINUX=disabled}} \\
+\textit{SELINUXTYPE=targeted} \\
+\textit{SETLOCALDEFS=0} \\
+
+Desabilitar o serviço de Ipables (deve ser feito em todos nodos envolvidos).
+
+\noindent{\textbf{\$sudo /etc/init.d/iptables stop}
+
+Próximo passo é configurar os nodos da rede de forma a permitir que eles se comuniquem por meio de nome e IP, para isso deve se editar o arquivo “/etc/hosts”, 
+e indicar o nome das máquinas e IPs, respectivamente. Realizar este procedimento nas quatro estações servidoras do \textit{cluster}.
+
+\noindent{\textbf{\$sudo vim /etc/hosts}}
+
+\noindent{\textit{127.0.0.1  \quad     localhost }} \\
+\textit{127.0.1.1  \quad   localhost.localdomain  \quad  localhost} \\
+\textit{10.0.1.1   \quad   node01.cluster.local   \quad  node01} \\
+\textit{10.0.2.1   \quad   node02.cluster.local   \quad  node02} \\
+\textit{10.0.1.3   \quad   node03.cluster.local   \quad	 node03} \\
+\textit{10.0.1.4   \quad   node04.cluster.local	  \quad  node04} \\
+
+
+\section*{Instalação do GlusterFS Server}
+
+Essa etapa requer que as máquinas tenham acesso a internet para que sejam instalados os pacotes bem como baixadas possíveis dependências.
+
+Certificado que elas possuam acesso Web,  habilitar repositórios extras com:
+
+\noindent{\textbf{rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY*}} \\
+\textbf{rpm --import https://fedoraproject.org/static/0608B895.txt}
+
+
+Atualizar a lista de repositórios e instalar o \textit{wget}, e baixar a última \textit{release}, 
+depois deve-se instalar manualmente e atualizar a ordem de prioridade do \textit{Yum}.
+
+\noindent{\textbf{\$ sudo yum update -y}} \\
+\textbf{\$ sudo yum install wget -y}
+
+
+\noindent{\textbf{\$wget http://dl.fedoraproject.org/pub/epel/6/x86\_64/epel-release-6-8.noarch.rpm}} \\
+\textbf{\$ sudo rpm -ivh epel-release-6-8.noarch.rpm }
+\textbf{\$ sudo yum install yum-priorities}
+
+Alterar o repositório “epel.repo”
+
+\noindent{\textbf{\$ sudo  vim /etc/yum.repos.d/epel.repo}}
+
+\noindent{\textit{[epel]}} \\
+\textit{name=Extra Packages for Enterprise Linux 6 - \$basearch} \\
+\textit{\#baseurl=http://download.fedoraproject.org/pub/epel/6/\$basearch} \\
+\textit{mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-6\&arch=\$basearch} \\ 
+\textit{failovermethod=priority} \\
+\textit{enabled=1} \\
+\textit{priority=10} \\
+\textit{gpgcheck=1} \\
+\textit{gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6}
+\textit{[…]} \\
+
+Instalação do GlusterFS \textit{Server} nos servidores:
+
+\noindent{\textbf{\$ sudo yum install glusterfs-server -y}}
+
+Configurar para que ele seja iniciado automaticamente:
+
+\noindent{\textbf{\$ sudo chkconfig --levels 235 glusterd on}}\\
+\textbf{\$ sudo /etc/init.d/glusterd start}
+
+\section*{Configuração do GlusterFS Server}
+
+A configuração consiste em adicionar os \textit{peers} que são os nodos pares que hospedaram os \textit{bricks}, 
+dos quais serão exportados como unidade de armazenamento mínimos pelos volumes.
+
+Adicionar cada um dos pares no primeiro nodo, e serão adicionados automaticamente nos demais as informações de 
+\textit{peers} de todos servidores pelo GlusterFS:
+
+\noindent{\textbf{\$ sudo gluster peer probe node02}} \\
+\textbf{\$ sudo gluster peer probe node03} \\
+\textbf{\$ sudo gluster peer probe node04} \\
+
+Será retornado mensagem informando que os pares foram adicionados com sucesso. Para fazer fazer a 
+checagem das configurações dos \textit{peers} e se eles estão conectados digite:
+
+\noindent{\textbf{\$ gluster peer status}} \\
+
+\begin{figure}[!htp]
+\centering
+\caption{gluster peer status}
+\vspace{-0.3cm}
+\includegraphics[width=1\textwidth]{figuras/config/figura1.png}
+\footnotesize\\ \textbf{Fonte: \citeonline{centos2014}}
+\label{fig:peer}
+\end{figure}
+
+Para adicionar cada volume deve ser informado qual o nome do volume, seu tipo, sua maneira 
+de transporte e onde estão localizados seus \textit{bricks} físicos, ou seja os diretórios 
+que serão exportados dos servidores remotos, que por sua vez devem ser criados antes desse 
+procedimento.
+
+Os diretórios devem ser criados em todos os nodos servidores da seguinte forma:
+
+\noindent{\textbf{\$ sudo mkdir -p /dados/replicate}} \\
+\textbf{\$  sudo mkdir -p /dados/distribute} \\
+\textbf{\$ sudo mkdir -p /dados/stripe}
+
+Depois pode ser realizado a criação dos volumes em apenas um dos nodos, pois a configuração é 
+replicada para todos os outros nodos do \textit{cluster}.
+
+\noindent{\textbf{\$ sudo gluster volume create vol-replicate replica 4 transport tcp node01:/storage/\\replicate node02:/storage/replicate node03:/storage/replicate node04:/storage/\\replicate}}
+
+\noindent{\textbf{\$ sudo  gluster volume create vol-distribute transport tcp node01:/storage/distribute   node02:/storage/distribute node03:/storage/distribute node04:/storage/distribute}}
+
+\noindent{\textbf{\$ sudo  gluster volume create vol-stripe stripe 4 transport tcp node01:/storage/stripe node02:/storage/stripe node03:/storage/stripe node04:/storage/stripe}}
+
+Então cada um dos volumes é habilitado para ser reiniciado:
+
+\noindent{\textbf{\$  sudo gluster volume start vol-distribute}} \\
+\textbf{\$  sudo gluster volume start vol-replicate }\\
+\textbf{\$  sudo gluster volume start vol-stripe}
+
+Para saber se os  volumes estão funcionando corretamente, verificar o status:
+
+ \noindent{\textbf{\$ sudo gluster volume info nome\_do\_volume}}
+ 
+\begin{figure}[!htp]
+\centering
+\caption{gluster volume info volume-replicate}
+\vspace{-0.3cm}
+\includegraphics[width=1\textwidth]{figuras/config/figura2.png}
+\footnotesize\\ \textbf{Fonte: \citeonline{centos2014}}
+\label{fig:replicate}
+\end{figure}
+
+
+ \begin{figure}[!htp]
+\centering
+\caption{gluster volume info volume-distribute}
+\vspace{-0.3cm}
+\includegraphics[width=1\textwidth]{figuras/config/figura3.png}
+\footnotesize\\ \textbf{Fonte: \citeonline{centos2014}}
+\label{fig:distribute}
+\end{figure}
+
+ \begin{figure}[!htp]
+\centering
+\caption{gluster volume info volume-stripe}
+\vspace{-0.3cm}
+\includegraphics[width=1\textwidth]{figuras/config/figura4.png}
+\footnotesize\\ \textbf{Fonte: \citeonline{centos2014}}
+\label{fig:stripe}
+\end{figure}
+
+\section*{Instalação do GlusterFS Cliente}
+
+Realizar os mesmos procedimentos iniciais da instalação do GlusterFS \textit{Server}, 
+adicionar os repositórios e atualizar a lista de pacotes, depois instalar o GlusterFS Cliente.
+
+\noindent{\textbf{\$ sudo yum install glusterfs glusterfs-geo-replication fuse-devel fuse-libs fuse-ntfs-3g}}
+
+\section*{Configuração do GlusterFS Cliente}
+
+A estação cliente deve estar devidamente configurada para enxergar os servidores por nome no arquivos de \textit{hosts}, 
+da mesma forma que foi feito nos nodos servidores. Proceda com a montagem manual dos volumes em um ponto de montagem criado localmente:
+
+\noindent{\textbf{\$ sudo mkdir -p /mnt/replicate}}\\
+\textbf{\$ sudo mkdir -p /mnt/distribute} \\
+\textbf{\$ sudo mkdir -p /mnt/stripe}
+
+Agora faça a montagem manual dos dispositivos, os volumes remotos:
+
+\noindent{\textbf{\$ sudo mount.glusterfs node01:/vol-replicate /mnt/replicate}}\\
+\textbf{\$ sudo mount.glusterfs node01:/vol-distribute  /mnt/distribute}\\
+\textbf{\$ sudo mount.glusterfs node01:/vol-stripe /mnt/stripe}
+
+ou
+
+\noindent{\textbf{\$ sudo mount -t glusterfs node01:/vol-replicate /mnt/replicate}}\\
+\textbf{\$ sudo mount -t glusterfs node01:/vol-distribute  /mnt/distribute}\\
+\textbf{\$ sudo mount -t glusterfs node01:/vol-stripe /mnt/stripe}
+
+A conferência se os volumes foram montados devidamente e estão funcionando é feita 
+com o comando:
+
+\noindent{\textbf{\$ sudo df -h}}
+
+ \begin{figure}[!htp]
+\centering
+\caption{sudo df -h}
+\includegraphics[width=1\textwidth]{figuras/config/figura5.png}
+\footnotesize\\ \textbf{Fonte: \citeonline{centos2014}}
+\label{fig:df}
+\end{figure}
+
+É importante observar que essa configuração é volátil, e quando a máquina cliente for reiniciada os discos não estarão mais montando. Para que a configuração seja fixa, 
+a montagem pode ser adicionada no arquivo “/etc/fstab” para que seja carregada na inicialização do sistema. Abra o arquivo e adicione nele assim:
+
+\noindent{\textbf{\$ sudo vim /etc/fstab}}
+
+\begin{figure}[!htp]
+\centering
+\caption{/etc/fstab}
+\includegraphics[width=1\textwidth]{figuras/config/figura6.png}
+\footnotesize\\ \textbf{Fonte: \citeonline{centos2014}}
+\label{fig:fsfab}
+\end{figure}
+
+\section*{Considerações da instalação e utilização}
+
+A partir dos pontos de montagem na máquina cliente, os volumes passam a ser acessados distribuindo os arquivos pelos \textit{bricks},
+de acordo com as características dos volumes associados a eles.
+Qualquer serviço de rede que utilize acesso local a um diretório ou mesmo compartilhamento remoto, pode ser direcionado para 
+esses diretórios como: bases de dados, servidores Web, servidores de arquivos dentre outros serviços de rede. 
+
+
+

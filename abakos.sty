@@ -1,0 +1,508 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%% Template Latex - Dissertação, Tese e Trabalho de Diplomação %%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% codificação UTF-8 - Abntex - Latex -  							     %%
+%% Autor: Fábio Leandro Rodrigues Cordeiro  (fabioleandro@pucminas.br)                               %% 
+%% Colaboradores: Prof. João Paulo Domingos Silva  e Harison da Silva                                %%
+%% Revisores normas NBR (Padrão PUC Minas): Helenice Rego Cunha e Prof. Theldo Cruz                  %%
+%% Versão: 1.0     13 de Setembro 2013                                                               %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\NeedsTeXFormat{LaTeX2e}
+\input{cvs-id.def}
+\CVSExtract$Id: abakos.sty,v 0.1 2012/29/08 15:08:25 Fabio Cordeiro Exp $
+\CVSPackage{abakos}{} %substitui \ProvidesPackage (replaces \ProvidesPackage)
+
+% Pacotes de codificação das fontes para português
+\usepackage[T1]{fontenc}
+% \usepackage{times}
+
+\usepackage{float}
+
+% \usepackage{memhfixc}  % Para mudança de tamanho de fontes 
+% Merge em duas células (linhas diferentes)
+\usepackage{multirow}
+
+% %desenhar cabeçalho e rodapé
+ \usepackage{fancyhdr}
+ 
+ \usepackage{amsmath}
+
+% Pacote para divisão silábica do portugues
+\usepackage[english, brazilian]{babel}   %%%% french to quadros
+\usepackage[titles]{tocloft} %% formatar a lista de figuras e tabelas.
+\usepackage[format=hang,font=bf,justification=centerlast,labelfont=bf,labelsep=endash]{caption}
+
+\usepackage{amssymb}  % para usar Striker math
+\usepackage{pdfpages}
+
+
+% Pacote para citação e referências seguindo ABNT no sistema (AUTOR, Data)
+%   \usepackage[alf,abnt-emphasize=bf,bibjustif,recuo=0cm, abnt-etal-cite=2, abnt-full-initials=yes, abnt-and-type=; , abnt-thesis-year=title]{abntex2cite} % faz ficar negrito i titulo e a o ano da thesi vir depois do titulo
+
+% \usepackage[alf,abnt-emphasize=bf, abnt-etal-cite=2, abnt-full-initials=yes]{abntex2cite} % faz ficar negrito i titulo e a o ano da thesi vir depois do titulo
+
+\usepackage[hyphens]{url}
+\usepackage[hidelinks]{hyperref} %hyperref most be before abntex2cite
+
+ \usepackage[notbib]{tocbibind}
+
+\usepackage[brazilian,hyperpageref]{backref}
+\usepackage[alf]{abntex2cite}
+% \usepackage{cite}
+%\usepackage{abntex2-alf}
+\usepackage{setspace}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+
+%\usepackage[linesnumbered, plain, vlined]{algorithm2e}
+%\usepackage{algorithmicx}
+%\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{listings}
+
+\usepackage{leading}   %espaçamento variavel
+\usepackage[a4paper]{geometry}
+
+\usepackage[perpage,para,symbol*]{footmisc}
+\usepackage{titlesec}
+\usepackage{chngcntr} 
+
+\usepackage{indentfirst}
+\usepackage{tikz}
+
+\citeoption{abnt-full-initials=yes}
+
+% Alterar o espaçamento da margem no algoritmo
+%\setlength{\algomargin}{1em}
+
+%Numeração de páginas em Arabe (arabico)
+\pagenumbering{arabic}
+
+% Margens 
+% \usepackage[inner=30mm,outer=20mm,top=30mm,bottom=20mm]{geometry}
+ \geometry{tmargin=30mm,bmargin=20mm,lmargin=30mm,rmargin=20mm}
+ 
+% -- Legenda das Figuras --
+\floatstyle{plaintop}
+\restylefloat{table}
+\restylefloat{figure}
+\captionsetup[figure]{labelsep=endash,labelfont={bf},textfont=bf} 
+\captionsetup[table]{labelsep=endash,labelfont={bf},textfont=bf}
+\captionsetup[algorithm]{labelsep=endash,labelfont={bf},textfont=bf} 
+ 
+%%%%%%Utilizar simbolos como nota de rodapé [* 
+ \long\def\symbolfootnote[#1]#2{\begingroup%
+ \def\thefootnote{\fnsymbol{footnote}}\footnote[#1]{#2}\endgroup}
+
+%%%%%%%%%% Identação de nota de rodapé %%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\footnotemargin}{0pt} %identação da nota de rodapé 
+\renewcommand{\footnotelayout}{\hspace{0px}}% Espaço entre simbolo do rodapé e layout texto 
+
+
+%%%% traduzir caption de figuras e tabelas %%%%%%%%%%%%%%%%%
+
+\addto\captionsbrazilian{
+% \renewcommand{\figurename}{Figura}
+ \renewcommand{\tablename}{Tabela}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % % Citação direta 
+\newenvironment{citacaodireta}{%
+  \begin{list}{}{%
+    \small
+    \setlength{\leftmargin}{4cm}
+    \singlespacing
+  }
+  \item\relax
+}{\end{list}}
+
+%%%%%%%%%% Configurar item de sumário %%%%%%%%%%
+% \usepackage[tocflat]{tocstyle}
+
+
+% --- Titulo de secao ---
+\beforetitleunit=1ex\@plus.3ex\@minus.06ex
+\aftertitleunit=1ex\@plus.1ex
+
+%\pagestyle {empty}
+\pagestyle {myheadings}
+
+\renewcommand\chapter{\if@openright\cleardoublepage\else\clearpage\fi
+                    \thispagestyle{empty}%
+                    \global\@topnum\z@
+                    \@afterindentfalse
+                    \secdef\@chapter\@schapter}
+
+\newcommand{\capitulo}[1]{\chapter{#1} \thispagestyle{myheadings} }
+\renewcommand{\@makechapterhead}[1]{\noindent{\uppercase{\textbf{\thechapter~#1}}}\vspace{0.5\baselineskip} \thispagestyle{myheadings}}
+
+% --- Titulo de secao ---
+
+\newcommand{\secao}[1]{\section{#1}}
+\renewcommand{\section}{\@startsection
+{section} %Nome
+{0} %Nivel
+{0mm} %Indentacao
+ {0.5\baselineskip} % Antes do paragrafo
+ {0.5\baselineskip} % Depois do paragrafo
+{\noindent\bfseries}} % Estilo
+
+% --- Titulo de subsecao ---
+
+\newcommand{\subsecao}[1]{\subsection{#1}}
+\renewcommand{\subsection}{\@startsection
+{subsection} %Nome
+{1} %Nivel
+{0mm} %Indentacao
+{0.5\baselineskip} % Antes do paragrafo
+{0.5\baselineskip} % Depois do paragrafo
+{\noindent\itshape\bfseries}} % Estilo
+
+% % --- Titulo de subsubsecao ---
+
+\newcommand{\subsubsecao}[1]{\subsubsection{#1}}
+\renewcommand{\subsubsection}{\@startsection
+{subsubsection}% %Nome
+{2} %Nivel
+{0mm} %Indentacao
+{0.5\baselineskip} % Antes do paragrafo
+{0.5\baselineskip} % Depois do paragrafo
+{\noindent\bfseries\underbar}} % Estilo
+
+
+%%%%%%%%%%%Título de Seção de 4° nível %%%%%%%%%%%%%%%%
+%\setcounter{secnumdepth}{4}
+%\setcounter{tocdepth}{3}
+\newcounter {subsubsubsection}[subsubsection]
+\renewcommand\thesubsubsubsection{\thesubsubsection .\@arabic\c@subsubsubsection}
+\newcommand\subsubsubsection{\@startsection{subsubsubsection}{4}{\z@}%
+				     {0.5\baselineskip} % Antes do paragrafo
+                                     {0.5\baselineskip}
+                                     {\normalsize}}
+% \newcommand*{\subsubsubsectionmark}[1]{\\ \par}
+
+
+%%%%%%%%%%%Título de Seção de 5° nível %%%%%%%%%%%%%%%%
+
+%para usar o paragrafo como  nivel
+%\setcounter{secnumdepth}{5}
+%\setcounter{tocdepth}{5} 
+
+% Para usar Fonte em algoritmos, gráficos, tabelas e quadros.
+%\newcommand{\floatFonte}[1]{\vspace{\abovecaptionskip}\caption*{\textbf{Fonte:} #1}\vspace{-\abovecaptionskip}}
+
+% --- LISTA DE FIGURAS ---
+\counterwithout{figure}{chapter}
+\counterwithout{table}{chapter}
+
+
+\renewcommand{\cftfigpresnum}{FIGURA \ }
+%\setlength{\cftfignumwidth}{}
+%\renewcommand{\cftfigaftersnum}{ \ -- \ }
+\setlength{\cftfignumwidth}{\dimexpr 7em}
+\renewcommand\cftfigaftersnum{\enspace--\enspace}
+\renewcommand{\thefigure}{\arabic{figure}}
+
+\newcommand{\listafiguras}
+{
+\begin{newpage}
+	\thispagestyle{empty}
+	\setlength{\baselineskip}{1.5\baselineskip} % Espacamento: 1.5
+
+	\begin{center}
+		\textbf{LISTA DE FIGURAS} \\ [1.5\baselineskip]
+	\end{center}
+	\@starttoc{lof}
+\end{newpage}
+}
+
+
+% --- LISTA DE TABELAS ---
+
+\renewcommand{\cfttabpresnum}{TABELA \ }
+\setlength{\cfttabnumwidth}{7.2em}
+\renewcommand{\cfttabaftersnum}{ \ -- \ }
+\renewcommand{\thetable}{\arabic{table}}
+
+\newcommand{\listatabelas}
+{
+\begin{newpage}
+	\thispagestyle{empty}
+	\setlength{\baselineskip}{1.5\baselineskip} % Espacamento: 1.5
+
+	\begin{center}
+		\textbf{LISTA DE TABELAS} \\ [1.5\baselineskip]
+	\end{center}
+	\@starttoc{lot}
+\end{newpage}
+}
+
+%% LISTA DE EXEMPLOS
+\newcommand{\acronymlistname}{LISTA DE SIGLAS}
+\newlistof{acronym}{loac}{\acronymlistname}
+\newcommand{\acronym}[2]{\refstepcounter{acronym}\addtocontents{loac}{\protect #1 \ -- \ #2 \\}}
+
+\newcommand{\sigla}[2]{\acronym{#1}{#2}}
+
+\newcommand{\listadesiglas}
+{
+\begin{newpage}
+	\thispagestyle{empty}
+	\setlength{\baselineskip}{1.5\baselineskip} % Espacamento: 1.5
+	\begin{center}
+		\textbf{\acronymlistname} \\ [1.5\baselineskip]
+	\end{center}
+	\@starttoc{loac}
+%        \newpage
+\end{newpage}
+}
+
+%%%%%%%%%%% LISTA DE QUADROS %%%%%%%%%%%%%%%%%%%
+
+%\RequirePackage{float}
+%\RequirePackage{tocloft}
+
+\newcommand{\quadref}[1]{QUADRO \ref{#1}}
+
+\newcommand{\listQuadrosname}{LISTA DE QUADROS}
+\newlistof{quadro}{qud}{\listQuadrosname}
+\floatstyle{plain}
+\newfloat{Quadros}{H}{loq}
+\floatname{Quadros}{QUADRO}
+\restylefloat{Quadros}
+
+\newenvironment{quadro}
+{\refstepcounter{quadro}
+
+\addcontentsline{qud}{quadro}{\numberline{Quadro \thequadro\ }}
+\begin{Quadros}\begin{center}
+}
+{\end{center}\end{Quadros}}
+
+\newlistof{quadros}{exp}{\listQuadrosname}
+\newcommand{\quadros}[1]{%
+\refstepcounter{quadros}
+\par\noindent{\textbf{Quadro \thequadros: #1}}
+\addcontentsline{exp}{quadros}{QUADRO \protect\numberline{\thequadros\ -- \ }#1}\par}
+
+\newcommand{\listaquadros}
+{
+\begin{newpage}
+	\thispagestyle{empty}
+	\setlength{\baselineskip}{1.5\baselineskip} % Espacamento: 1.5
+
+	\begin{center}
+		\textbf{LISTA DE QUADROS} \\ [1.5\baselineskip]
+	\end{center}
+	\@starttoc{exp}
+\end{newpage}
+}
+
+%\addcontentsline{toc}{chapter}{LISTA DE QUADROS}
+
+
+%%%%%%%%%%% LISTA DE GRÁFICOS %%%%%%%%%%%%%%%%%%%
+ 
+%\RequirePackage{float}
+%\RequirePackage{tocloft}
+
+\newcommand{\grafref}[1]{Gráfico \ref{#1}}
+
+\newcommand{\listGraficosname}{LISTA DE GRÁFICOS}
+\newlistof{grafico}{gud}{\listGraficosname}
+\floatstyle{plaintop}
+\newfloat{Graficos}{H}{log}
+\floatname{Graficos}{Gráfico}
+
+\newenvironment{grafico}
+{\refstepcounter{grafico}
+
+\addcontentsline{gud}{grafico}{\numberline{Gráfico \thegrafico\ }}
+\begin{Graficos}\begin{center}
+}
+{\end{center}\end{Graficos}}
+
+\newlistof{graficos}{exg}{\listGraficosname}
+\newcommand{\graficos}[1]{%
+\refstepcounter{graficos}
+\par\noindent\caption*{\textbf{Gráfico \thegraficos: #1}}
+\addcontentsline{exg}{graficos}{GRÁFICO \protect\numberline{\thegraficos\ -- \ }\ #1}\par}
+\restylefloat{Graficos}
+
+\newcommand{\listagraficos}
+{
+\begin{newpage}
+	\thispagestyle{empty}
+	\setlength{\baselineskip}{1.5\baselineskip} % Espacamento: 1.5
+
+	\begin{center}
+		\textbf{LISTA DE GRÁFICOS} \\ [1.5\baselineskip]
+	\end{center}
+	\@starttoc{exg}
+\end{newpage}
+}
+
+
+%\addcontentsline{toc}{chapter}{LISTA DE GRÁFICOS}
+
+
+ %%%%%%%%%%%%%%%%LISTA DE ALGORITMOS %%%%%%%%%%%%%%
+%\RequirePackage{float}
+%\RequirePackage{tocloft}
+
+%\SetAlgorithmName{Algoritmo}{algoritmo}{LISTA DE ALGORITMOS}
+
+\newcommand{\algoref}[1]{Algoritmo \ref{#1}}
+
+\newcommand{\listAlgoritmosname}{LISTA DE ALGORITMOS}
+\newlistof{algoritmo}{aud}{\listAlgoritmosname}
+\floatstyle{plain}
+\newfloat{Algoritmos}{H}{loa}
+\floatname{Algoritmos}{Algoritmo}
+\restylefloat{Algoritmos}
+
+\newenvironment{algoritmo}
+{\refstepcounter{algoritmo}
+\addcontentsline{aud}{algoritmo}{\numberline{Algoritmo \thealgoritmo\ }}
+\begin{Algoritmos}\begin{center}
+}
+{\end{center}\end{Algoritmos}}
+
+\newlistof{algoritmos}{exa}{\listAlgoritmosname}
+\newcommand{\algoritmos}[1]{%
+\refstepcounter{algoritmos}
+\par\noindent{\normalsize{\textbf{Algoritmo \thealgoritmos: #1}}}
+\addcontentsline{exa}{algoritmos}{ALGORITMO \protect\numberline{\thealgoritmos\ -- \ }#1}\par}
+
+\newcommand{\listaalgoritmos}
+{
+\begin{newpage}
+	\thispagestyle{empty}
+	\setlength{\baselineskip}{1.5\baselineskip} % Espacamento: 1.5
+
+	\begin{center}
+		\textbf{LISTA DE ALGORITMOS} \\ [1.5\baselineskip]
+	\end{center}
+	\@starttoc{exa}
+\end{newpage}
+}
+
+%\addcontentsline{toc}{chapter}{LISTA DE ALGORITMOS}
+ 
+
+%Para personlizar identação
+\newcommand{\esp}{\hspace{-0.3cm}} % espaço entre Numero e Título da seção
+\cftsetindents{chapter}{0cm}{.4cm}
+\cftsetindents{section}{0cm}{1.0cm}
+\cftsetindents{subsection}{0cm}{1.4cm}
+\cftsetindents{subsubsection}{0cm}{1.8cm}
+\cftsetindents{paragraph}{0cm}{1.9cm}
+% \cftsetindents{subsubsubsection}{0cm}{1.4cm}
+
+% Personalizar a fonte e pontilhados do sumário
+
+\setlength{\cftbeforechapskip}{\baselineskip}
+%\renewcommand{\cftchapfont}{\upshape\bfseries}
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+
+\setlength{\cftsecindent}{0em}
+\renewcommand{\cftsecfont}{\bfseries}
+
+\setlength{\cftsubsecindent}{0em}
+\renewcommand{\cftsubsecfont}{\bfseries\itshape}
+
+\setlength{\cftsubsubsecindent}{0em}
+\renewcommand{\cftsubsubsecfont}{\bfseries}
+
+ \setlength{\cftsubsubsecindent}{0em}
+
+ 
+%%%%%%%%%%%%SUMÁRIO%%%%%%%%%%%%
+\newcommand{\sumario}
+{
+\pagestyle{empty}
+\begin{newpage}
+%	\pagenumbering{arabic}
+	\thispagestyle{empty}
+        \setlength{\baselineskip}{0.73\baselineskip} % Espacamento: 0.7 % Linux deve ter esta linha, se for rWindows deve ser comentada
+% 	\setlength{\baselineskip}{1.0\baselineskip} % Espacamento: 0.7
+	\begin{center}
+		\textbf{SUM\'ARIO} \\ [1.5\baselineskip]
+	\end{center}
+     	\@starttoc{toc}
+     	\thispagestyle{empty}
+     	\clearpage
+%      	\cleardoublepage
+% 	\newpage
+        \setlength{\baselineskip}{1.5\baselineskip} % Espacamento: 1.5
+\end{newpage}
+\pagestyle{myheadings}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Comando para citação individual de Autor e Ano
+\newcommand{\citeAutorAno}[1]{\citeauthoronline{#1} (\citeyear{#1})}
+\newcommand{\citeCitacao}[1]{\textsc{\citeauthoronline{#1}}, \citeyear{#1}} % para dentro do parentese ficar maisculo
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Recuo da primeira linha de cada parágrafo
+%  \onehalfspace  % espaçamento 1.5 entre linhas
+%  \setlength{\parindent}{1.25cm}
+
+%Desenhar figuras geometricas
+
+
+% --- REFERENCIAS ---
+
+\usepackage{emptypage} % ocultar numeração de páginas vazias
+
+\usepackage{etoolbox} %mostrar numeração primeira página bibliografia
+\newbool{firstbib}
+\booltrue{firstbib}
+\preto{\bibitem}{\ifbool{firstbib}{\thispagestyle{fancy}\setbool{firstbib}{false}}{}}
+
+\def\@makeschapterhead#1{
+	  \pagestyle{myheadings}
+%          \thispagestyle{myheadings}
+	\begin{center} \textbf{#1}\par \end{center}
+        \addcontentsline{toc}{chapter}{\bibname}
+	\vspace{1.5\baselineskip}
+	\setcounter{secnumdepth}{1} % Mostrar indice
+	\setcounter{tocdepth}{1}    % no sumário
+}
+
+%  \usepackage[none]{hyphenat}
+\newcommand{\referencias}[1]
+{  
+   % retirar espaçamento
+   \cleardoublepage %garantir início em página ímpar
+       \pagestyle{myheadings} %mostrar numeração de página
+       \setlength{\baselineskip}{0.79\baselineskip} % Espacamento: 0.7
+	\renewcommand{\bibname}{REFERÊNCIAS}
+%	\bibliographystyle{abntex2-alf}
+	%\renewcommand{\bibsetup}{\thispagestyle{myheading}}
+
+	\bibliography{#1}
+	\clearpage %garantir numeração na última página
+}
+
+%%%%%%%%%%%%%%%%%%%% Cabeçalho e Rodapé
+
+\thispagestyle{fancy}
+\fancyhf{}
+\fancyheadoffset{0cm}
+\renewcommand{\headrulewidth}{0pt} 
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[R]{\thepage}
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \fancyhead[R]{\thepage}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
