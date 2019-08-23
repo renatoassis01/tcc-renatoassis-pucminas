@@ -43,13 +43,47 @@ Realizar um ensaio comparativo entre dois softwares de provisionamento de infrae
 \section{\esp ESTRUTURA DO TRABALHO}
 Este trabalho é composto por uma introdução, contextualização, justificativas e objetivos e os seguintes capítulos:
 \begin{itemize}
-\item Capitulo 2 - Revisão literária: traz  o referencial teórico apresentando um conceito básico de DevOps e práticas os conceitos de infraestrutura como código.  
+\item Capitulo 2 - Revisão literária: traz  o referencial teórico apresentando um conceito básico de DevOps e práticas e os conceitos de infraestrutura como código.  
 \item Capitulo 3 - Apresenta os principais conceitos chaves e características de cada ferramenta
 \item Capitulo 4 - Apresenta os principais componentes de cada ferramenta.
 \item Capítulo 5 - Apresenta os critérios avaliativos e  métricas
 \item Capítulo 6 - Funcionamento básico: Demonstra o funcionamento das ferramentas 
 \item Capítulo 7 - Comparativo entre as ferramentas: Apresenta as os resultados e conclusões
 \end{itemize}
+
+\chapter{ Revisão literária}
+
+Este capítulo apresenta uma revisão da literatura sobre as definições de \textit{DevOps}, e os conceitos de infraestrutura como código e as suas principais características e práticas e fatores que envolvam sua adoção. 
+
+
+O que é DevOps?
+
+        O movimento Ágil tem como premissas a comunicação, colaboração e interações, 
+formando equipes altamente eficazes multidisciplinares que compartilham os mesmos objetivos. ou seja, focam em indivíduos e entrega de software e não em processos. 
+Os membros das equipes compreendem as funções e papeis de todos, permitindo que 
+uma equipe de programadores e testadores trabalhem em sintonia. Isso proporcionam 
+que as equipes desempenharem seu principal papel que é o desenvolvimento do produto.   \cite{sbbrocco}
+
+    Entregar software em produção é um processo que tem se tornado cada vez
+mais complexo em diversas empresas. Ciclos longos de desenvolvimento,
+teste e a implatação do sistema em produçãoo alguns
+dos fatores que contribuem para este problema. Mesmo equipes ágeis que
+produzem software incremental ao final de cada iteração. O software para ser implantado em produção encontram estas barreiras.
+DevOps e um movimento cultural e profissional que esta tentando quebrar
+essas barreiras. Com o foco em automacao, colaboracao, compartilhamento
+de ferramentas e de conhecimento, DevOps esta mostrando que desenvolvedores
+e engenheiros de sistema tem muito o que aprender uns com
+os outros.
+A equipe de desenvolvimento é ágil a operação não. As operações ainda em muitas empresas têm uma abordagem tradicional cheia de protocolos e processos que não as permitem ser ágeis.\cite{sato}
+DevOps traz uma abordagem diferente como software são entregues e colocados em operações e modo como as operações de TI devem se comportar.   
+DevOps tem como fundamentos a integração entre as equipes de desenvolvimento e operações, visando a agilidade de entregas também nas operações. Tem o foco em compartilhar o conhecimento e o uso de ferramentas que viabilizam está agilidade.
+A adoção da cultura DevOps traz benefícios para o negócio proporcionando agilizar processos para obtenção de softwares de qualidade e sendo implantados mais rápido em produção. A empresa tem maior aderências as mudanças mais sensíveis do mercado.
+
+A automação é importante para que se ganhe agilidade e coloque a equipe de infraestrutura em sinergia com as equipes ágeis de desenvolvimento.
+Chamando também como “Infraestrutura como código” é um dos aspectos mais fundamentais do DevOps. Ele permite que as organizações criarem ambientes altamente escalares, padronizados, monitorados e seguros com uma maior velocidade. A infraestrutura como código tratar de captar requisitos de configurações como diretrizes de seguranças, hardwares, softwares e versões a serem instalados e a inclusão destas em uma rede tudo isso definidos via softwares de automação.
+Esses softwares possuem um framework que permitem aos usuários escrever programas denominados “receitas” (Cookbooks) para automatizar tarefas de infra-estrutura. Essas receitas usam blocos de construção chamados de recursos. Um recursos descreve algum requisito de infraestrutura, por exemplo, qual, versão do sistema operacional devo instalar para um determinado sistema ou qual IP (Internet Protocol) deve ser atribuído para uma máquina.
+A grande vantagem de utilizar receitas que elas são escritas apenas uma vez e podem ser compartilhadas e reaproveitadas e integração com computação na nuvem.
+
 
 \chapter{CRITÉRIOS AVALIATIVOS E MÉTRICAS}
 \chapter{DESENVOLVIMENTO}
