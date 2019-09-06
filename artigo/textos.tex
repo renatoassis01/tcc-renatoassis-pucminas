@@ -30,10 +30,27 @@ Os objetivos específicos são explicar as diferenças entre \textit{softwares} 
 
 O \textit{design} da infraestrutura é a fase do ciclo de vida do produto em que se define e configura os recursos necessários para o funcionamento dele. A Infraestrutura como código é um conjunto de práticas que usam código para configurar máquinas e redes (virtuais), instalar programas, configurar um banco de dados e definir uma regra de segurança. As práticas IaC permitem a criação de vários recursos de maneira automatizada e padronizada controlando o estado da infraestrutura, além disso permitem o controle de versão, ou seja, pode-se desfazer de qualquer mudança na infraestrutura, somente alterando o código do recursos. \cite{Carnegie}
 
+\begin{citacaodireta}
+Infraestrutura como código representa o gerenciamento infraestrutura de rede (por exemplo, máquinas virtuais, balanceadores de carga e topologia de conexão) em um modelo descritivo, usando o mesmo versionamento que a equipe do desenvolvimento usa para o código-fonte.\cite[p. 1, tradução nossa]{masek} \footnote { ... Infrastructure as Code represents the management of network infrastructure (e.g., virtual machines, load balancers, and connection topology) in a descriptive model, using the same versioning as DevOps team uses for source code ...}
+\end{citacaodireta}
+
+\begin{citacaodireta}
+ Com o IaC, as equipes fazem alterações do ambiente e a versão da configuração que geralmente está em formatos de código bem documentados por exemplo, \textit{JavaScript Object Notation (JSON)}. O pipeline \footnote{Todo o ciclo de vida das aplicações, incluindo as etapas de teste e integração, além da entrega e implantação. Juntas, essas práticas relacionadas são chamadas de pipeline} executa o modelo para configurar ambientes de destino. Se a equipe precisa de fazer alterações, eles editam o código fonte, não o alvo. Portanto, a IaC permite que as equipes de DevOps testem um aplicativo em ambientes de produção no início do ciclo de desenvolvimento. Espera-se que essas equipes forneçam vários testes ambientes confiáveis e sob demanda. Infra-estrutura representada como o código também pode ser validado e testado para evitar problemas comuns de implantação antes de ser lançada no ambiente de produção. \cite[p. 2, tradução nossa]{masek} \footnote{... Accordingly, with IaC, maintenance teams make changes to the environment description and version the configuration model, which is typically in well-documented code formats e.g., JavaScript Object Notation (JSON). The release pipeline
+executes the model to configure target environments. If the team needs to make changes, they edit the source, not the target. Therefore, IaC enables DevOps teams to test an applica-tions in production-like environments early in the development cycle. These teams are expected to provision multiple test environments reliably and on demand. Infrastructure represented as code can also be validated and tested to prevent common deployment issues before it is rolled out to the production environment...}
+ \end {citacaodireta}
+ 
+ \begin{citacaodireta}
+ In the following, we consider the latter type of frameworks. Some of these frameworks rely on so-called “DevOps” tools such as Chef [21] and Puppet [22] that automate the deployment of applications, as well as the management of cloud capabilities. With visibility and control on both IaaS and PaaS levels, developers can exploit the peculiarities of cloud solutions at each level of the cloud stack. These frameworks embed
+mechanisms to monitor cloud resources and their consumption.  \cite{ferry} 
+ \end{citacaodireta}
+ 
+
 %  \section{\esp IaC ou Infraestrutura como Código uma abordagem geral}
  
  %   \subsection{ Softwares de provisionamento }
 
   %  \subsection{ Softwares de gerenciamento de configuração }
+  
+ 
 
    
