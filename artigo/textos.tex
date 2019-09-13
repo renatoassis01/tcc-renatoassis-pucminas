@@ -19,7 +19,7 @@ No entanto as equipes que lidam com a infraestrutura têm a difícil tarefa de i
 Para garantir um processo totalmente ágil e que acompanhe as exigências do negócio da organização é necessário que haja uma integração do desenvolvimento de sistemas e as operações de infraestrutura. Portanto essa abordagem ágil também deve ser seguida pelas equipes de infraestrutura.
 O movimento cultural denominado DevOps surgido em meados de 2009, foi influenciado principalmente por metodologias ágeis e computação na nuvem. Ele teve como fundamento a automatização de processos das operações de infraestrutura e a integração entre as equipes de desenvolvimento e operações. \cite{sato}.
 
-A automatização de processos de infraestrutura é uma das premissas do DevOps, utilizando uma abordagem para provisionar e gerenciar recursos de computação como máquinas virtuais, discos de armazenamento, regras de segurança, instalação de softeare, regras de redes e qualquer outro componente de serviço, destinando-se a simplificar significativamente a configuração e o gerenciamento de recursos em pequena e grande escala. A tradicional administração de um \textit{data center} ou uma nuvem exige que a cada alteração de \textit{software}, uma eventual ação manual na infraestrutura para acertar as configurações. Com a automação a infraestrutura também é tratada como "código" e um desenvolvedor pode descrever os recursos exigidos por uma aplicação em um arquivo padronizado de acordo com a ferramenta utilizada e os \textit{software} de gerenciamento ou provisionamento se encarregará de criar,atualizar ou remover recursos mantendo o estado da infraestrutura. 
+A automatização de processos de infraestrutura é uma das premissas do DevOps, utilizando uma abordagem para provisionar e gerenciar recursos de computação como máquinas virtuais, discos de armazenamento, regras de segurança, instalação de \textit{software}, regras de redes e qualquer outro componente de serviço, destinando-se a simplificar significativamente a configuração e o gerenciamento de recursos em pequena e grande escala. A tradicional administração de um \textit{data center} ou uma nuvem exige que a cada alteração de \textit{software}, uma eventual ação manual na infraestrutura para acertar as configurações. Com a automação a infraestrutura também é tratada como "código" e um desenvolvedor pode descrever os recursos exigidos por uma aplicação em um arquivo padronizado de acordo com a ferramenta utilizada e os \textit{software} de gerenciamento ou provisionamento se encarregará de criar,atualizar ou remover recursos mantendo o estado da infraestrutura. 
 
 \section{\esp Objetivos}
 
@@ -45,26 +45,67 @@ O autor descreve a infraestrutura como código, como o gerenciamento de redes in
 
 \section{\esp IaC ou Infraestrutura como código}
 
-Os trabalhos relacionados serviram de base para escrever esta seção. De acordo com a tabela 1 apresentada pelo autor xxxxxxx será usada para apresentar os conceitos da infraestrutura como código.
+Os trabalhos relacionados serviram de base para escrever esta seção. 
+
+\subsection{Gerenciamento de Configuração} 
+Ferramentas de gerenciamento de configuração como \textit{Chef, Puppet, Ansible,Saltack} foram projetadas para instalar e gerenciar softwares em servidores já existentes. Por exemplo podendo instalar um banco de dados, adicionar uma regra de \textit{firewall}, realizar uma atualização do sistema operacional. 
 
 
+\subsection{Provisionamento}
+
+Ferramentas de Provisionamento como \textit{Terraform, Heat, Cloudformation} foram projetadas criar as próprias instâncias \footnote{Uma instância é um servidor virtual na nuvem. Por exemplo: Uma instância rodando o sistema operacional LINUX} e a inicialização de seus recursos. As ferramentas geralmente se concentram no resultado final e ajudam a garantir que o ambiente esteja sempre nesse "estado" 
+
+\hfill
+Segundo \citeonline{Carnegie} existem sobreposições e esses termos não são necessariamente mutuamente exclusivos de ambas as ferramentas. As ferramentas de provisionamento podem realizar tarefas de configuração e ferramentas de configuração podem realizar tarefas de provisionamento, porém elas se concentram naquilo que são melhores. 
 
 
-Configuration Management vs Provisioning
-Mutable Infrastructure vs Immutable Infrastructure
-Procedural vs Declarative
-Master vs Masterless
-Agent vs Agentless
+\subsection{Linguagem}
 
+ As ferramentas podem usar para sua interação linguagens construídas especificamente para este propósito as chamadas \textit{Domain-Specific Language - DSL} 
+  \footnote{Uma linguagem de domínio específico é criada especificamente para resolver problemas em um domínio particular e não se destina a ser capaz de resolver os problemas fora de seu âmbito. } e ou integrando com tipos de formatos conhecidos como \textit{ YAML Ain't  Markup Language - YAML} \footnote{É um formato de serialização (codificação de dados) de dados legíveis por humanos -  https://yaml.org/ } ou \textit{JavaScript Object Notation - Notação de Objetos JavaScript - JSON} \footnote{ É uma formatação leve de troca de dados. Para seres humanos, é fácil de ler e escrever. Para máquinas, é fácil de interpretar e gerar. Está baseado em um subconjunto da linguagem de programação JavaScript, https://www.json.org/json-pt.html }
+  ou linguagens de programação como \textit{Python,Ruby} ou uma mesclagem de ambas.
+ 
+  \subsubsubsection{Procedural}
+  
+  É o estilo na qual você escreve um código e especifica, passo a passo, como atingir o estado final desejado. O ônus recai sobre o usuário para determinar o processo de implantação ideal. Veja o exemplo na figura \ref{fig:figura1}
 
+\begin{figure}[ht]
+	\centering	
+	\caption[\hspace{0.1cm}Exemplo procedural]{Exemplo de escrita procedural da ferramenta Chef}
+	\vspace{-0.4cm}
+	\includegraphics[width=0.5\textwidth]{figuras/chef-io-exemplo-procedural.png}
+	 \vspace{-0.2cm}
+	\\\textbf{\footnotesize Fonte: \cite{chef01} }
+	\label{fig:figura1}
+\end{figure}
+\vspace{-0.5cm}
+  
+  \subsubsubsection{Declarativa}
+  É o estilo em que você escreve um código que especifica o estado final desejado, e a própria ferramenta IAC é responsável por descobrir como atingir esse estado. Veja o exemplo na figura \ref{fig:figura2}
+ 
+ \begin{figure}[ht]
+	\centering	
+	\caption[\hspace{0.1cm}Exemplo declarativo]{Exemplo de escrita declarativa da ferramenta Terraform}
+	\vspace{-0.4cm}
+	\includegraphics[width=0.6\textwidth]{figuras/terraform-declarative-exemple-01.png}
+	 \vspace{-0.2cm}
+	\\\textbf{\footnotesize Fonte: \cite{terraform01}}
+	\label{fig:figura2}
+\end{figure}
+\vspace{-0.5cm}
 
-%\subsection{ Softwares de provisionamento }
+ \subsection{Infraestrutura}
+ 
+ \subsubsubsection{Mutável}
+ 
+ \subsubsubsection{Imutável}
+ 
+\subsection{Arquitetura}
 
-%\subsection{ Softwares de gerenciamento de configuração }
+\subsubsubsection{Cliente/Servidor}
+ 
+\subsubsubsection{Cliente} 
 
-%\subsection{ Arquitetura }
-
-%\subsection{ Infraestrutura }
 
 
 \section{\esp Metologia}
