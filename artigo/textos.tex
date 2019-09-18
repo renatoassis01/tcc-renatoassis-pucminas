@@ -24,7 +24,7 @@ A automatização de processos de infraestrutura é uma das premissas do DevOps,
 \section{\esp Metologia}
 
 
-\section{\esp Trabalhos Relacionados}
+\section{\esp Trabalhos Relacionados} \label{relacionados}
 
 
 \citeonline{Carnegie} explica que o \textit{design} da infraestrutura é a fase do ciclo de vida do produto em que se define e configura os recursos necessários para o funcionamento dele. A Infraestrutura como código é um conjunto de práticas que usam código para configurar recursos, como máquinas e redes (virtuais), instalar programas, configurar um banco de dados e definir uma regra de segurança. As práticas IaC permitem a criação de vários recursos de maneira automatizada e padronizada, controlando o estado da infraestrutura, além disso permitem o controle de versão, ou seja, pode-se desfazer de qualquer mudança na infraestrutura, somente alterando o código do recursos. Ele também cita que antes mesmo do surgimento da IaC os administradores de sistemas já utilizavam automação, através de \textit{script} para realizar as tarefas de configuração de infraestrutura. E que a IaC surgiu com a popularização da computação da nuvem como serviço e que todos os recursos oferecidos são virtuais. No artigo ele ainda descreve que os provedores de serviços em nuvem fornecem um console de gerenciamento(uma interface \textit{web}) para a administração de recursos. Porém, para um sistema de larga escala, usar o console não é muito prático devido à dificuldade de gerenciar centenas de recursos que são criados e destruídos com uma grande frequência deve-se usar as \textit{application program interface} \footnote{É um conjunto de rotinas e padrões de programação para acesso a um aplicativo de \textit{software} ou plataforma baseada na \textit{Web}, permitindo que dois aplicativos se comuniquem. } (API) disponibilizadas pelo provedor ou Ferramentas IaC  que interagem com essas API que resolvem a questão da criação e destruição de alta frequência desses recursos. Por fim ele cita a relação entre infraestrutura como código \textit{Agile} e o DevOps. 
@@ -42,11 +42,10 @@ O autor descreve a infraestrutura como código, como o gerenciamento de redes in
 
 \section{\esp IaC ou Infraestrutura como código} \label{IaC}
 
-Os trabalhos relacionados serviram de base para escrever esta seção. 
+Os items apresentados neste capítulo foram levantados de acordo com assuntos abordados na seção \ref{relacionados}. A ideia dessa seção é descrever os conceitos básicos da infraestrutura como código de forma sucinta para um entendimento geral do assunto.  
 
 \subsection{Gerenciamento de Configuração} 
 Ferramentas de gerenciamento de configuração como \textit{Chef, Puppet, Ansible,Saltack} foram projetadas para instalar e gerenciar softwares em servidores já existentes. Por exemplo podendo instalar um banco de dados, adicionar uma regra de \textit{firewall}, realizar uma atualização no sistema operacional. 
-
 
 \subsection{Provisionamento}
 
@@ -101,17 +100,60 @@ As ferramentas de IaC usam arquivos de definição como \textit{DSL}
  \subsubsubsection{Imutável}
   Segundo \citeonline{Dadgar} A Noção de imutabilidade é a ideia de que, uma vez criada uma coisa, não a mudamos após a criação.
  
- Na infraestrutura imutável qualquer alteração a ser realizada nos servidores eles devem ser recriados. Estas alterações são feitas criando novas configurações e novos servidores são criados a partir delas. Isso aumenta a previsibilidade porque este servidor já foi testado antes de ir para a produção. Em outras palavras, as implantações se tornam atômicas. As ferramentas de provisionamento desempenham este papel.\cite{Morris:2016:ICM:3006361}
+ Na infraestrutura imutável qualquer alteração a ser realizada nos servidores eles devem ser recriados. Estas alterações são feitas criando novas configurações e novos servidores são criados a partir delas. Isso aumenta a previsibilidade porque este servidor já foi testado antes de ir para a produção. Em outras palavras, as implantações se tornam atômicas. As ferramentas de provisionamento desempenham este papel.\cite{Morris:2016:ICM:3006361}.
  
- Um exemplo: Digamos que precisamos atualizar o \textit{JAVA}\footnote{Java é uma linguagem de programação e plataforma computacional.} para uma versão mais nova. Na infraestrutura imutável é criado um novo servidor com essa atualização. Esta configuração é testada então novos servidores são criados a partir desta configuração e todos que estão rodando a versão antiga do java são destruídos. 
+ Um exemplo: Digamos que precisamos atualizar o \textit{JAVA}\footnote{Java é uma linguagem de programação e plataforma computacional.} para uma versão mais nova. Na infraestrutura imutável é criado um novo servidor com essa atualização. Esta configuração é testada então novos servidores são criados a partir desta configuração e todos que estão rodando a versão antiga do java serão destruídos. 
  
-
 \subsection{Arquitetura}
 
-\subsubsubsection{Cliente/Servidor}
- 
-\subsubsubsection{Cliente} 
+Vale ressaltar que segundo \citeonline{Morris:2016:ICM:3006361}, a essência da infraestrutura como código é tratar a configuração dos sistemas da mesma maneira que o código fonte do software é tratado. Versionando-os as definições da infraestrutura em sistemas de gerenciamento de código fonte, aplicando TDD \footnote{\textit{Test Driven Development:} É uma técnica que se relaciona com o conceito de verificação e validação e se baseia em um ciclo curto de repetições: Primeiramente o desenvolvedor escreve um caso de teste automatizado que define uma melhoria desejada ou uma nova funcionalidade. Então, é produzido código que possa ser validado pelo teste},e incluído na integração contínua \footnote{CI - Continuous Integration: É uma prática de desenvolvimento de \textit{software} de DevOps em que os desenvolvedores, com frequência, juntam suas alterações de código em um repositório central. Depois disso, criações e testes são executados. Geralmente, a integração contínua se refere ao estágio de criação ou integração do processo de lançamento do sistema e, além de originar um componente de automação}, refatoração de código e outras práticas são úteis para garantir que as alterações na infraestrutura sejam exaustivamente testadas, repetíveis e transparentes.
 
+\subsubsubsection{Cliente ou Masterless} 
+Na arquitetura cliente não existe um servidor central e não é necessário instalar agentes nos nós gerenciados. 
+o que torna a configuração mais simples. A configuração é feita escolhendo uma máquina e instalando o cliente e informando os IP's \footnote{\textit{Internet Protocol}} dos nós ele deve gerenciar no arquivo de configuração do programa. A autenticação é realizada por meio do protocolo \textit{SSH} \footnote{\textit{SSH - Sever Secure Shell:}  É um protocolo de rede criptográfico para operação de serviços de rede de forma segura sobre uma rede insegura. Baseado na arquitetura cliente-servidor, ele conecta uma aplicação cliente \textit{SSH} com um servidor \textit{SSH}, permitindo a execução remota de comandos.} , Ao alterar algum recurso ele se conecta ao no \textit{IP} e executa as alterações. Veja a Figura \ref{fig:figura3}. 
+
+Exemplo de ferramentas: \textit{Ansible}
+
+\begin{figure}[ht]
+	\centering	
+	\caption[\hspace{0.1cm}Exemplo arquitetura Cliente]{Exemplo geral de arquitetura Cliente}
+	\vspace{-0.4cm}
+	\includegraphics[width=0.5\textwidth]{figuras/cliente.png}
+	 \vspace{-0.2cm}
+	\\\textbf{\footnotesize Fonte: Próprio Autor}
+	\label{fig:figura3}
+\end{figure}
+\vspace{-0.5cm}
+
+
+As ferramentas de provisionamento se comunicam diretamente com a \textit{API} do provedor de serviços de nuvem \footnote{Um provedor de serviços de nuvem é uma empresa contratada que fornece uma plataforma, infraestrutura, aplicativo ou serviços de armazenamento baseados em nuvem. Assim como pagamos contas de energia e gás em nossas casas, as empresas costumam pagar apenas pela quantidade de serviços de nuvem que elas utilizam, conforme as necessidades de cada negócio. Por exemplo: \textit{Amazon Web Service, Azure, Digital Ocean, Google Cloud.} }
+
+Exemplo de ferramentas: \textit{Terraform}
+
+\subsubsubsection{Mestre/Agente ou Cliente/Servidor}
+ 
+ Segundo a \citeonline{puppetlabs}, nessa arquitetura (Figura \ref{fig:figura4}), um servidor \footnote{Dependendo da ferramenta o \textit{master} pode ser representado por mais de um servidor} central denominado mestre controla as informações de configuração de cada nó(cada servidor tem instalado e um agente, geralmente rodando como um processo em segundo plano \footnote{Processos em que não há interação com o usuário}). Este agente solicita seu próprio catálogo de configuração ao mestre.  
+ 
+ Periodicamente, cada agente envia informações ao mestre e solicita um catálogo. O mestre compila e retorna o catálogo de alterações desse nó, usando várias fontes de informações às quais ele tem acesso. Ao receber este catálogo com as alterações a serem realizadas o agente aplica as alterações no nó. 
+ 
+ Em outras palavras o fluxo básico de funcionamento é: Quando se altera as definições de um recurso, por exemplo, uma nova versão do \textit{Apache} \footnote{É um servidor \textit{web}, compatível com o protocolo HTTP, mantido pela \textit{Apache Software Foundation }}, estas são submetidas para o mestre. Quando o Agente solicita informações do mestre, o mestre compila e retorna o catálogo com as alterações para o nó desse agente usando as fontes de informação às quais o mestre tem acesso, o agente recebe essas alterações então ele aplica nó correspondente, alterado a versão do \textit{Apache}.   
+
+Essa arquitetura pode ter uma leve variação entre ferramentas podendo ter uma máquina de onde é acessado o mestre para que depois sejam replicadas nos nó.
+
+Embora essas ferramentes podem ser usada para o gerenciamento de estações de trabalho não é o objetivo deste estudo.
+
+Exemplo de ferramentas: \textit{Puppet,Chef} 
+
+ \begin{figure}[ht]
+	\centering	
+	\caption[\hspace{0.1cm}Exemplo arquitetura Master/Agent]{Exemplo geral de arquitetura Master/Agent}
+	\vspace{-0.4cm}
+	\includegraphics[width=0.5\textwidth]{figuras/master-agent.png}
+	 \vspace{-0.2cm}
+	\\\textbf{\footnotesize Fonte: \cite{Harit}}
+	\label{fig:figura4}
+\end{figure}
+\vspace{-0.5cm}
 
 \section{Ferramentas}
 
