@@ -19,7 +19,8 @@ No entanto as equipes que lidam com a infraestrutura têm a difícil tarefa de i
 Para garantir um processo totalmente ágil e que acompanhe as exigências do negócio da organização é necessário que haja uma integração do desenvolvimento de sistemas e as operações de infraestrutura. Portanto essa abordagem ágil também deve ser seguida pelas equipes de infraestrutura.
 O movimento cultural denominado DevOps surgido em meados de 2009, foi influenciado principalmente por metodologias ágeis e computação na nuvem. Ele teve como fundamento a automatização de processos das operações de infraestrutura e a integração entre as equipes de desenvolvimento e operações. \cite{sato}.
 
-A automatização de processos de infraestrutura é uma das premissas do DevOps, utilizando uma abordagem para provisionar e gerenciar recursos de computação como máquinas virtuais, discos de armazenamento, regras de segurança, instalação de \textit{software}, regras de redes e qualquer outro componente de serviço, destinando-se a simplificar significativamente a configuração e o gerenciamento de recursos em pequena e grande escala. A tradicional administração de um \textit{data center} ou uma nuvem exige que a cada alteração de \textit{software}, uma eventual ação manual na infraestrutura para acertar as configurações. Com a automação a infraestrutura também é tratada como "código" e um desenvolvedor pode descrever os recursos exigidos por uma aplicação em um arquivo padronizado de acordo com a ferramenta utilizada e os \textit{software} de gerenciamento ou provisionamento se encarregará de criar,atualizar ou remover recursos mantendo o estado da infraestrutura. 
+A automatização de processos de infraestrutura é uma das premissas do DevOps, utilizando uma abordagem para provisionar e gerenciar recursos de computação como máquinas virtuais, discos de armazenamento, regras de segurança, instalação de \textit{software}, regras de redes e qualquer outro componente de serviço, destinando-se a simplificar significativamente a configuração e o gerenciamento de recursos. Ao tratar a infraestrutura como código, as organizações podem usar as melhores práticas de desenvolvimento de software, incluindo revisão de código e controle de versão, documentação e testes. Esta abordagem reduz a complexidade do gerenciamento,pois, todo o processo e dividindo em tarefas em menores e em mais processos gerenciáveis.A abordagem da infraestrutura como código ou também conhecida como IaC, reduz os riscos operacionais, permitindo revisar o código e salvar todas as revisões anteriores de uma infraestrutura codificada, podendo restaurar a infraestrutura em qualquer revisão anterior quando necessário.
+
 
 \section{\esp Metologia}
 
@@ -38,7 +39,7 @@ O autor descreve a infraestrutura como código, como o gerenciamento de redes in
 
  \citeonline{steve} fala da importância da escolha de ferramentas de IaC como (\textit{ Chef, Ansible, Puppet, SaltStack, Terraform }) se deve levar em consideração o conjunto de casos em que essas ferramentas se propõem a resolver. Estas ferramentas são classificadas em dois domínios: gerenciamento de configurações e orquestração de configuração e quais casos elas resolveram. O autor ainda explica os conceitos de infraestrutura mutável e imutável, escrita de código procedural e declarativa. Este conceitos serão abordados na seção \ref{IaC}. 
 
-\citeonline{steve} expressa que se deve escolher uma ferramenta focada na orquestração de infraestrutura e outra em gerenciamento de configuração de aplicativos reunindo os benefícios de ambas. 
+\citeonline{steve} expressa que se deve escolher uma ferramenta focada na orquestração de infraestrutura e outra em gerenciamento de configuração de aplicativos reunindo os benefícios de ambas, pois os desafios do gerenciamento de provisionamento e configuração estão intimamente relacionados, porque as organizações geralmente provisionam os servidores e implantam aplicativos neles. E ai que os tipos de ferramentas de IaC vão se convergir.   
 
 \section{\esp IaC ou Infraestrutura como código} \label{IaC}
 
@@ -106,9 +107,7 @@ As ferramentas de IaC usam arquivos de definição como \textit{DSL}
  
 \subsection{Arquitetura}
 
-Vale ressaltar que segundo \citeonline{Morris:2016:ICM:3006361}, a essência da infraestrutura como código é tratar a configuração dos sistemas da mesma maneira que o código fonte do software é tratado. Versionando-os as definições da infraestrutura em sistemas de gerenciamento de código fonte, aplicando TDD \footnote{\textit{Test Driven Development:} É uma técnica que se relaciona com o conceito de verificação e validação e se baseia em um ciclo curto de repetições: Primeiramente o desenvolvedor escreve um caso de teste automatizado que define uma melhoria desejada ou uma nova funcionalidade. Então, é produzido código que possa ser validado pelo teste},e incluído na integração contínua \footnote{CI - Continuous Integration: É uma prática de desenvolvimento de \textit{software} de DevOps em que os desenvolvedores, com frequência, juntam suas alterações de código em um repositório central. Depois disso, criações e testes são executados. Geralmente, a integração contínua se refere ao estágio de criação ou integração do processo de lançamento do sistema e, além de originar um componente de automação}, refatoração de código e outras práticas são úteis para garantir que as alterações na infraestrutura sejam exaustivamente testadas, repetíveis e transparentes.
-
-\subsubsubsection{Cliente ou Masterless} 
+\subsubsubsection{Cliente ou Masterless} \label{semagent}
 Na arquitetura cliente não existe um servidor central e não é necessário instalar agentes nos nós gerenciados. 
 o que torna a configuração mais simples. A configuração é feita escolhendo uma máquina e instalando o cliente e informando os IP's \footnote{\textit{Internet Protocol}} dos nós ele deve gerenciar no arquivo de configuração do programa. A autenticação é realizada por meio do protocolo \textit{SSH} \footnote{\textit{SSH - Sever Secure Shell:}  É um protocolo de rede criptográfico para operação de serviços de rede de forma segura sobre uma rede insegura. Baseado na arquitetura cliente-servidor, ele conecta uma aplicação cliente \textit{SSH} com um servidor \textit{SSH}, permitindo a execução remota de comandos.} , Ao alterar algum recurso ele se conecta ao no \textit{IP} e executa as alterações. Veja a Figura \ref{fig:figura3}. 
 
@@ -126,11 +125,11 @@ Exemplo de ferramentas: \textit{Ansible}
 \vspace{-0.5cm}
 
 
-As ferramentas de provisionamento se comunicam diretamente com a \textit{API} do provedor de serviços de nuvem \footnote{Um provedor de serviços de nuvem é uma empresa contratada que fornece uma plataforma, infraestrutura, aplicativo ou serviços de armazenamento baseados em nuvem. Assim como pagamos contas de energia e gás em nossas casas, as empresas costumam pagar apenas pela quantidade de serviços de nuvem que elas utilizam, conforme as necessidades de cada negócio. Por exemplo: \textit{Amazon Web Service, Azure, Digital Ocean, Google Cloud.} }
+As ferramentas de provisionamento se comunicam diretamente com a \textit{API} do provedor de serviços de nuvem \footnote{Um provedor de serviços de nuvem é uma empresa contratada que fornece uma plataforma, infraestrutura, aplicativo ou serviços de armazenamento baseados em nuvem. Em que você paga conforme o uso. Por exemplo: \textit{Amazon Web Service, Azure, Digital Ocean, Google Cloud.} }
 
 Exemplo de ferramentas: \textit{Terraform}
 
-\subsubsubsection{Mestre/Agente ou Cliente/Servidor}
+\subsubsubsection{Mestre/Agente ou Cliente/Servidor} \label{cliente-servidor}
  
  Segundo a \citeonline{puppetlabs}, nessa arquitetura (Figura \ref{fig:figura4}), um servidor \footnote{Dependendo da ferramenta o \textit{master} pode ser representado por mais de um servidor} central denominado mestre controla as informações de configuração de cada nó(cada servidor tem instalado e um agente, geralmente rodando como um processo em segundo plano \footnote{Processos em que não há interação com o usuário}). Este agente solicita seu próprio catálogo de configuração ao mestre.  
  
@@ -157,7 +156,21 @@ Exemplo de ferramentas: \textit{Puppet,Chef}
 
 \section{Ferramentas}
 
+Esta seção aborda os principais conceitos das ferramentas e as definições destes conceitos foram retiras diretamente da documentação oficial das ferramentas que podem ser consultadas respectivamente aqui: \href{https://docs.ansible.com}{https://docs.ansible.com} e  \href{https://www.terraform.io/docs/index.html}{https://www.terraform.io/docs/index.html}
+
+\textit{Ansible} e \textit{Terraform} operam usando uma arquitetura sem agente(conforme mencionado no item \ref{semagent}) e promovem uma interface simplificada legível para a definição de recursos, facilitando a adoção. As definições de conceitos foram retirados diretamente da documentação oficial das ferramentas.
+
+
 \subsubsubsection{Ansible}
+
+\textit{Ansible} é uma suíte completa de automação de processos de TI radicalmente simples, ela abrange desde o provisionamento e o gerenciamento de configurações e outras necessidades..
+
+Ele não usa agentes e nenhuma infraestrutura de segurança personalizada adicional(uma características de ferramentas, conforme mencionado no item \ref{cliente-servidor}), por isso é relativamente fácil de implantar. O \textit{Ansible} usa uma linguagem muito simples a \textit{YAML} na forma que eles descrevem como \textit{Ansible Playbooks} que permite descrever seus trabalhos de automação de uma maneira que se aproxima do inglês. 
+
+\textit{Ansible} nasceu como uma ferramenta de gerenciamente de configurações e a partir da versão 2.0 passou a ser uma suíte completa e também podendo provisionar infraestrutura ele ainda 
+
+Embora o \textit{Ansible} possa realizar ambas características tanto provisionar infraestrutura e gerenciamente de infraestrutura o 
+ 
  
 \subsubsubsection{Terraform} 
   
