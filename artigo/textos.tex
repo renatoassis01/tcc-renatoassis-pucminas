@@ -167,13 +167,48 @@ Esta seção aborda os principais conceitos das ferramentas e as definições de
 
 Ele não usa agentes e nenhuma infraestrutura de segurança personalizada adicional(uma características de ferramentas, conforme mencionado no item \ref{cliente-servidor}), por isso é relativamente fácil de implantar. O \textit{Ansible} usa uma linguagem muito simples a \textit{YAML} na forma que eles descrevem como \textit{Ansible Playbooks} que permite descrever seus trabalhos de automação de uma maneira que se aproxima do inglês. 
 
-\textit{Ansible} nasceu como uma ferramenta de gerenciamente de configurações e a partir da versão 2.0 passou a ser uma suíte completa e também podendo provisionar infraestrutura ele ainda 
+Ele é descentralizado e depende de das credenciais do sistema operacional existentes para controlar o acesso a máquinas remotas. A principal e mais usada forma dele se conectar é usando o protocolo \textit{SSH}.Se necessário, ele pode se conectar facilmente por \textit{Kerberos} \footnote{É um protocolo desenvolvido para fornecer poderosa autenticação em aplicações usuário/servidor, onde ele funciona como a terceira parte neste processo, oferendo autenticação ao usuário.}, \textit{LDAP} \footnote{\textit{LDAP - Lightweight Directory Access:} É um protocolo de aplicação aberto para acessar e manter serviços de informação de diretório distribuído sobre uma rede de IP, permitindo o compartilhamento de informações sobre usuários, sistemas, redes, serviços e aplicações através da rede.} e outros sistemas de gerenciamento de autenticação centralizados.
 
-Embora o \textit{Ansible} possa realizar ambas características tanto provisionar infraestrutura e gerenciamente de infraestrutura o 
- 
- 
+
+\textit{Ansible} nasceu como uma ferramenta de gerenciamento de configurações e a partir da versão 2.0 passou a ser uma suíte completa e também podendo provisionar infraestrutura neste artigo abordaremos apenas como uma ferramenta de configuração o que ainda ele é muito citado na literatura como essas características.
+
+ O \textit{Ansible} apresenta os seguintes itens em sua arquitetura:
+
+\hfill
+
+\textbf{\textit{Controller Machine}}: É máquina de onde o \textit{Ansible} está sendo executado. 
+
+\textbf{\textit{Modules}}: Um módulo normalmente abstrai uma tarefa do sistema, por exemplo instalar um determinado aplicativo e configurar, para não ficar reescrevendo esta tarefa quando precisar, um módulo pode ser escrito para isso e usando qualquer linguagem de programação. Então bastando referenciar este módulo em alguma tarefa. O \textit{Ansible} se conecta aos seus nós(máquinas) e envia os chamados e executa esses módulos (por \textit{SSH} por padrão) e os remove quando finalizados.   
+
+\textbf{\textit{Plugins}}: Os \textit{plugins} oferecem uma extensões para os principais recursos do \textit{Ansible}, por exemplo um \textit{plugin} para envio de \textit{e-mail}. Um \textit{plugins} deve ser escritos em \textit{Python}. Diferente dos módulos os \textit{plugins} são executados na máquina de controle.
+
+\textbf{\textit{Inventory}}: É um arquivo de configuração que contém informações sobre os servidores os nós(servidores) que ele esta gerenciando. Todo o servidor gerenciado deve ser informado nesse arquivo.
+
+\textbf{\textit{Playbooks}}: É principal item é o ponto de entrada para definir os recursos, escritos por meio do formato \textit{YAML}.
+
+\textbf{\textit{Role}}: Uma maneira predefinida de organizar \textit{playbooks} e outros arquivos para facilitar o compartilhamento e a reutilização.
+
+\textbf{\textit{Play}}: Uma execução de um \textit{playbook} do início ao fim.
+
+\textbf{\textit{Facts}}: Variáveis globais que contêm informações sobre o sistema, como interfaces de rede ou sistema operacional.
+
+\textbf{\textit{Task}}: Um bloco de código que define um único procedimento a ser executado, por exemplo, instalar o \textit{Apache}.
+
+ \begin{figure}[ht]
+	\centering	
+	\caption[\hspace{0.1cm}Arquitetura do Ansible]{Arquitetura do Ansible}
+	\vspace{-0.4cm}
+	\includegraphics[width=0.5\textwidth]{figuras/ansible-arquiteture.png}
+	 \vspace{-0.2cm}
+	\\\textbf{\footnotesize Fonte: \cite{intellipaat}}
+	\label{fig:figura6}
+\end{figure}
+\vspace{-0.5cm}
+
 \subsubsubsection{Terraform} 
   
+ 
+ 
  
 
 
