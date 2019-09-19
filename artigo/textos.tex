@@ -68,9 +68,9 @@ As ferramentas de IaC usam arquivos de definição como \textit{DSL}
 	\centering	
 	\caption[\hspace{0.1cm}Exemplo declarativo]{Exemplo de escrita declarativa da ferramenta Terraform}
 	\vspace{-0.4cm}
-	\includegraphics[width=0.5\textwidth]{artigo/figuras/terraform-declarative-exemple-01.png}
+	\includegraphics[width=0.98\textwidth]{artigo/figuras/terraform-declarative-exemple-01.png}
 	 \vspace{-0.2cm}
-	\\\textbf{\footnotesize Fonte: \cite{chef01} }
+	\\\textbf{\footnotesize Fonte: \cite{terraform01} }
 	\label{fig:figura2}
 \end{figure}
 \vspace{-0.5cm}
@@ -125,7 +125,7 @@ Exemplo de ferramentas: \textit{Ansible}
 \vspace{-0.5cm}
 
 
-As ferramentas de provisionamento se comunicam diretamente com a \textit{API} do provedor de serviços de nuvem \footnote{Um provedor de serviços de nuvem é uma empresa contratada que fornece uma plataforma, infraestrutura, aplicativo ou serviços de armazenamento baseados em nuvem. Em que você paga conforme o uso. Por exemplo: \textit{Amazon Web Service, Azure, Digital Ocean, Google Cloud.} }
+As ferramentas de provisionamento se comunicam diretamente com a \textit{API} do provedor de serviços de nuvem \footnote{Um provedor de serviços de nuvem é uma empresa contratada que fornece uma plataforma, infraestrutura, aplicativo ou serviços de armazenamento baseados em nuvem. Em que você paga conforme o uso. Por exemplo: \textit{Amazon Web Service, Azure, Digital Ocean, Google Cloud.}. Eles também são conhecido pelo termo \textit{IaaS - Infrastructure as a service} }
 
 Exemplo de ferramentas: \textit{Terraform}
 
@@ -156,7 +156,9 @@ Exemplo de ferramentas: \textit{Puppet,Chef}
 
 \section{Ferramentas}
 
-Esta seção aborda os principais conceitos das ferramentas e as definições destes conceitos foram retiras diretamente da documentação oficial das ferramentas que podem ser consultadas respectivamente aqui: \href{https://docs.ansible.com}{https://docs.ansible.com} e  \href{https://www.terraform.io/docs/index.html}{https://www.terraform.io/docs/index.html}
+Esta seção aborda os principais conceitos das ferramentas utilizada neste artigo e as definições destes conceitos foram retiras diretamente da documentação oficial das ferramentas que podem ser consultadas respectivamente aqui: 
+
+\href{https://docs.ansible.com}{https://docs.ansible.com} e \href{https://terraform.io/docs}{https://terraform.io/docs}
 
 \textit{Ansible} e \textit{Terraform} operam usando uma arquitetura sem agente(conforme mencionado no item \ref{semagent}) e promovem uma interface simplificada legível para a definição de recursos, facilitando a adoção. As definições de conceitos foram retirados diretamente da documentação oficial das ferramentas.
 
@@ -196,9 +198,9 @@ Ele é descentralizado e depende de das credenciais do sistema operacional exist
 
  \begin{figure}[ht]
 	\centering	
-	\caption[\hspace{0.1cm}Arquitetura do Ansible]{Arquitetura do Ansible}
+	\caption[\hspace{0.1cm}Exemplo de funcionameno do Ansible]{Exemplo de funcionameno do Ansible}
 	\vspace{-0.4cm}
-	\includegraphics[width=0.5\textwidth]{figuras/ansible-arquiteture.png}
+	\includegraphics[width=0.5\textwidth]{figuras/ansible-working.png}
 	 \vspace{-0.2cm}
 	\\\textbf{\footnotesize Fonte: \cite{intellipaat}}
 	\label{fig:figura6}
@@ -206,9 +208,55 @@ Ele é descentralizado e depende de das credenciais do sistema operacional exist
 \vspace{-0.5cm}
 
 \subsubsubsection{Terraform} 
-  
+
+ O \textit{Terraform} é uma ferramenta para provisionamento de infraestrutura, permite criar, alterar e criar versões de infraestrutura com segurança e eficiência. Ele pode gerenciar os mais populares provedores de nuvem e também trabalhar com soluções internas personalizadas.
+
+O \textit{Terraform} usa uma linguagem \textit{DSL} muito simples a \textit{HCL} \footnote{\textit{HCL - Hashicorp Configuration Language.} Veja mais em: \href{https://www.terraform.io/docs/configuration/syntax.html}{https://www.terraform.io/docs/configuration/syntax.html} } (veja na Figura \ref{fig:figura2}.) com a extensão de arquivo \textit{"*.tf"} para a definição de recursos de infraestrutura. 
+
+Os arquivos de configuração descrevem para o \textit{Terraform} os componentes necessários para criar um único aplicativo ou toda a configuração da infraestrutura. Ao executar ele gera um plano de execução descrevendo o que fará para atingir o estado desejado e, em seguida, executa-o para construir a infraestrutura descrita. 
+À medida que a configuração muda, ele determina o que mudou e criar planos de execução incrementais para serem aplicados.
+
+Uma característica do \textit{Terraform} é garantir que ao executar um arquivo de definição de recursos varias vezes o resultado será o mesmo, ou seja a \textbf{idempotência} \footnote{É a propriedade que algumas operações têm de poderem ser aplicadas várias vezes sem que o valor do resultado se altere após a aplicação inicial.} de uma operação.
+
+O \textit{Terraform} pode criar e gerenciar componentes de baixo nível como instâncias de servidores, armazenamento e componentes de alto nível(Aqui o \textit{Terraform} se sobrepõem com ferramentas de gerenciamento de configuração), como configurar um \textit{DNS} \footnote{\textit{DNS -Domain Name System}: É responsável por localizar e traduzir para números IP os endereços dos sites que digitamos nos navegadores.} de uma máquina.
+
+Os principais conceitos dele são:
+
+\textbf{Infraestrutura como código}: A infraestrutura é descrita usando uma sintaxe de configuração de alto nível. Isso permite que os recursos da infraestrutura sejam versionados e tratado como qualquer outro código. Além disso, a infraestrutura pode ser compartilhada e reutilizada.
+
+\textbf{Planos de Execução}: O \textit{Terraform} possui uma etapa de "planejamento" onde gera um plano de execução . O plano de execução mostra o que o \textit{Terraform} fará quando você chama aplicar. Isso permite evitar surpresas quando o ele manipula a infraestrutura.
+
+\textbf{Gráfico de Recursos}: Ele cria um gráfico de todos os recursos e paralela a criação e modificação de quaisquer recursos não dependentes. Por esse motivo, o \textit{Terraform} constrói a infraestrutura da maneira mais eficiente possível, e os operadores obtêm entendimento sobre as dependências dos recursos.
+
+\textbf{Automação de Mudanças}: Conjuntos de alterações complexas podem ser aplicados à infraestrutura com mínimo de interação humana. Com o plano de execução e o gráfico de recursos, permite sabe exatamente o que o \textit{Terraform} mudará e em que ordem, evitando muitos possíveis erros humanos.
+
+\textbf{Estado da infraestrutura}: É um registro dos recursos provisionados no momento e que guardam o estado da infraestrutura e ativam o histórico das alterações incrementais. O estado pode ser armazenado remotamente e localmente. O armazenamento de estado remoto permitem que as equipes compartilhem o estado, evitem mais de uma alteração por vez e visualizem um histórico de todas as alterações na infraestrutura por equipe.
+
+\textbf{\textit{Providers}}: Um provedor é responsável por entender as interações da \textit{API} e expor os recursos. Os provedores geralmente são serviços de \textit{IaaS},  por exemplo : \textit{Amazon
+Web Service, Azure, Digital Ocean, Google Cloud, DNSimple, CloudFlare, Digital Ocean}).
+
+\textbf{\textit{Resource}}: Um recurso fornecido por um provedor, por exemplo: Uma instância, Um disco   
+
+\textbf{\textit{Provisioners}}: Os provisionadores podem ser usados para executar ações específicas na máquina local ou remota, por exemplo: copiar um arquivo da máquina local para a máquina remota.
+
+\textbf{\textit{Modules}}: Um módulo é um agrupamento para vários recursos que são usados juntos. Os módulos podem ser usados para criar abstrações leves, para que você possa descrever sua infraestrutura em termos de arquitetura, em vez de diretamente em termos de objetos físicos.
+
+\textbf{\textit{Variables}}: Usando um espaço reservado especial para inserir um valor calculado em uma sequência de caracteres. 
+
+ \textbf{\textit{Variables output}}: Dados exportados por um módulo, que podem ser exibidos para um usuário e  ou usados de forma programática por outro código \textit{Terraform}.
  
+ \textbf{\textit{Plugins}}: O \textit{Terraform} é construído em uma arquitetura baseada em \textit{plugins}. Todos os provedores e provisionadores usados nas configurações do \textit{Terraform} são \textit{plugins}. Os usuários do \textit{Terraform} podem escrever novos \textit{plugins} para oferecer suporte a novas funcionalidades no \textit{Terraform}.
  
+  \begin{figure}[ht]
+	\centering	
+	\caption[\hspace{0.1cm}Exemplo de funcionamento do Terraform]{Exemplo de funcionamento do Terraform}
+	\vspace{-0.4cm}
+	\includegraphics[width=0.5\textwidth]{figuras/terraform-working.png}
+	 \vspace{-0.2cm}
+	\\\textbf{\footnotesize Fonte: \cite{oreilly}}
+	\label{fig:figura7}
+\end{figure}
+\vspace{-0.5cm}
  
 
 
