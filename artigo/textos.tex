@@ -21,8 +21,18 @@ O movimento cultural denominado DevOps surgido em meados de 2009, foi influencia
 
 A automatização de processos de infraestrutura é uma das premissas do DevOps, utilizando uma abordagem para provisionar e gerenciar recursos de computação como máquinas virtuais, discos de armazenamento, regras de segurança, instalação de \textit{software}, regras de redes e qualquer outro componente de serviço, destinando-se a simplificar significativamente a configuração e o gerenciamento de recursos. Ao tratar a infraestrutura como código, as organizações podem usar as melhores práticas de desenvolvimento de software, incluindo revisão de código e controle de versão, documentação e testes. Esta abordagem reduz a complexidade do gerenciamento,pois, todo o processo e dividindo em tarefas em menores e em mais processos gerenciáveis.A abordagem da infraestrutura como código ou também conhecida como IaC, reduz os riscos operacionais, permitindo revisar o código e salvar todas as revisões anteriores de uma infraestrutura codificada, podendo restaurar a infraestrutura em qualquer revisão anterior quando necessário.
 
+Segundo \citeonline{Morris:2016:ICM:3006361}, a essência da infraestrutura como código é submeter a configuração da infraestrutura da mesma maneira que o código fonte do software é tratado, usando sistemas de gerenciamento de código-fonte, \textit{TDD} \footnote{\textit{TDD - Test Driven Development}: O teste são que são escritos antes do nosso código de produção} , integração contínua \footnote{\textit{CI - Continuous Integration}: É uma prática de desenvolvimento de software em que os desenvolvedores, juntam suas alterações de código em um repositório central e os testes são executados. Geralmente, a integração contínua se refere ao estágio de criação ou integração do processo de lançamento de software  }, refatoração de código e outras técnicas que são úteis para garantir que as alterações na infraestrutura sejam exaustivamente testadas, repetíveis e transparentes.
 
-\section{\esp Metologia}
+
+\section{\esp Metodologia}
+
+\subsubsubsection{Tecnologias utilizadas}
+
+
+\subsubsubsection{Artefatos produzidos}
+
+
+\subsubsubsection{Métricas de Validação}
 
 
 \section{\esp Trabalhos Relacionados} \label{relacionados}
@@ -108,7 +118,7 @@ As ferramentas de IaC usam arquivos de definição como \textit{DSL}
 \subsection{Arquitetura}
 
 \subsubsubsection{Cliente ou Masterless} \label{semagent}
-Na arquitetura cliente não existe um servidor central e não é necessário instalar agentes nos nós gerenciados. 
+Segundo \citeonline{Jan-Piet} conforme citado por \citeonline{Morris:2016:ICM:3006361} na arquitetura cliente não existe um servidor central e não é necessário instalar agentes nos nós gerenciados. 
 o que torna a configuração mais simples. A configuração é feita escolhendo uma máquina e instalando o cliente e informando os IP's \footnote{\textit{Internet Protocol}} dos nós ele deve gerenciar no arquivo de configuração do programa. A autenticação é realizada por meio do protocolo \textit{SSH} \footnote{\textit{SSH - Sever Secure Shell:}  É um protocolo de rede criptográfico para operação de serviços de rede de forma segura sobre uma rede insegura. Baseado na arquitetura cliente-servidor, ele conecta uma aplicação cliente \textit{SSH} com um servidor \textit{SSH}, permitindo a execução remota de comandos.} , Ao alterar algum recurso ele se conecta ao no \textit{IP} e executa as alterações. Veja a Figura \ref{fig:figura3}. 
 
 Exemplo de ferramentas: \textit{Ansible}
@@ -220,6 +230,8 @@ Uma característica do \textit{Terraform} é garantir que ao executar um arquivo
 
 O \textit{Terraform} pode criar e gerenciar componentes de baixo nível como instâncias de servidores, armazenamento e componentes de alto nível(Aqui o \textit{Terraform} se sobrepõem com ferramentas de gerenciamento de configuração), como configurar um \textit{DNS} \footnote{\textit{DNS -Domain Name System}: É responsável por localizar e traduzir para números IP os endereços dos sites que digitamos nos navegadores.} de uma máquina.
 
+Além disso o terraform o terraform pode ser integrado com a ferramentas de gerenciamento de configuração, como \textit{Ansible, Chef ou Puppet}
+
 Os principais conceitos dele são:
 
 \textbf{Infraestrutura como código}: A infraestrutura é descrita usando uma sintaxe de configuração de alto nível. Isso permite que os recursos da infraestrutura sejam versionados e tratado como qualquer outro código. Além disso, a infraestrutura pode ser compartilhada e reutilizada.
@@ -257,7 +269,15 @@ Web Service, Azure, Digital Ocean, Google Cloud, DNSimple, CloudFlare, Digital O
 	\label{fig:figura7}
 \end{figure}
 \vspace{-0.5cm}
- 
+
+\subsection{Ferramentas Auxiliares}
+
+\textbf{\textit{Gitbub}} é uma plataforma baseada em \textit{VCS - Version Control System} que registra as mudanças feitas em um arquivo ou um conjunto de arquivos ao longo do tempo de forma que possa recuperar versões específicas. 
+
+\textbf{\textit{Azure}}: O \textit{Microsoft Azure} é um conjunto serviços de nuvem que permite criar, gerenciar e implantar aplicativos em uma enorme rede global. 
+
+\textbf{\textit{Azure Pipelines}}: É uma ferramenta de integração contínua e entrega contínua baseado em nuvem.
+
 
 
  
