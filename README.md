@@ -16,9 +16,6 @@ https://www.slideshare.net/jedi4ever/code-but-not-as-we-know-it-infrastructure-a
 
 
 
-
-
-
 https://medium.com/faun/building-repeatable-infrastructure-with-terraform-and-ansible-on-aws-3f082cd398ad
 
 https://www.ibm.com/cloud/blog/end-to-end-application-provisioning-with-ansible-and-terraform
