@@ -23,16 +23,20 @@ A automatização de processos de infraestrutura é uma das premissas do DevOps,
 
 Segundo \citeonline{Morris:2016:ICM:3006361}, a essência da infraestrutura como código é submeter a configuração da infraestrutura da mesma maneira que o código fonte do software é tratado, usando sistemas de gerenciamento de código-fonte, \textit{TDD} \footnote{\textit{TDD - Test Driven Development}: O teste são que são escritos antes do nosso código de produção} , integração contínua \footnote{\textit{CI - Continuous Integration}: É uma prática de desenvolvimento de \textit{software} em que os desenvolvedores, juntam suas alterações de código em um repositório central e os testes são executados. Geralmente, a integração contínua se refere ao estágio de criação ou integração do processo de lançamento de software  }, refatoração de código e outras técnicas que são úteis para garantir que as alterações na infraestrutura sejam exaustivamente testadas, repetíveis e transparentes.
 
+\hfill
+
+Neste artigo será apresentado uma abordagem geral de \textit{IAC}, um comparativo entre duas ferramentas e apresentar os resultados obtidos  e uma conclusão. Os objetivos específicos serão, explicar as diferenças entre \textit{software} de gerenciamento de configuração e \textit{software} de provisionamento, infraestrutura imutável e mutável, descrever e avaliar as características de cada ferramenta escolhida e apresentar resultados e conclusões. Este trabalho não abordará itens como: integração de ferramentas \textit{IAC} com ferramentas de \textit{CI}, aplicações de metodologias de desenvolvimento de software. 
+
 
 \section{\esp Metodologia}
 
-\subsubsection{Tecnologias utilizadas}
+\subsection{Tecnologias utilizadas}
 
 
-\subsubsection{Artefatos produzidos}
+\subsection{Artefatos produzidos}
 
 
-\subsubsection{Métricas de Validação}
+\subsection{Métricas de Validação}
 
 
 \section{\esp Trabalhos Relacionados} \label{relacionados}
@@ -70,7 +74,7 @@ Segundo \citeonline{Carnegie}, existem sobreposições e esses termos não são 
 As ferramentas de IaC usam arquivos de definição como \textit{DSL} \footnote{\textit{DSL - Domain-Specific Language:} Uma linguagem de domínio específico é criada especificamente para resolver problemas em um domínio particular e não se destina a ser capaz de resolver os problemas fora de seu âmbito. }, ou formatos de texto conhecidos comuns como \textit{ YAML} \footnote{\textit{YAML - Ain't  Markup Language}: É um formato de serialização (codificação de dados) de dados legíveis por humanos -  https://yaml.org/ }, \textit{JSON} \footnote{\textit{JSON - JavaScript Object Notation:} É uma formatação leve de troca de dados. Para seres humanos, é fácil de ler e escrever. Para máquinas, é fácil de interpretar e gerar. Está baseado em um subconjunto da linguagem de programação JavaScript, https://www.json.org/json-pt.html}, \textit{XML} \footnote{\textit{XML - eXtensible Markup Language:} é uma linguagem de marcação para a criação de documentos com dados organizados hierarquicamente, tais como textos, banco de dados ou desenhos vetoriais.}
   ou linguagens de programação como \textit{Python} \footnote{\textit{Python} é uma linguagem de programação de alto nível, interpretada, de script, imperativa, orientada a objetos, funcional, de tipagem dinâmica e forte.}  \textit{Ruby} \footnote{\textit{Ruby} é uma linguagem de programação interpretada multi-paradigma, de tipagem dinâmica e forte, com gerenciamento de memória automático.}  ou uma mesclagem de ambas.
   
-  \subsubsection{Declarativa}
+  \subsection{Declarativa}
   É o estilo em  especifica é especificado o estado final desejado, e a própria ferramenta IaC é responsável por descobrir como atingir esse estado. Veja o exemplo na Figura \ref{fig:figura2}.
  
  \begin{figure}[ht]
@@ -84,7 +88,7 @@ As ferramentas de IaC usam arquivos de definição como \textit{DSL} \footnote{\
 \end{figure}
 \vspace{-0.5cm}
  
- \subsubsection{Procedural}
+ \subsection{Procedural} \label{procedural}
   
   É o estilo na qual você escreve um código e especifica, passo a passo, como atingir o estado final desejado. O usuário deve deve determinar o processo de implantação ideal. Veja o exemplo na Figura \ref{fig:figura1}.
 
@@ -103,12 +107,12 @@ As ferramentas de IaC usam arquivos de definição como \textit{DSL} \footnote{\
  
  Nesta seção é abordada duas característica de como as infraestruturas são tratadas atualmente e apresentar uma a ideia central dos conceitos, não serão discutidos qual modelo é melhor ou qual as vantagens de se utilizar um ou outro. 
 
-\subsubsection{Mutável}
+\subsection{Mutável}
  Segundo \cite{Morris:2016:ICM:3006361}, na infraestrutura mutável a cada mudança de algum componente, seja por uma demanda de serviço, aplicação, segurança, estas atualizações precisam ser replicadas em todos os servidores que dependem dessas mudanças. A medida que atualizações são realizadas, cada servidor tem um histórico único de alterações levando erros sutis de configuração. As ferramentas de gerenciamento de configuração normalmente são padronizadas para este paradigma de infraestrutura mutável. 
  
   Um exemplo hipotético seria que ao \textit{JAVA}\footnote{Java é uma linguagem de programação e plataforma computacional.} para uma versão superior. Na infraestrutura mutável cada servidor precisaria receber esta atualização do JAVA. A infraestrutura mutável é como a maioria dos ambientes computacionais funcionam hoje.
  
- \subsubsection{Imutável}
+ \subsection{Imutável} \label{imutavel}
   Segundo \citeonline{Dadgar}, a noção de imutabilidade é a ideia de que, uma vez criada uma coisa, não a mudamos após a criação.
  
  Na infraestrutura imutável qualquer alteração a ser realizada deve ser feita através da substituição completa dos servidores. Estas alterações são feitas criando novas configurações e novos servidores são criados a partir delas. Isso aumenta a previsibilidade porque este servidor já foi testado antes de ir para a produção. Em outras palavras, as implantações se tornam atômicas. As ferramentas de provisionamento desempenham este papel.\cite{Morris:2016:ICM:3006361}.
@@ -119,10 +123,9 @@ As ferramentas de IaC usam arquivos de definição como \textit{DSL} \footnote{\
 
 Nesta seção é apresenta dois conceitos de como as ferramentas foram projetadas para funcionar. Não serão discutidos ou comparados qual o melhor modelo ou suas vantagens e desvantagens. 
 
-\subsubsection{Cliente ou Masterless} \label{semagent}
+\subsection{Cliente ou Masterless} \label{semagent}
 Segundo \citeonline{Jan-Piet}, conforme citado por \citeonline{Morris:2016:ICM:3006361}, na arquitetura cliente não existe um servidor central e não é necessário instalar agentes nos nós gerenciados, o que torna a configuração mais simples. A configuração é feita escolhendo uma máquina e instalando o cliente e informando os IP's \footnote{\textit{Internet Protocol}} dos nós. A autenticação é feita por meio do protocolo \textit{SSH} \footnote{\textit{SSH - Sever Secure Shell:}  É um protocolo de rede criptográfico para operação de serviços de rede de forma segura sobre uma rede insegura. Baseado na arquitetura cliente-servidor, ele conecta uma aplicação cliente \textit{SSH} com um servidor \textit{SSH}, permitindo a execução remota de comandos.}. Ao alterar algum recurso, ele se conecta ao no \textit{IP} e executa as alterações. Veja a Figura \ref{fig:figura3}. 
-
-Exemplo de ferramentas: \textit{Ansible}
+\textit{Ansible} e \textit{Terraform} são exemplos de ferramentas que são baseadas nesse modelo de arquitetura. 
 
 \begin{figure}[ht]
 	\centering	
@@ -138,21 +141,20 @@ Exemplo de ferramentas: \textit{Ansible}
 
 As ferramentas de provisionamento se comunicam diretamente com a \textit{API} do provedor de serviços de nuvem \footnote{Um provedor de serviços de nuvem é uma empresa contratada que fornece uma plataforma, infraestrutura, aplicativo ou serviços de armazenamento baseados em nuvem. Em que você paga conforme o uso. Por exemplo: \textit{Amazon Web Service, Azure, Digital Ocean, Google Cloud.}. Eles também são conhecido pelo termo \textit{IaaS - Infrastructure as a service} }
 
-Exemplo de ferramentas: \textit{Terraform}
 
-\subsubsection{Mestre/Agente ou Cliente/Servidor} \label{cliente-servidor}
+\subsection{Mestre/Agente ou Cliente/Servidor} \label{cliente-servidor}
  
- Segundo a \citeonline{puppetlabs}, nessa arquitetura (Figura \ref{fig:figura4}), um servidor \footnote{Dependendo da ferramenta o \textit{master} pode ser representado por mais de um servidor} central denominado mestre controla as informações de configuração de cada nó(cada servidor tem instalado e um agente, geralmente rodando como um processo em segundo plano \footnote{Processos em que não há interação com o usuário}). Este agente solicita seu próprio catálogo de configuração ao mestre.  
+ Segundo a \citeonline{puppetlabs}, nessa arquitetura (Figura \ref{fig:figura4}), um servidor \footnote{Dependendo da ferramenta o \textit{master} pode ser representado por mais de um servidor} central denominado mestre controla as informações de configuração de cada nó(cada servidor tem instalado  um agente, geralmente rodando como um processo em segundo plano \footnote{Processos em que não há interação com o usuário}). Este agente solicita seu próprio catálogo de configuração ao mestre.  
  
- Periodicamente, cada agente envia informações ao mestre e solicita um catálogo. O mestre compila e retorna o catálogo de alterações desse nó, usando várias fontes de informações às quais ele tem acesso. Ao receber este catálogo com as alterações a serem realizadas o agente aplica as alterações no nó. 
+ Periodicamente, cada agente envia informações ao mestre e solicita um catálogo. O mestre compila e retorna o catálogo de alterações desse nó, usando várias fontes de informações às quais ele tem acesso. Ao receber este catálogo com as alterações a serem realizadas, o agente aplica as alterações no nó. 
  
- Em outras palavras o fluxo básico de funcionamento é: Quando se altera as definições de um recurso, por exemplo, uma nova versão do \textit{Apache} \footnote{É um servidor \textit{web}, compatível com o protocolo HTTP, mantido pela \textit{Apache Software Foundation }}, estas são submetidas para o mestre. Quando o Agente solicita informações do mestre, o mestre compila e retorna o catálogo com as alterações para o nó desse agente usando as fontes de informação às quais o mestre tem acesso, o agente recebe essas alterações então ele aplica nó correspondente, alterado a versão do \textit{Apache}.   
+ Em outras palavras, o fluxo básico de funcionamento é: quando se altera as definições de um recurso, por exemplo, uma nova versão do \textit{Apache} \footnote{É um servidor \textit{web}, compatível com o protocolo HTTP, mantido pela \textit{Apache Software Foundation }}, estas são submetidas para o mestre. Quando o Agente solicita informações do mestre, o mestre compila e retorna um catálogo com as alterações para o nó desse agente usando as fontes de informação às quais o mestre tem acesso. O agente recebe essas alterações e as aplica no nó correspondente, alterando a versão do \textit{Apache}.   
 
-Essa arquitetura pode ter uma leve variação entre ferramentas podendo ter uma máquina de onde é acessado o mestre para que depois sejam replicadas nos nó.
+Essa arquitetura pode ter uma leve variação entre ferramentas, podendo ter uma máquina exclusiva de onde o mestre é acessado.
 
-Embora essas ferramentes podem ser usada para o gerenciamento de estações de trabalho não é o objetivo deste estudo.
+Embora essas ferramentes podem ser usada para o gerenciamento de estações de trabalho não é o objetivo deste estudo. 
+\textit{Puppet} e \textit{Chef} são exemplos de ferramentas que são baseadas nesse modelo de arquitetura. 
 
-Exemplo de ferramentas: \textit{Puppet,Chef} 
 
  \begin{figure}[ht]
 	\centering	
@@ -167,37 +169,32 @@ Exemplo de ferramentas: \textit{Puppet,Chef}
 
 \section{Ferramentas}
 
-Esta seção aborda os principais conceitos das ferramentas utilizada neste artigo e as definições destes conceitos foram retiras diretamente da documentação oficial das ferramentas que podem ser consultadas respectivamente aqui: 
+Esta seção aborda os principais conceitos das ferramentas utilizadas neste artigo. \textit{Ansible} e \textit{Terraform} operam usando uma arquitetura sem agente(conforme mencionado no item \ref{semagent}) e promovem uma interface simplificada legível para a definição de recursos, facilitando a adoção. As definições de conceitos foram retirados diretamente da documentação oficial das ferramentas.
 
-\href{https://docs.ansible.com}{https://docs.ansible.com} e \href{https://terraform.io/docs}{https://terraform.io/docs}
+\subsection{Ansible}
 
-\textit{Ansible} e \textit{Terraform} operam usando uma arquitetura sem agente(conforme mencionado no item \ref{semagent}) e promovem uma interface simplificada legível para a definição de recursos, facilitando a adoção. As definições de conceitos foram retirados diretamente da documentação oficial das ferramentas.
+A \citeonline{redhat}, descreve o \textit{Ansible} como uma suíte completa de automação de processos de TI simples. Ele abrange desde o provisionamento e o gerenciamento de configurações e outras necessidades.
 
+Ele não usa agentes e nenhuma infraestrutura de segurança personalizada adicional(uma característica de ferramentas, conforme mencionado no item \ref{cliente-servidor}), por isso é relativamente fácil de implantar. O \textit{Ansible} usa uma linguagem de marcação muito simples, o \textit{YAML}, o que é chamado como \textit{Ansible Playbooks} e o estilo de escrita de código é a procedural(\ref{procedural}). E é através dos \textit{Playbooks} que define -se os recursos, estas definições se aproximam de uma escrita em inglês. 
 
-\subsubsection{Ansible}
-
-\textit{Ansible} é uma suíte completa de automação de processos de TI simples, ela abrange desde o provisionamento e o gerenciamento de configurações e outras necessidades..
-
-Ele não usa agentes e nenhuma infraestrutura de segurança personalizada adicional(uma características de ferramentas, conforme mencionado no item \ref{cliente-servidor}), por isso é relativamente fácil de implantar. O \textit{Ansible} usa uma linguagem muito simples a \textit{YAML} na forma que eles descrevem como \textit{Ansible Playbooks} que permite descrever seus trabalhos de automação de uma maneira que se aproxima do inglês. 
-
-Ele é descentralizado e depende de das credenciais do sistema operacional existentes para controlar o acesso a máquinas remotas. A principal e mais usada forma dele se conectar é usando o protocolo \textit{SSH}.Se necessário, ele pode se conectar facilmente por \textit{Kerberos} \footnote{É um protocolo desenvolvido para fornecer poderosa autenticação em aplicações usuário/servidor, onde ele funciona como a terceira parte neste processo, oferendo autenticação ao usuário.}, \textit{LDAP} \footnote{\textit{LDAP - Lightweight Directory Access:} É um protocolo de aplicação aberto para acessar e manter serviços de informação de diretório distribuído sobre uma rede de IP, permitindo o compartilhamento de informações sobre usuários, sistemas, redes, serviços e aplicações através da rede.} e outros sistemas de gerenciamento de autenticação centralizados.
+O \textit{Ansible} é descentralizado e depende das credenciais existentes do sistema operacional para controlar o acesso à máquinas remotas. A principal e mais usada forma dele se conectar é usando o protocolo \textit{SSH}.Se necessário, ele pode se conectar facilmente por \textit{Kerberos} \footnote{É um protocolo desenvolvido para fornecer poderosa autenticação em aplicações usuário/servidor, onde ele funciona como a terceira parte neste processo, oferendo autenticação ao usuário.}, \textit{LDAP} \footnote{\textit{LDAP - Lightweight Directory Access:} É um protocolo de aplicação aberto para acessar e manter serviços de informação de diretório distribuído sobre uma rede de IP, permitindo o compartilhamento de informações sobre usuários, sistemas, redes, serviços e aplicações através da rede.} e outros sistemas de gerenciamento de autenticação centralizados.
 
 
-\textit{Ansible} nasceu como uma ferramenta de gerenciamento de configurações e a partir da versão 2.0 passou a ser uma suíte completa e também podendo provisionar infraestrutura neste artigo abordaremos apenas como uma ferramenta de configuração o que ainda ele é muito citado na literatura como essas características.
+\textit{Ansible} nasceu como uma ferramenta de gerenciamento de configurações e a partir da versão 2.0 passou a ser uma suíte completa, também podendo provisionar infraestrutura.
 
  O \textit{Ansible} apresenta os seguintes itens em sua arquitetura:
 
 \hfill
  \begin{itemize}
-\item \textbf{\textit{Controller Machine}}: É máquina de onde o \textit{Ansible} está sendo executado. 
+\item \textbf{\textit{Controller Machine}}: É a máquina de onde o \textit{Ansible} está sendo executado. 
 
-\item \textbf{\textit{Modules}}: Um módulo normalmente abstrai uma tarefa do sistema, por exemplo instalar um determinado aplicativo e configurar, para não ficar reescrevendo esta tarefa quando precisar, um módulo pode ser escrito para isso e usando qualquer linguagem de programação. Então bastando referenciar este módulo em alguma tarefa. O \textit{Ansible} se conecta aos seus nós(máquinas) e envia os chamados e executa esses módulos (por \textit{SSH} por padrão) e os remove quando finalizados.   
+\item \textbf{\textit{Modules}}: Um módulo normalmente abstrai uma tarefa do sistema, por exemplo, instalar um determinado aplicativo e o configurar. Um módulo pode ser escrito em qualquer linguagem de programação. Para usar um módulo, basta referenciar este módulo em alguma tarefa. Os módulos são executados diretamente em um nó.   
 
-\item \textbf{\textit{Plugins}}: Os \textit{plugins} oferecem uma extensões para os principais recursos do \textit{Ansible}, por exemplo um \textit{plugin} para envio de \textit{e-mail}. Um \textit{plugins} deve ser escritos em \textit{Python}. Diferente dos módulos os \textit{plugins} são executados na máquina de controle.
+\item \textbf{\textit{Plugins}}: Os \textit{plugins} permitem extender as funcionalidades e recursos do \textit{Ansible}, por exemplo, um \textit{plugin} para o envio de \textit{e-mail}. Os \textit{plugins} devem ser escritos em \textit{Python}. Diferente dos módulos, os \textit{plugins} são executados na máquina de controle.
 
-\item \textbf{\textit{Inventory}}: É um arquivo de configuração que contém informações sobre os servidores os nós(servidores) que ele esta gerenciando. Todo o servidor gerenciado deve ser informado nesse arquivo.
+\item \textbf{\textit{Inventory}}: É um arquivo de configuração que contém informações sobre os nós(servidores) que o \textit{Ansible} esta gerenciando. Todos os servidores gerenciados devem ser informados nesse arquivo.
 
-\item \textbf{\textit{Playbooks}}: É principal item é o ponto de entrada para definir os recursos, escritos por meio do formato \textit{YAML}.
+\item \textbf{\textit{Playbooks}}: É o principal ponto de entrada para definir os recursos, escritos por meio do formato \textit{YAML}.
 
 \item \textbf{\textit{Role}}: Uma maneira predefinida de organizar \textit{playbooks} e outros arquivos para facilitar o compartilhamento e a reutilização.
 
@@ -218,47 +215,47 @@ Ele é descentralizado e depende de das credenciais do sistema operacional exist
 \end{figure}
 \vspace{-0.5cm}
 
-\subsubsection{Terraform} 
+\subsection{Terraform} \label{terraform} 
 
- O \textit{Terraform} é uma ferramenta para provisionamento de infraestrutura, permite criar, alterar e criar versões de infraestrutura com segurança e eficiência. Ele pode gerenciar os mais populares provedores de nuvem e também trabalhar com soluções internas personalizadas.
+ Segundo a \citeonline{hashcorp2}, o \textit{Terraform} é uma ferramenta para provisionamento de infraestrutura, que permite criar, alterar e criar versões de infraestrutura com segurança e eficiência. Ele pode gerenciar os mais populares provedores de nuvem e também trabalhar com soluções internas personalizadas.
 
-O \textit{Terraform} usa uma linguagem \textit{DSL} muito simples a \textit{HCL} \footnote{\textit{HCL - Hashicorp Configuration Language.} Veja mais em: \href{https://www.terraform.io/docs/configuration/syntax.html}{https://www.terraform.io/docs/configuration/syntax.html} } (veja na Figura \ref{fig:figura2}.) com a extensão de arquivo \textit{"*.tf"} para a definição de recursos de infraestrutura. 
+O \textit{Terraform} usa uma linguagem \textit{DSL} muito simples, a \textit{HCL} \footnote{\textit{HCL - Hashicorp Configuration Language.} Veja mais em: \href{https://www.terraform.io/docs/configuration/syntax.html}{https://www.terraform.io/docs/configuration/syntax.html} } (veja na Figura \ref{fig:figura2}) com a extensão de arquivo \textit{"*.tf"} para a definição de recursos de infraestrutura. 
 
-Os arquivos de configuração descrevem para o \textit{Terraform} os componentes necessários para criar um único aplicativo ou toda a configuração da infraestrutura. Ao executar ele gera um plano de execução descrevendo o que fará para atingir o estado desejado e, em seguida, executa-o para construir a infraestrutura descrita. 
-À medida que a configuração muda, ele determina o que mudou e criar planos de execução incrementais para serem aplicados.
+Os arquivos de configuração descrevem para o \textit{Terraform} os componentes necessários para criar um único aplicativo ou toda a configuração da infraestrutura. Ao executar, ele gera um plano de execução descrevendo o que fará para atingir o estado desejado e, em seguida, executa-o para construir a infraestrutura descrita. 
+À medida que a configuração muda, ele determina o que mudou e cria planos de execução incrementais para serem aplicados.
 
-Uma característica do \textit{Terraform} é garantir que ao executar um arquivo de definição de recursos varias vezes o resultado será o mesmo, ou seja a \textbf{idempotência} \footnote{É a propriedade que algumas operações têm de poderem ser aplicadas várias vezes sem que o valor do resultado se altere após a aplicação inicial.} de uma operação.
+Uma característica do \textit{Terraform} é garantir que ao executar um arquivo de definição de recursos varias vezes, o resultado será o mesmo, ou seja, a \textbf{idempotência} \footnote{É a propriedade que algumas operações têm de poderem ser aplicadas várias vezes sem que o valor do resultado se altere após a aplicação inicial.} de uma operação.
 
-O \textit{Terraform} pode criar e gerenciar componentes de baixo nível como instâncias de servidores, armazenamento e componentes de alto nível(Aqui o \textit{Terraform} se sobrepõem com ferramentas de gerenciamento de configuração), como configurar um \textit{DNS} \footnote{\textit{DNS -Domain Name System}: É responsável por localizar e traduzir para números IP os endereços dos sites que digitamos nos navegadores.} de uma máquina.
+O \textit{Terraform} pode criar e gerenciar componentes de baixo nível, como instâncias de servidores, armazenamento e componentes de alto nível(aqui o \textit{Terraform} se sobrepõe com ferramentas de gerenciamento de configuração), como configurar um \textit{DNS} \footnote{\textit{DNS -Domain Name System}: É responsável por localizar e traduzir para números IP os endereços dos sites que digitamos nos navegadores.} de uma máquina.
 
-Além disso o terraform o terraform pode ser integrado com a ferramentas de gerenciamento de configuração, como \textit{Ansible, Chef ou Puppet}
+Além disso o \textit{Terraform} pode ser integrado com as ferramentas de gerenciamento de configuração, como \textit{Ansible, Chef ou Puppet}
 
 Os principais conceitos dele são:
  \begin{itemize}
-\item \textbf{Infraestrutura como código}: A infraestrutura é descrita usando uma sintaxe de configuração de alto nível. Isso permite que os recursos da infraestrutura sejam versionados e tratado como qualquer outro código. Além disso, a infraestrutura pode ser compartilhada e reutilizada.
+\item \textbf{Infraestrutura como código}: A infraestrutura é descrita usando uma sintaxe de configuração de alto nível. Isso permite que os recursos da infraestrutura sejam versionados e tratados como qualquer outro código. Além disso, a infraestrutura pode ser compartilhada e reutilizada.
 
-\item \textbf{Planos de Execução}: O \textit{Terraform} possui uma etapa de "planejamento" onde gera um plano de execução . O plano de execução mostra o que o \textit{Terraform} fará quando você chama aplicar. Isso permite evitar surpresas quando o ele manipula a infraestrutura.
+\item \textbf{Planos de Execução}: O \textit{Terraform} possui uma etapa de "planejamento" onde gera um plano de execução . O plano de execução mostra quais os recursos que o \textit{Terraform} criará. Isso permite verificar os itens que serão criados antes de efetivamente antes de ser criados na infraestrutura real.
 
-\item \textbf{Gráfico de Recursos}: Ele cria um gráfico de todos os recursos e paralela a criação e modificação de quaisquer recursos não dependentes. Por esse motivo, o \textit{Terraform} constrói a infraestrutura da maneira mais eficiente possível, e os operadores obtêm entendimento sobre as dependências dos recursos.
+\item \textbf{Gráfico de Recursos}: Ele cria um gráfico de todos os recursos e paraleliza a criação e modificação de quaisquer recursos não dependentes. Por esse motivo, o \textit{Terraform} constrói a infraestrutura da maneira mais eficiente possível, e os operadores obtêm entendimento sobre as dependências dos recursos.
 
-\item \textbf{Automação de Mudanças}: Conjuntos de alterações complexas podem ser aplicados à infraestrutura com mínimo de interação humana. Com o plano de execução e o gráfico de recursos, permite sabe exatamente o que o \textit{Terraform} mudará e em que ordem, evitando muitos possíveis erros humanos.
+\item \textbf{Automação de Mudanças}: Conjuntos de alterações complexas podem ser aplicados à infraestrutura com o mínimo de interação humana. Com o plano de execução e o gráfico de recursos, permite -se saber exatamente o que o \textit{Terraform} mudará e em que ordem, evitando muitos possíveis erros humanos.
 
-\item \textbf{Estado da infraestrutura}: É um registro dos recursos provisionados no momento e que guardam o estado da infraestrutura e ativam o histórico das alterações incrementais. O estado pode ser armazenado remotamente e localmente. O armazenamento de estado remoto permitem que as equipes compartilhem o estado, evitem mais de uma alteração por vez e visualizem um histórico de todas as alterações na infraestrutura por equipe.
+\item \textbf{Estado da infraestrutura}: É um registro dos recursos provisionados no momento e que guardam o estado da infraestrutura e ativam o histórico das alterações incrementais. O estado pode ser armazenado remotamente e localmente. O armazenamento de estado remoto permite que as equipes compartilhem o estado, evitem mais de uma alteração por vez e visualizem um histórico de todas as alterações na infraestrutura por equipe.
 
 \item \textbf{\textit{Providers}}: Um provedor é responsável por entender as interações da \textit{API} e expor os recursos. Os provedores geralmente são serviços de \textit{IaaS},  por exemplo : \textit{Amazon
-Web Service, Azure, Digital Ocean, Google Cloud, DNSimple, CloudFlare, Digital Ocean}).
+Web Service, Azure, Digital Ocean, Google Cloud, DNSimple, CloudFlare, Digital Ocean}.
 
-\item \textbf{\textit{Resource}}: Um recurso fornecido por um provedor, por exemplo: Uma instância, Um disco   
+\item \textbf{\textit{Resource}}: Um recurso fornecido por um provedor, por exemplo: uma instância, um disco.   
 
-\item \textbf{\textit{Provisioners}}: Os provisionadores podem ser usados para executar ações específicas na máquina local ou remota, por exemplo: copiar um arquivo da máquina local para a máquina remota.
+\item \textbf{\textit{Provisioners}}: Os provisionadores podem ser usados para executar ações específicas na máquina local ou remota, por exemplo copiar um arquivo da máquina local para a máquina remota.
 
 \item \textbf{\textit{Modules}}: Um módulo é um agrupamento para vários recursos que são usados juntos. Os módulos podem ser usados para criar abstrações leves, para que você possa descrever sua infraestrutura em termos de arquitetura, em vez de diretamente em termos de objetos físicos.
 
 \item \textbf{\textit{Variables}}: Usando um espaço reservado especial para inserir um valor calculado em uma sequência de caracteres. 
 
- \item \textbf{\textit{Variables output}}: Dados exportados por um módulo, que podem ser exibidos para um usuário e  ou usados de forma programática por outro código \textit{Terraform}.
+ \item \textbf{\textit{Variables output}}: Dados exportados por um módulo, que podem ser exibidos para um usuário  ou usados de forma programática por outro código \textit{Terraform}.
  
- \item \textbf{\textit{Plugins}}: O \textit{Terraform} é construído em uma arquitetura baseada em \textit{plugins}. Todos os provedores e provisionadores usados nas configurações do \textit{Terraform} são \textit{plugins}. Os usuários do \textit{Terraform} podem escrever novos \textit{plugins} para oferecer suporte a novas funcionalidades no \textit{Terraform}.
+ \item \textbf{\textit{Plugins}}: O \textit{Terraform} é construído em uma arquitetura baseada em \textit{plugins}. Todos os provedores e provisionadores usados nas configurações do \textit{Terraform} são \textit{plugins}. Os usuários do \textit{Terraform} podem escrever novos \textit{plugins} para oferecer suporte às novas funcionalidades no \textit{Terraform}.
  \end{itemize}
   
   \begin{figure}[ht]
@@ -272,15 +269,96 @@ Web Service, Azure, Digital Ocean, Google Cloud, DNSimple, CloudFlare, Digital O
 \end{figure}
 \vspace{-0.5cm}
 
+
+\subsection{ Analise Comparativa }
+
+Nesta seção é apresentada os itens de comparação. completar XXXXXXXXXXXXXXXX
+
+\subsection{Fluxo de trabalho}
+Os fluxos de trabalho  das ferramentas são bem simples e atendem equipes de diversos tamanhos. Este item descreve o fluxo principal de cada ferramenta. 
+
+No fluxo de trabalho principal do \textbf{\textit{Terraform}}(veja na Figura \ref{fig:figura7}) possuem três etapas:
+
+\begin{itemize}
+  \item Definir: A definição de recursos da infraestrutura deve ser criada em qualquer editor de texto puro e salvo com a extensão \textbf{*.tf} respeitando a sintaxe do \textit{HCL}. É prática comum armazenar os arquivos em um repositório controlado por versão.
+   \item Planejar: Visualizar as alterações antes de criar os recursos(aplicar).
+   \item Aplicar/Destruir: Criar, atualizar ou deletar recursos na infraestrutura 
+\end{itemize}
+
+
+Este fluxo é resumido em três comandos  em três comandos \textbf{\textit{terraform init, terraform apply/destroy}}
+
+
+\begin{itemize}
+
+\item \textbf{\textit{terraform init }}: Este comando é usado somente na primeira vez quando é instalado ou quando o próprio \textit{terraform} solicita. Ele realiza \textit{download} de itens de funcionamento do \textit{terraform} como os \textit{providers, resource e modules} (\ref{terraform}). 
+
+\item \textbf{\textit{terraform apply ou destroy }}: O terraform é detecta automaticamente as alterações de recursos, como, criação, atualização e exclusão e mostrar um plano do que ele fará antes de aplicar ou destruir recursos.
+
+\end{itemize}
+
+\begin{figure}[ht]
+	\centering	
+	\caption[\hspace{0.1cm}Fluxo Principal Terraform]{Fluxo Principal Terraform}
+	\vspace{-0.4cm}
+	\includegraphics[width=1.2\textwidth]{artigo/figuras/terraform_single_workflow.png}
+	 \vspace{-0.2cm}
+	\\\textbf{\footnotesize Adaptado de: \cite{Turbinskii}}
+	\label{fig:figura7}
+\end{figure}
+\vspace{-0.5cm}
+
+Considerando apenas a função de provisionamento que o \textbf{\textit{Ansible}} tem. O fluxo de trabalho também é divido em duas etapas:
+
+\begin{itemize}
+  \item Desenvolvimento: Definir os recursos da infraestrutura que devem ser criados, este devem ser ser criados em qualquer editor de texto puro e salvos com a extensão \textbf{*.yaml}, respeitando a sintaxe dos \textit{Playbooks}. É prática comum armazenar os arquivos em um repositório controlado por versão.
+  \item Aplicar/Destruir: Criar, atualizar ou deletar recursos na infraestrutura. 
+\end{itemize}
+
+
+Este fluxo é resumido em apenas um comando: \textbf{\textit{ansible-playbook recurso.yaml}}
+
+
+A diferença entre o fluxo das duas ferramenta é que no \textit{Terraform} ele gera um arquivo de estado, com extensão \textbf{*.tfstate} que deve ser armazenado no controle de versão. Outra diferença é que no \textit{Ansible} o fluxo de destruir um recursos requer um \textit{Playbook} especifico para finalidade. Esta última diferença será explicada no item \ref{idem}.  
+
+
+\subsection{Linguagem}
+
+No \textit{Terraform}, um recurso é criado usando a linguagem personalizadas a \textit{HCL} e o mecanismo do \textit{Terraform} se encarrega de provisionar e atualizar recursos. Com o \textit{Ansible}, você usa a \textit{YAML} para expressar o estado desejado e o \textit{Ansible} se encarrega de criar o recurso oferece a você diferenças e uma maneira de atualizar robusta sua infraestrutura. Neste ponto o \textit{Ansible} tem uma certa vantagem, pois \textit{YAML} é muito usado por outras ferramentas.  No entando o \textit{Ansible} trabalha com o modelo de escrita de código procedural conforme mencionado no item \ref{procedural} o força ao usuário ter conhecimento prévio de como configurar uma determinado recurso antes de escrever um \textit{playbook}. 
+
+
+
 \begin{comment}
-\subsection{Ferramentas Auxiliares}
+\subsection{Documentação}
 
-\textbf{\textit{Gitbub}} é uma plataforma baseada em \textit{VCS - Version Control System} que registra as mudanças feitas em um arquivo ou um conjunto de arquivos ao longo do tempo de forma que possa recuperar versões específicas. 
+A documentação do \textit{Ansible} é bastante extensa e as vezes confusa e os exemplos não são completos e não acompanham as evoluções do produto, por outro lado existe uma grande quantidade de conteúdo disponível na internet, como blogs, vídeos, livros e cursos.
 
-\textbf{\textit{Azure}}: O \textit{Microsoft Azure} é um conjunto serviços de nuvem que permite criar, gerenciar e implantar aplicativos em uma enorme rede global. 
+A documentação do \textit{Terraform} é bastante extensa completa os exemplos são claros e simples existe também muito conteúdo na internet.
 
-\textbf{\textit{Azure Pipelines}}: É uma ferramenta de integração contínua e entrega contínua baseado em nuvem.
+\subsection{Performance}
 \end{comment}
+\subsection{Controle de Estado e Idempotência} \label{idem}
+Um dos grandes de desafios das ferramentas de Provisionamento é garantir que um determinado recursos seja único e que toda operação tenha o mesmo resultado esperado o que é chamando de Idempotência tanto o  \textit{Terraform} quanto o \textit{Ansible} possuem essa característica. No \textit{Terraform} isto é implícito, pois o nome associado ao recursos tem que ser único, então o \textit{Terraform} faz o controle automaticamente pelo nome do recursos. No \textit{Ansible} essa característica é explicita deve-se ser informada na definição do recurso que ele deve ser único.
 
+Uma característica observada no \textit{Terraform} é que ele mantém o estado da infraestrutura e detecta automaticamente alterações de estado e sincronizada a diferença entre o estado do \textit{Terraform} e a infraestrutura. Essa é uma grande vantagem em relação ao \textit{Ansible} que apresenta um modelo de recursos controlado em que o usuário deve descreve o estado desejado ou seja, o usuário deve descrever que o recurso por exemplo deve ser excluído e o \textit{Ansible} entende como transformá-lo no estado desejado, diferente do \textit{Terraform} que apenas retirando o recurso do arquivo ele já entende que deve-se destruir o recurso na infraestrutura. 
+
+
+\subsection{Extensibilidade}
+
+\textit{Ansible} e \textit{Terraform} possui um sistema de plugins e módulos permitem estender as suas funcionalidades. Este módulos e \textit{plugins} são escritos em linguagens de programação e pode ser compartilhados. As duas ferramentas possuem um repositório central, no \textit{Ansible} é chamado de \textit{Galaxy} e no \textit{Terraform} é chamado como \textit{Registry} onde esses módulos e \textit{plugins} pode ser compartilhados para que outras pessoas possam usar. No \textit{Terraform} o usuário só pode escrever um módulo em apenas uma linguagem de programação a \textit{Golang}  \footnote{Linguagem de programação de propósito geral desenvolvida pela Google} e no \textit{Ansible} é permitido usar qualquer linguagem de programação.  
+
+\subsection{Performance}
+
+\subsection{Maturidade}
+
+\subsection{Conclusão}
+
+
+\section{Trabalhos Futuros}
+
+Como possíveis trabalhos futuros, pode-se apontar: 
+ \begin{itemize}
+ \item Realizar um estudo aprofundado no tema \ref{imutavel} 
+\end{itemize}
 
  
