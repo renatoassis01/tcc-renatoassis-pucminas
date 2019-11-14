@@ -58,7 +58,7 @@ A escolha das ferramentas obedeceram critérios da tabela de \citeonline{masek} 
 
 Para medir a aceitação do mercado foram realizadas pesquisas em sites especializados de comparação de tipos de ferramentas. Um outro aspecto consideração foi se é uma ferramenta \textit{open source}(um ponto importante para permitir adaptação da ferramenta),se possui um plano de suporte pago, para critério de desempate foi considerado o preço do suporte. Para medir a maturidade foram considerados o tempo de mercado, documentação, tempo de lançamento entre versões e a integração com outras ferramentas.
 
-A realização dos testes foram consideradas as últimas versões estáveis de lançadas no momento da escritas desse artigo, o \textit{Ansible}(2.4.6) e o \textit{Terraform}(0.12.13). Os testes foram usando o fornecedor de computação na nuvem  \textit{Digital Ocean}. \footnote{https://www.digitalocean.com/}   
+A realização dos testes foram consideradas as últimas versões estáveis de lançadas no momento da escritas desse artigo, o \textit{Ansible}(2.4.6) e o \textit{Terraform}(0.12.13). Os testes foram usando o fornecedor de computação na nuvem  \textit{Digital Ocean}. \footnote{https://www.digitalocean.com/}. Utilizando uma máquina com um processador de 7 núcleos e 16 Gigabtyes de memória RAM.   
 
 As métricas comparativas consideradas foram a linguagem de escrita, a performance(o tempo em que cada ferramenta leva para criar um determinado número de recursos. O controle de estado(capacidade da ferramenta  de controlar e identificar o estado real dos recursos) e a extensibilidade da ferramenta(Se possui um conjunto de \textit{SDK's} \footnote{\textit{SDK - Software Development Kit}} em que permite a programadores estender as funcionalidades da ferramenta).  
 
@@ -165,15 +165,15 @@ As ferramentas de provisionamento se comunicam diretamente com a \textit{API} do
 
 \subsubsection{Mestre/Agente ou Cliente/Servidor} \label{cliente-servidor}
  
- Segundo a \citeonline{puppetlabs}, nessa arquitetura (Figura \ref{fig:figura4}), um servidor \footnote{Dependendo da ferramenta o \textit{master} pode ser representado por mais de um servidor} central denominado mestre controla as informações de configuração de cada nó(cada servidor tem instalado  um agente, geralmente rodando como um processo em segundo plano \footnote{Processos em que não há interação com o usuário}). Este agente solicita seu próprio catálogo de configuração ao mestre.  
+  Nessa arquitetura (Figura \ref{fig:figura4}), um servidor \footnote{Dependendo da ferramenta o \textit{master} pode ser representado por mais de um servidor} central denominado mestre controla as informações de configuração de cada nó(cada servidor tem instalado  um agente, geralmente rodando como um processo em segundo plano \footnote{Processos em que não há interação com o usuário}). Este agente solicita seu próprio catálogo de configuração ao mestre.  
  
- Periodicamente, cada agente envia informações ao mestre e solicita um catálogo. O mestre compila e retorna o catálogo de alterações desse nó, usando várias fontes de informações às quais ele tem acesso. Ao receber este catálogo com as alterações a serem realizadas, o agente aplica as alterações no nó. 
+ Periodicamente, cada agente envia informações ao mestre e solicita um catálogo. O mestre compila e retorna o catálogo de alterações desse nó, usando várias fontes de informações às quais ele tem acesso. Ao receber este catálogo com as alterações a serem realizadas, o agente aplica as alterações no nó. \cite{puppetlabs}, 
  
  Em outras palavras, o fluxo básico de funcionamento é: quando se altera as definições de um recurso, por exemplo, uma nova versão do \textit{Apache} \footnote{É um servidor \textit{web}, compatível com o protocolo HTTP, mantido pela \textit{Apache Software Foundation }}, estas são submetidas para o mestre. Quando o Agente solicita informações do mestre, o mestre compila e retorna um catálogo com as alterações para o nó desse agente usando as fontes de informação às quais o mestre tem acesso. O agente recebe essas alterações e as aplica no nó correspondente, alterando a versão do \textit{Apache}.   
 
-Essa arquitetura pode ter uma leve variação entre ferramentas, podendo ter uma máquina exclusiva de onde o mestre é acessado.
+Segundo \cite{Morris:2016:ICM:3006361}, essa arquitetura pode ter uma leve variação entre ferramentas, podendo ter uma máquina exclusiva de onde o mestre é acessado.
 
-Embora essas ferramentes podem ser usada para o gerenciamento de estações de trabalho não é o objetivo deste estudo. 
+Embora essas ferramentes podem ser usadas para o gerenciamento de estações de trabalho não é o objetivo deste artigo. 
 \textit{Puppet} e \textit{Chef} são exemplos de ferramentas que são baseadas nesse modelo de arquitetura. 
 
 
@@ -190,20 +190,18 @@ Embora essas ferramentes podem ser usada para o gerenciamento de estações de t
 
 \section{Ferramentas}
 
-Esta seção aborda os principais conceitos das ferramentas utilizadas neste artigo. \textit{Ansible} e \textit{Terraform} operam usando uma arquitetura sem agente(conforme mencionado no item \ref{semagent}) e promovem uma interface simplificada legível para a definição de recursos, facilitando a adoção. As definições de conceitos foram retirados diretamente da documentação oficial das ferramentas.
+Esta seção aborda os principais conceitos das ferramentas utilizadas neste artigo. \textit{Ansible} e \textit{Terraform} operam usando uma arquitetura sem agente(conforme mencionado a seção \ref{semagent}) e promovem uma interface simplificada legível para a definição de recursos, facilitando a adoção. As definições de conceitos foram retirados diretamente da documentação oficial das ferramentas.
 
-\subsection{Ansible}
+\subsection{Ansible} \label{Ansible}
 
-A \citeonline{redhat}, descreve o \textit{Ansible} como uma suíte completa de automação de processos de TI simples. Ele abrange desde o provisionamento e o gerenciamento de configurações e outras necessidades.
+A \citeonline{redhat} descreve o \textit{Ansible} como uma suíte completa de automação de processos de TI simples. Ele abrange desde o provisionamento e o gerenciamento de configurações e outras necessidades.
 
-Ele não usa agentes e nenhuma infraestrutura de segurança personalizada adicional(uma característica de ferramentas, conforme mencionado no item \ref{cliente-servidor}), por isso é relativamente fácil de implantar. O \textit{Ansible} usa uma linguagem de marcação muito simples, o \textit{YAML}, o que é chamado como \textit{Ansible Playbooks} e o estilo de escrita de código é a procedural(\ref{procedural}). E é através dos \textit{Playbooks} que define -se os recursos, estas definições se aproximam de uma escrita em inglês. 
+Ele não usa agentes e nenhuma infraestrutura de segurança personalizada adicional(uma característica de ferramentas, conforme mencionado na seção \ref{cliente-servidor}), por isso é relativamente fácil de implantar. O \textit{Ansible} usa uma linguagem de marcação muito simples, o \textit{YAML}, o que é chamado como \textit{Ansible Playbooks} e o estilo de escrita de código é a procedural. E é através dos \textit{Playbooks} que se definem os recursos, sendo que estas definições se aproximam de uma escrita em inglês. 
 
 O \textit{Ansible} é descentralizado e depende das credenciais existentes do sistema operacional para controlar o acesso à máquinas remotas. A principal e mais usada forma dele se conectar é usando o protocolo \textit{SSH}.Se necessário, ele pode se conectar facilmente por \textit{Kerberos} \footnote{É um protocolo desenvolvido para fornecer poderosa autenticação em aplicações usuário/servidor, onde ele funciona como a terceira parte neste processo, oferendo autenticação ao usuário.}, \textit{LDAP} \footnote{\textit{LDAP - Lightweight Directory Access:} É um protocolo de aplicação aberto para acessar e manter serviços de informação de diretório distribuído sobre uma rede de IP, permitindo o compartilhamento de informações sobre usuários, sistemas, redes, serviços e aplicações através da rede.} e outros sistemas de gerenciamento de autenticação centralizados.
 
 
-\textit{Ansible} nasceu como uma ferramenta de gerenciamento de configurações e a partir da versão 2.0 passou a ser uma suíte completa, também podendo provisionar infraestrutura.
-
- O \textit{Ansible} apresenta os seguintes itens em sua arquitetura:
+\textit{Ansible} nasceu como uma ferramenta de gerenciamento de configurações e a partir da versão 2.0 passou a ser uma suíte completa, também podendo provisionar infraestrutura. Neste caso utiliza-se chamadas de \textit{API} diretamente do provedor de núvem. O \textit{Ansible} apresenta os seguintes itens em sua arquitetura:
 
 \hfill
  \begin{itemize}
@@ -211,9 +209,9 @@ O \textit{Ansible} é descentralizado e depende das credenciais existentes do si
 
 \item \textbf{\textit{Modules}}: Um módulo normalmente abstrai uma tarefa do sistema, por exemplo, instalar um determinado aplicativo e o configurar. Um módulo pode ser escrito em qualquer linguagem de programação. Para usar um módulo, basta referenciar este módulo em alguma tarefa. Os módulos são executados diretamente em um nó.   
 
-\item \textbf{\textit{Plugins}}: Os \textit{plugins} permitem extender as funcionalidades e recursos do \textit{Ansible}, por exemplo, um \textit{plugin} para o envio de \textit{e-mail}. Os \textit{plugins} devem ser escritos em \textit{Python}. Diferente dos módulos, os \textit{plugins} são executados na máquina de controle.
+\item \textbf{\textit{Plugins}}: Os \textit{plugins} permitem estender as funcionalidades e recursos do \textit{Ansible}, por exemplo, um \textit{plugin} para o envio de \textit{e-mail}. Os \textit{plugins} devem ser escritos em \textit{Python}. Diferente dos módulos, os \textit{plugins} são executados na máquina de controle.
 
-\item \textbf{\textit{Inventory}}: É um arquivo de configuração que contém informações sobre os nós(servidores) que o \textit{Ansible} esta gerenciando. Todos os servidores gerenciados devem ser informados nesse arquivo.
+\item \textbf{\textit{Inventory}}: É um arquivo de configuração que contém informações sobre os nós(servidores) que o \textit{Ansible} está gerenciando. Todos os servidores gerenciados devem ser informados nesse arquivo.
 
 \item \textbf{\textit{Playbooks}}: É o principal ponto de entrada para definir os recursos, escritos por meio do formato \textit{YAML}.
 
@@ -240,30 +238,26 @@ O \textit{Ansible} é descentralizado e depende das credenciais existentes do si
 
  Segundo a \citeonline{hashcorp2}, o \textit{Terraform} é uma ferramenta para provisionamento de infraestrutura, que permite criar, alterar e criar versões de infraestrutura com segurança e eficiência. Ele pode gerenciar os mais populares provedores de nuvem e também trabalhar com soluções internas personalizadas.
 
-O \textit{Terraform} usa uma linguagem \textit{DSL} muito simples, a \textit{HCL} \footnote{\textit{HCL - Hashicorp Configuration Language.} Veja mais em: \href{https://www.terraform.io/docs/configuration/syntax.html}{https://www.terraform.io/docs/configuration/syntax.html} } (veja na Figura \ref{fig:figura2}) com a extensão de arquivo \textit{"*.tf"} para a definição de recursos de infraestrutura. 
-
-Os arquivos de configuração descrevem para o \textit{Terraform} os componentes necessários para criar um único aplicativo ou toda a configuração da infraestrutura. Ao executar, ele gera um plano de execução descrevendo o que fará para atingir o estado desejado e, em seguida, executa-o para construir a infraestrutura descrita. 
+O \textit{Terraform} usa uma linguagem \textit{DSL} muito simples, a \textit{HCL} \footnote{\textit{HCL - Hashicorp Configuration Language.} Veja mais em: \href{https://www.terraform.io/docs/configuration/syntax.html}{https://www.terraform.io/docs/configuration/syntax.html} } (veja na Figura \ref{fig:figura2}) com a extensão de arquivo \textit{"*.tf"} para a definição de recursos de infraestrutura. Os arquivos de configuração descrevem para o \textit{Terraform} os componentes necessários para criar um único aplicativo ou toda a configuração da infraestrutura. Ao executar, ele gera um plano de execução descrevendo o que fará para atingir o estado desejado e, em seguida, executa-o para construir a infraestrutura descrita. 
 À medida que a configuração muda, ele determina o que mudou e cria planos de execução incrementais para serem aplicados.
 
-Uma característica do \textit{Terraform} é garantir que ao executar um arquivo de definição de recursos varias vezes, o resultado será o mesmo, ou seja, a \textbf{idempotência} \footnote{É a propriedade que algumas operações têm de poderem ser aplicadas várias vezes sem que o valor do resultado se altere após a aplicação inicial.} de uma operação.
+Uma característica do \textit{Terraform} é garantir que ao executar um arquivo de definição de recursos várias vezes, o resultado será o mesmo, ou seja, a \textbf{idempotência} \footnote{É a propriedade que algumas operações têm de poderem ser aplicadas várias vezes sem que o valor do resultado se altere após a aplicação inicial.} de uma operação. O \textit{Terraform} pode criar e gerenciar componentes de baixo nível, como instâncias de servidores, armazenamento e componentes de alto nível(aqui o \textit{Terraform} se sobrepõe com ferramentas de gerenciamento de configuração), como configurar um \textit{DNS} \footnote{\textit{DNS -Domain Name System}: É responsável por localizar e traduzir para números IP os endereços dos sites que digitamos nos navegadores.} de uma máquina.
 
-O \textit{Terraform} pode criar e gerenciar componentes de baixo nível, como instâncias de servidores, armazenamento e componentes de alto nível(aqui o \textit{Terraform} se sobrepõe com ferramentas de gerenciamento de configuração), como configurar um \textit{DNS} \footnote{\textit{DNS -Domain Name System}: É responsável por localizar e traduzir para números IP os endereços dos sites que digitamos nos navegadores.} de uma máquina.
-
-Além disso o \textit{Terraform} pode ser integrado com as ferramentas de gerenciamento de configuração, como \textit{Ansible, Chef ou Puppet}
+Além disso o \textit{Terraform} pode ser integrado com as ferramentas de gerenciamento de configuração, como \textit{Ansible, Chef ou Puppet}.
 
 Os principais conceitos dele são:
  \begin{itemize}
 \item \textbf{Infraestrutura como código}: A infraestrutura é descrita usando uma sintaxe de configuração de alto nível. Isso permite que os recursos da infraestrutura sejam versionados e tratados como qualquer outro código. Além disso, a infraestrutura pode ser compartilhada e reutilizada.
 
-\item \textbf{Planos de Execução}: O \textit{Terraform} possui uma etapa de "planejamento" onde gera um plano de execução . O plano de execução mostra quais os recursos que o \textit{Terraform} criará. Isso permite verificar os itens que serão criados antes de efetivamente antes de ser criados na infraestrutura real.
+\item \textbf{Planos de Execução}: O \textit{Terraform} possui uma etapa de "planejamento" onde gera um plano de execução. Este  plano mostra quais os recursos que o \textit{Terraform} criará. Isso permite verificar os itens que serão criados antes de efetivamente serem criados na infraestrutura real.
 
 \item \textbf{Gráfico de Recursos}: Ele cria um gráfico de todos os recursos e paraleliza a criação e modificação de quaisquer recursos não dependentes. Por esse motivo, o \textit{Terraform} constrói a infraestrutura da maneira mais eficiente possível, e os operadores obtêm entendimento sobre as dependências dos recursos.
 
-\item \textbf{Automação de Mudanças}: Conjuntos de alterações complexas podem ser aplicados à infraestrutura com o mínimo de interação humana. Com o plano de execução e o gráfico de recursos, permite -se saber exatamente o que o \textit{Terraform} mudará e em que ordem, evitando muitos possíveis erros humanos.
+\item \textbf{Automação de Mudanças}: Conjuntos de alterações complexas podem ser aplicados à infraestrutura com o mínimo de interação humana. Com o plano de execução e o gráfico de recursos, permite-se saber exatamente o que o \textit{Terraform} mudará e em que ordem, evitando muitos possíveis erros humanos.
 
-\item \textbf{Estado da infraestrutura}: É um registro dos recursos provisionados no momento e que guardam o estado da infraestrutura e ativam o histórico das alterações incrementais. O estado pode ser armazenado remotamente e localmente. O armazenamento de estado remoto permite que as equipes compartilhem o estado, evitem mais de uma alteração por vez e visualizem um histórico de todas as alterações na infraestrutura por equipe.
+\item \textbf{Estado da infraestrutura}: É um registro dos recursos provisionados no momento e que guardam o estado da infraestrutura e ativam o histórico das alterações incrementais. O estado pode ser armazenado remoto e localmente. O armazenamento de estado remoto permite que as equipes compartilhem o estado, evitem mais de uma alteração por vez e visualizem um histórico de todas as alterações na infraestrutura por equipe.
 
-\item \textbf{\textit{Providers}}: Um provedor é responsável por entender as interações da \textit{API} e expor os recursos. Os provedores geralmente são serviços de \textit{IaaS},  por exemplo : \textit{Amazon
+\item \textbf{\textit{Providers}}: Um provedor é responsável por entender as interações da \textit{API} e expor os recursos. Os provedores geralmente são serviços de \textit{IaaS},  por exemplo: \textit{Amazon
 Web Service, Azure, Digital Ocean, Google Cloud, DNSimple, CloudFlare, Digital Ocean}.
 
 \item \textbf{\textit{Resource}}: Um recurso fornecido por um provedor, por exemplo: uma instância, um disco.   
@@ -291,30 +285,28 @@ Web Service, Azure, Digital Ocean, Google Cloud, DNSimple, CloudFlare, Digital O
 \vspace{-0.5cm}
 
 
-\subsection{ Analise Comparativa }
+\subsection{ Análise Comparativa }
 
-Nesta seção é apresentada os itens de comparação. completar XXXXXXXXXXXXXXXX
+Nesta seção é apresentada algumas diferenças entre as ferramentas, diferenças extraídas pela experimentação e a leitura da documentação de ambas. O intuito dessa análise é estabelecer qual ferramenta é mais fácil implantação é utilização.
 
 \subsection{Fluxo de trabalho}
-Os fluxos de trabalho  das ferramentas são bem simples e atendem equipes de diversos tamanhos. Este item descreve o fluxo principal de cada ferramenta. 
-
-No fluxo de trabalho principal do \textbf{\textit{Terraform}}(veja na Figura \ref{fig:figura7}) possuem três etapas:
+Os fluxos de trabalho  das ferramentas são bem simples e atendem a equipes de diversos tamanhos. Este item descreve o fluxo principal de cada ferramenta. No fluxo de trabalho principal do \textbf{\textit{Terraform}}(veja na Figura \ref{fig:figura7}) possuem três etapas: 
 
 \begin{itemize}
-  \item Definir: A definição de recursos da infraestrutura deve ser criada em qualquer editor de texto puro e salvo com a extensão \textbf{*.tf} respeitando a sintaxe do \textit{HCL}. É prática comum armazenar os arquivos em um repositório controlado por versão.
+  \item Definir: A definição de recursos da infraestrutura deve ser criada em qualquer editor de texto puro com a extensão \textbf{*.tf}, respeitando a sintaxe do \textit{HCL}. É prática comum armazenar os arquivos em um repositório controlado por versão.
    \item Planejar: Visualizar as alterações antes de criar os recursos(aplicar).
-   \item Aplicar/Destruir: Criar, atualizar ou deletar recursos na infraestrutura 
+   \item Aplicar/Destruir: Criar, atualizar ou deletar recursos na infraestrutura. 
 \end{itemize}
 
 
-Este fluxo é resumido em três comandos  em três comandos \textbf{\textit{terraform init, terraform apply/destroy}}
+Este fluxo é resumido em três comandos  em três comandos: 
 
 
 \begin{itemize}
 
-\item \textbf{\textit{terraform init }}: Este comando é usado somente na primeira vez quando é instalado ou quando o próprio \textit{terraform} solicita. Ele realiza \textit{download} de itens de funcionamento do \textit{terraform} como os \textit{providers, resource e modules} (\ref{terraform}). 
+\item \textbf{\textit{terraform init }}: Este comando é usado somente na primeira vez quando é instalado ou quando o próprio \textit{terraform} solicita. Ele realiza \textit{download} de itens de funcionamento do \textit{terraform}, como os \textit{providers, resource e modules} (\ref{terraform}). 
 
-\item \textbf{\textit{terraform apply ou destroy }}: O terraform é detecta automaticamente as alterações de recursos, como, criação, atualização e exclusão e mostrar um plano do que ele fará antes de aplicar ou destruir recursos.
+\item \textbf{\textit{terraform apply ou destroy }}: O terraform  detecta automaticamente as alterações de recursos, como criação, atualização e exclusão e mostra um plano do que ele fará antes de aplicar ou destruir recursos.
 
 \end{itemize}
 
@@ -329,41 +321,30 @@ Este fluxo é resumido em três comandos  em três comandos \textbf{\textit{terr
 \end{figure}
 \vspace{-0.5cm}
 
-Considerando apenas a função de provisionamento que o \textbf{\textit{Ansible}} tem. O fluxo de trabalho também é divido em duas etapas:
+\hfill
+
+Considerando apenas a função de provisionamento que o \textbf{\textit{Ansible}} tem, o fluxo de trabalho também é divido em duas etapas:
 
 \begin{itemize}
-  \item Desenvolvimento: Definir os recursos da infraestrutura que devem ser criados, este devem ser ser criados em qualquer editor de texto puro e salvos com a extensão \textbf{*.yaml}, respeitando a sintaxe dos \textit{Playbooks}. É prática comum armazenar os arquivos em um repositório controlado por versão.
+  \item Desenvolvimento: Definir os recursos da infraestrutura que devem ser criados em qualquer editor de texto puro com a extensão \textbf{*.yaml}, respeitando a sintaxe dos \textit{Playbooks}. Como no \textit{Ansible} o estado desejado deve ser descrito, deve-se definir recursos de criação, atualização e destruição.  É prática comum armazenar os arquivos em um repositório controlado por versão. 
   \item Aplicar/Destruir: Criar, atualizar ou deletar recursos na infraestrutura. 
 \end{itemize}
 
 
-Este fluxo é resumido em apenas um comando: \textbf{\textit{ansible-playbook recurso.yaml}}
+Este fluxo( veja na xxxxxxx) é resumido em apenas um comando: \textbf{\textit{ansible-playbook recurso.yaml}}
 
 
-A diferença entre o fluxo das duas ferramenta é que no \textit{Terraform} ele gera um arquivo de estado, com extensão \textbf{*.tfstate} que deve ser armazenado no controle de versão. Outra diferença é que no \textit{Ansible} o fluxo de destruir um recursos requer um \textit{Playbook} especifico para finalidade. Esta última diferença será explicada no item \ref{idem}.  
+A diferença entre o fluxo das duas ferramentas é que no \textit{Terraform} ele gera um arquivo de estado, com extensão \textbf{*.tfstate}, que deve ser armazenado no controle de versão. Outra diferença é que no \textit{Ansible} o fluxo de destruir um recursos, requer um \textit{Playbook} específico para finalidade. Esta última diferença será explicada na seção \ref{idem}.  
 
-
-\subsection{Linguagem}
-
-No \textit{Terraform}, um recurso é criado usando a linguagem personalizadas a \textit{HCL} e o mecanismo do \textit{Terraform} se encarrega de provisionar e atualizar recursos. Com o \textit{Ansible}, você usa a \textit{YAML} para expressar o estado desejado e o \textit{Ansible} se encarrega de criar o recurso oferece a você diferenças e uma maneira de atualizar robusta sua infraestrutura. Neste ponto o \textit{Ansible} tem uma certa vantagem, pois \textit{YAML} é muito usado por outras ferramentas.  No entando o \textit{Ansible} trabalha com o modelo de escrita de código procedural conforme mencionado no item \ref{procedural} o força ao usuário ter conhecimento prévio de como configurar uma determinado recurso antes de escrever um \textit{playbook}. 
-
-\begin{comment}
-\subsection{Documentação}
-
-A documentação do \textit{Ansible} é bastante extensa e as vezes confusa e os exemplos não são completos e não acompanham as evoluções do produto, por outro lado existe uma grande quantidade de conteúdo disponível na internet, como blogs, vídeos, livros e cursos.
-
-A documentação do \textit{Terraform} é bastante extensa completa os exemplos são claros e simples existe também muito conteúdo na internet.
-
-\subsection{Performance}
-\end{comment}
 \subsection{Controle de Estado e Idempotência} \label{idem}
-Um dos grandes de desafios das ferramentas de provisionamento é garantir que um determinado recursos seja único e que toda operação tenha o mesmo resultado esperado o que é chamando de idempotência tanto o  \textit{Terraform} quanto o \textit{Ansible} possuem essa característica. No \textit{Terraform} isto é implícito, pois o nome associado ao recursos tem que ser único, então o \textit{Terraform} faz o controle automaticamente pelo nome do recursos. No \textit{Ansible} essa característica é explicita deve-se ser informada na definição do recurso que ele deve ser único.
+Um dos grandes desafios das ferramentas de provisionamento é garantir que determinado recurso seja único e que toda operação tenha o mesmo resultado esperado, o que é chamando de idempotência tanto  \textit{Terraform} quanto \textit{Ansible} possuem essa característica. No \textit{Terraform} isto é implícito, pois o nome associado ao recursos, tem que ser único, então o \textit{Terraform} faz o controle automaticamente pelo nome do recurso. No \textit{Ansible} essa característica é explicita deve ser na definição do recurso.
 
-Uma característica observada no \textit{Terraform} é que ele mantém o estado da infraestrutura e detecta automaticamente alterações de estado e sincronizada a diferença entre o estado do \textit{Terraform} e a infraestrutura. Essa é uma grande vantagem em relação ao \textit{Ansible} que apresenta um modelo de recursos controlado, em que o usuário deve descreve o estado desejado ou seja, o usuário deve descrever que o recurso por exemplo deve ser excluído e o \textit{Ansible} entende como transformá-lo no estado desejado, diferente do \textit{Terraform} que apenas retirando o recurso do arquivo ele já entende que deve-se destruir o recurso na infraestrutura.
+Uma característica observada no \textit{Terraform} é que ele mantém o estado da infraestrutura e detecta automaticamente alterações de estado(quando um recurso foi incluído, excluído ou alterado), sincroniza essa diferença entre, o estado do \textit{Terraform} e a infraestrutura. Essa é uma grande vantagem em relação ao \textit{Ansible} que apresenta um modelo de recursos controlado, em que o usuário deve descreve o estado desejado ou seja, os passos para atingir tal estado. O que é uma grande desvantagem, pois o usuário, deve conhecer como criar o recurso. 
+
 
 \subsection{Extensibilidade}
 
-\textit{Ansible} e \textit{Terraform} possui um sistema de plugins e módulos permitem estender as suas funcionalidades. Este módulos e \textit{plugins} são escritos em linguagens de programação e pode ser compartilhados. As duas ferramentas possuem um repositório central, no \textit{Ansible} é chamado de \textit{Galaxy} e no \textit{Terraform} é chamado como \textit{Registry} onde esses módulos e \textit{plugins} pode ser compartilhados para que outras pessoas possam usar. No \textit{Terraform} o usuário só pode escrever um módulo em apenas uma linguagem de programação a \textit{Golang}  \footnote{Linguagem de programação de propósito geral desenvolvida pela Google} e no \textit{Ansible} é permitido usar qualquer linguagem de programação.  
+\textit{Ansible} e \textit{Terraform} possui um sistema de plugins e módulos que permite estender as suas funcionalidades. Estes módulos e \textit{plugins} são escritos em linguagens de programação e podem ser compartilhados. As duas ferramentas possuem um repositório central. No \textit{Ansible} é chamado de \textit{Galaxy} e no \textit{Terraform} é chamado \textit{Registry}. No \textit{Terraform} o usuário só pode escrever um módulo em apenas uma linguagem de programação, a \textit{Golang}  \footnote{Linguagem de programação de propósito geral desenvolvida pela Google}, e no \textit{Ansible} é permitido usar qualquer linguagem de programação.  
 
 A vantagem de se poder usar qualquer linguagem para a extensibilidade permite-se usar uma linguagem em que uma organização já utiliza o que diminui a curva de aprendizado e não ter a necessidade de aprender novas linguagens de programação.  
 
@@ -436,30 +417,26 @@ Segundo a \cite{hashcorp03} "Nossa regra prática é 10 execuções \textit{Terr
 A comparação ficou limitada em 20 máquinas virtuais, devido ao valores em dólares disponíveis para a realização dos testes. 
 
 \subsection{Outra Comparações}
-\textit{Ansible} e \textit{Terraform} são ferramentas de código aberto e código fonte de ambas estão no hospedadas no \textit{Github}. O \textit{github} é um repositório central de código fonte, onde existem atualmente mais de 40 milhões de usuários e mais de 10 milhões de projetos e pessoas do mundo inteiro podem contribuir com projetos de código aberto. No \textit{Github} é possível extrair métricas de projetos como: 
+\textit{Ansible} e \textit{Terraform} são ferramentas de código aberto e código fonte de ambas estão no hospedadas no \textit{Github}. O \textit{github} é um repositório central de código fonte, existem atualmente mais de 40 milhões de usuários e mais de 10 milhões de projetos e pessoas do mundo inteiro podem contribuir com projetos de código aberto. No \textit{Github} é possível extrair métricas de projetos como: 
 
 \begin{itemize}
     \item  \textit{Contributors}: Número de pessoas que contribuíram de alguma forma no projeto, corrigindo \textit{bugs}, adicionando novas funcionalidades.
-     \item \textit{Issues}: Número de problemas encontrados por outras pessoas e relatados ao projeto. 
      \item \textit{Code Frequency}: Número de linhas de código inseridas no código fonte principal anualmente. 
 \end{itemize}
 
 A tabela a seguir foi montada com base nas métricas fornecidas do \textit{Github}: 
-   
-  
-\begin{table}[ht]
+   \begin{table}[ht]
 	\centering
 	\caption{\hspace{0.1cm} Github - Insights}
 	\vspace{-0.3cm} % espaço entre titulo e tabela
-	\label{tab:tabela2}
+	\label{tab:tabela3}
 	% Conteúdo da tabela
 	\begin{tabular}{l|c|c}
   \hline
     \textbf{Métrica}	& \textbf{Ansible} & \textbf{Terraform} \\
     \hline
   Contributors & 4.752  & 1351\\
-  Issues   & 4.200   & 1103     \\
-  Code Frequency  & 200MIL  &   100MIL  \\
+  Code Frequency(2018)  & 200MIL  &   100MIL  \\
      \hline
  \end{tabular}
  	\vspace{.1cm}  %espaço entre tabela e fonte
@@ -468,9 +445,13 @@ A tabela a seguir foi montada com base nas métricas fornecidas do \textit{Githu
 	{\footnotesize\\ \textbf{Fonte: Próprio Autor}}
 \end{table}
 
-
-
+As métricas do \textit{Github} demonstram que são projetos bem consolidados e bem aceitos no mercado. O número de contribuidores e a frequência de alteração no código mostra a maturidade dos projetos e que os ambos são sempre evoluídos. Além de serem mantidos por empresas bem avaliadas no mercado.  
 
 \subsection{Conclusão e Trabalho Futuros}
-A detecção de estado automático é um grande diferencial do terraform, pois o gerenciamento de código se torna simples, uma vez que não é necessário conhecido os passo necessários para se chegar no estado final desejado.
+Na infraestrutura como código todos recursos, como rede, maquinas virtuais, bancos de dados e outros são descritos em uma linguagem de alto nível, trazendo muitos benefícios como: criar uma infraestrutura dinâmica, onde recursos podem facilmente serem criados ou destruídos ou substituídos. Uma infraestrutura reproduzível e testável, já que os recursos podem ser aplicados novamente em uma infraestrutura auxiliar. Escalável, uma vez que os recursos podem ser redimensionados de acordo com as necessidades, alterando apenas no código do recurso. Rastreabilidade de recursos, pois a infraestrutura é tratada com o mesmo processo de desenvolvimento. 
 
+Softwares como \textit{Ansible}, \textit{Terraform} e outros auxiliam nesse processo de tratar a infraestrutura como código, no entanto não resolvem toda a questão é preciso alinhar com outras ferramentas e mudar a mentalidade nos times de tecnologia. Na comparação entre elas, foi observado que o \textit{Terraform} é uma ferramenta mais madura para lidar com provisionamento de infraestrutura, devido ao fato de ter uma linguagem mais alto nível para descrever recursos do que o \textit{Ansible}. Um ponto que merece destaque e a detecção de estado automático do \textit{Terraform} é um grande diferencial da ferramenta, pois o gerenciamento de código se torna simples, uma vez que não é necessário conhecido os passo necessários para se chegar no estado final desejado. Por outro lado, o \textit{Ansible} é uma ferramenta bastante popular e já conta com recursos de provisionamento, conforme mencionado neste artigo \ref{Ansible} e talvez em versões futura o suporte a provisionamento melhore. 
+
+O \textit{Terraform} sem dúvidas é uma ferramenta que melhor se encaixa em um cenário de infraestrutura como código, pelo fato da ferramenta já ter sido pensada para essa finalidade. 
+
+Além dos benefícios da infraestrutura como código ela traz novas abordagens como por exemplo, a infraestrutura imutável no qual este artigo abordou de forma superficial por ser um assunto extenso e exige um conhecimento mais profundo, além de uma gama novas ferramentas. O que pode ser tratado em um trabalho futuro. 
