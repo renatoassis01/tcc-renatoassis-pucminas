@@ -368,62 +368,106 @@ Uma característica observada no \textit{Terraform} é que ele mantém o estado 
 A vantagem de se poder usar qualquer linguagem para a extensibilidade permite-se usar uma linguagem em que uma organização já utiliza o que diminui a curva de aprendizado e não ter a necessidade de aprender novas linguagens de programação.  
 
 \subsection{Performance}
-Para a medição da performance entre as ferramentas, a medida considerada foi o tempo gasto para se criar recursos.
+A medida em que sistemas se desenvolvem as quantidades de recursos requeridos podem aumentar ou diminuir. A velocidade em que esses recursos são criados, destruídos ou atualizados, podem por exemplo, podem ocasionar em instabilidades, quedas de serviços, comprometendo o \textit{LNS} \footnote{ \textit{LNS}: Acordo de Nível de Serviço} de um sistema. É importante garantir que mudanças na infraestrutura sejam simples e rápidas. Um software de provisionamento deve ser eficaz a ponto de não compromenter toda uma atualização de recurso. Neste trabalho a medição da performance foi dada pelo tempo em minutos em que um recurso(utilizou-se apenas máquinas virtuais que é um recurso mais criado) é criado no fornecedor de computação na nuvem. As tabelas \ref{tab:tabela1} e \ref{tab:tabela2} a seguir mostram uma comparação entre \textit{Ansible} e \textit{terraform}. 
 
+
+% Tabela
 \begin{table}[ht]
-\begin{tabular}{lllll}
-                         & Ansible & Terraform & Tempo - Ansible & Tempo Terraform \\
-Numero    de    Recursos & 1       & 1         & 2               & 1.4             \\
-Numero    de    Recursos & 2       & 2         & 2.2             & 2.8             \\
-Numero    de    Recursos & 3       & 3         & 4.3             & 3.6             \\
-Numero    de    Recursos & 5       & 5         & 7.5             & 5.45            \\
-Numero    de    Recursos & 10      & 10        & 9.20            & 6.2             \\
-Numero    de    Recursos & 15      & 15        & 17.2            & 9.36            \\
-Numero    de    Recursos & 20      & 20        & 22.56           & 12.19           \\
-                         &         &           &                 &                
-\end{tabular}
+	\centering
+	\caption{\hspace{0.1cm} Comparativo - Criação de Recurso}
+	\vspace{-0.3cm} % espaço entre titulo e tabela
+	\label{tab:tabela1}
+	% Conteúdo da tabela
+	\begin{tabular}{l|c|c}
+  \hline
+    \textbf{Qtde. Recursos}	& \textbf{Tempo - Ansible} & \textbf{Tempo - Terraform} \\
+    \hline
+  1   & 1.5  Minutos   & 0.4  Minutos    \\
+2   & 2.10  Minutos   & 1.5  Minutos    \\
+3   & 3.17  Minutos   & 2.1  Minutos    \\
+5   & 5.32  Minutos   & 4.7  Minutos     \\
+10  & 10.3 Minutos   & 5.2  Minutos      \\
+15  & 13.8  Minutos   & 5.7 Minutos      \\
+20  & 16.6  Minutos   & 7.38  Minutos      \\
+
+     \hline
+ \end{tabular}
+ 	\vspace{.1cm}  %espaço entre tabela e fonte
+	\small
+	% Fonte
+	{\footnotesize\\ \textbf{Fonte: Próprio Autor}}
 \end{table}
 
 
+% Tabela
 \begin{table}[ht]
-\begin{tabular}{lllll}
-                         & Ansible & Terraform & Tempo - Ansible & Tempo Terraform \\
-Numero    de    Recursos & 1       & 1         & 2               & 1.4             \\
-Numero    de    Recursos & 2       & 2         & 2.2             & 2.8             \\
-Numero    de    Recursos & 3       & 3         & 4.3             & 3.6             \\
-Numero    de    Recursos & 5       & 5         & 7.5             & 5.45            \\
-Numero    de    Recursos & 10      & 10        & 9.20            & 6.2             \\
-Numero    de    Recursos & 15      & 15        & 17.2            & 9.36            \\
-Numero    de    Recursos & 20      & 20        & 22.56           & 12.19           \\
-                         &         &           &                 &                
-\end{tabular}
+	\centering
+	\caption{\hspace{0.1cm} Comparativo - Destruição de Recurso}
+	\vspace{-0.3cm} % espaço entre titulo e tabela
+	\label{tab:tabela2}
+	% Conteúdo da tabela
+	\begin{tabular}{l|c|c}
+  \hline
+    \textbf{Qtde. Recursos}	& \textbf{Tempo - Ansible} & \textbf{Tempo - Terraform} \\
+    \hline
+  1   & 1.2  Minutos   & 0.4  Minutos    \\
+2   & 1.9    Minutos   & 1.2  Minutos    \\
+3   & 2.5    Minutos   & 1.6  Minutos    \\
+5   & 3.6    Minutos   & 2.7  Minutos     \\
+10  & 4.20   Minutos   & 3.2  Minutos      \\
+15  & 5.8    Minutos   & 4.19 Minutos      \\
+20  & 7.4    Minutos   & 5.1  Minutos      \\
+
+     \hline
+ \end{tabular}
+ 	\vspace{.1cm}  %espaço entre tabela e fonte
+	\small
+	% Fonte
+	{\footnotesize\\ \textbf{Fonte: Próprio Autor}}
 \end{table}
 
 
+A titulo de comparação, para se criar uma máquina virtual no console do fornecedor leva-se um tempo estimado de 1 minutos, entre escolher os requisitos da máquina, como sistema operacional, quantidade de memória RAM, tamanho e tipos de disco rígidos. 
 
+Nesta comparação o \textit{Terraform} tem uma melhor performance, tanto para criação ou destruição de recursos. Um fato para essa diferença de performance é fato dele distribuir as execuções(criação ou destruição de recursos) por núcleo. 
 
+Segundo a \cite{hashcorp03} "Nossa regra prática é 10 execuções \textit{Terraform} por núcleo de CPU, com 2 núcleos de CPU alocados para os serviços básicos.  Portanto, uma máquina de 8 núcleos com 8 GB de memória pode executar confortavelmente 20 execuções \textit{Terraform}."
 
+A comparação ficou limitada em 20 máquinas virtuais, devido ao valores em dólares disponíveis para a realização dos testes. 
 
+\subsection{Outra Comparações}
+\textit{Ansible} e \textit{Terraform} são ferramentas de código aberto e código fonte de ambas estão no hospedadas no \textit{Github}. O \textit{github} é um repositório central de código fonte, onde existem atualmente mais de 40 milhões de usuários e mais de 10 milhões de projetos e pessoas do mundo inteiro podem contribuir com projetos de código aberto. No \textit{Github} é possível extrair métricas de projetos como: 
 
+\begin{itemize}
+    \item  \textit{Contributors}: Número de pessoas que contribuíram de alguma forma no projeto, corrigindo \textit{bugs}, adicionando novas funcionalidades.
+     \item \textit{Issues}: Número de problemas encontrados por outras pessoas e relatados ao projeto. 
+     \item \textit{Code Frequency}: Número de linhas de código inseridas no código fonte principal anualmente. 
+\end{itemize}
 
+A tabela a seguir foi montada com base nas métricas fornecidas do \textit{Github}: 
+   
+  
+\begin{table}[ht]
+	\centering
+	\caption{\hspace{0.1cm} Github - Insights}
+	\vspace{-0.3cm} % espaço entre titulo e tabela
+	\label{tab:tabela2}
+	% Conteúdo da tabela
+	\begin{tabular}{l|c|c}
+  \hline
+    \textbf{Métrica}	& \textbf{Ansible} & \textbf{Terraform} \\
+    \hline
+  Contributors & 4.752  & 1351\\
+  Issues   & 4.200   & 1103     \\
+  Code Frequency  & 200MIL  &   100MIL  \\
+     \hline
+ \end{tabular}
+ 	\vspace{.1cm}  %espaço entre tabela e fonte
+	\small
+	% Fonte
+	{\footnotesize\\ \textbf{Fonte: Próprio Autor}}
+\end{table}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\subsection{Maturidade}
 
 
 
