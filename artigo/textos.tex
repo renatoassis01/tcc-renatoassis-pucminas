@@ -8,25 +8,27 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{\esp Introdução}
 
-Em um mercado globalizado e competitivo, as tecnologias da informação se tornaram fundamentais para o auxílio da gestão das empresas em suas atividades rotineiras e também no suporte a tomadas de decisões e a possibilidade de desenvolvimento de novos negócios, novos modelos de negócio e a modificação dos valores estratégicos das empresas. \cite{audy}.
+As tecnologias da informação se tornaram fundamentais para o auxílio da gestão das empresas em suas atividades rotineiras e também no suporte a tomadas de decisões e a possibilidade de desenvolvimento de novos negócios, novos modelos de negócio e a modificação dos valores estratégicos das empresas. \cite{audy}.
 
-Visando a adequação às mudanças mercadológicas, organizacionais e à manutenibilidade em relação a concorrência, o investimento em sistemas de informação tem uma grande parcela do orçamento das empresas, buscando o alinhamento da Tecnologia da informação e negócios. \cite{luftman}  
+Visando a adequação às mudanças mercadológicas, organizacionais e à manutenibilidade em relação à concorrência, o investimento em sistemas de informação ocupa uma grande parcela do orçamento das empresas, buscando o alinhamento da Tecnologia da informação e negócios. \cite{luftman}  
 Para atender a essas necessidades, os requisitos de sistemas têm se tornado cada vez mais complexos, voláteis e robustos diante das demandas das organizações. 
 As denominadas metodologias ágeis permitem a entrega de \textit{software} funcionais em ciclos de desenvolvimento mais curtos, considerando a velocidade demandada para a sua construção. \cite{sbbrocco} 
           
-No entanto, as equipes que lidam com a infraestrutura têm a difícil tarefa de implantar um \textit{software} em produção a medida em que são criados ou modificados, pois estes sistemas requerem dependências de componentes externos, como configurações de \textit{hardware}, sistemas operacionais, banco de dados, servidores de aplicação e web e ainda configurações específicas da aplicação. Isto demanda um tempo considerável para a implantação destes sistemas.
+No entanto, as equipes que lidam com a infraestrutura têm a difícil tarefa de implantar um \textit{software} em produção a medida em que são criados ou modificados, pois estes sistemas requerem dependências de componentes externos, como configurações de \textit{hardware}, sistemas operacionais, banco de dados, servidores de aplicação e web e ainda configurações específicas da aplicação. Isto demanda um tempo considerável para a implantação destes sistemas.\cite{sato}.
 
 Para garantir um processo totalmente ágil e que acompanhe as exigências do negócio da organização, é necessário que haja uma integração do desenvolvimento de sistemas e as operações de infraestrutura. Portanto, essa abordagem ágil também deve ser seguida pelas equipes de infraestrutura.
 O movimento cultural denominado DevOps surgido em meados de 2009 foi influenciado principalmente por metodologias ágeis e computação na nuvem. Ele teve como fundamento a automatização de processos das operações de infraestrutura e a integração entre as equipes de desenvolvimento e operações. \cite{sato}.
 
-A automatização de processos de infraestrutura é uma das premissas do DevOps, utilizando uma abordagem para provisionar e gerenciar recursos de computação como máquinas virtuais, discos de armazenamento, regras de segurança, instalação de \textit{software}, regras de redes e qualquer outro componente de serviço, destinando-se a simplificar significativamente a configuração e o gerenciamento de recursos. Ao tratar a infraestrutura como código, as organizações podem usar as melhores práticas de desenvolvimento de software, incluindo revisão de código e controle de versão, documentação e testes. Esta abordagem reduz a complexidade do gerenciamento, pois todo o processo é dividido em tarefas em menores e mais processos gerenciáveis.A abordagem da infraestrutura como código ou também conhecida como IaC reduz os riscos operacionais, permitindo revisar o código e salvar todas as revisões anteriores de uma infraestrutura codificada, podendo restaurar a infraestrutura em qualquer revisão anterior, quando necessário.
+A automatização de processos de infraestrutura é uma das premissas do DevOps, utilizando uma abordagem para provisionar e gerenciar recursos de computação como máquinas virtuais, discos de armazenamento, regras de segurança, instalação de \textit{software}, regras de redes e qualquer outro componente de serviço, simplificando o provisionamento e o gerenciamento de recursos. Ao tratar a infraestrutura como código, as organizações podem usar as melhores práticas de desenvolvimento de software, incluindo revisão de código e controle de versão, documentação e testes da infraestrutura. Esta abordagem reduz a complexidade do gerenciamento, pois todo o processo é dividido em tarefas em menores e mais processos gerenciáveis.
 
-Segundo \citeonline{Morris:2016:ICM:3006361}, a essência da infraestrutura como código é submeter a configuração da infraestrutura da mesma maneira que o código fonte do software é tratado, usando sistemas de gerenciamento de código-fonte, \textit{TDD} \footnote{\textit{TDD - Test Driven Development}: O teste são que são escritos antes do nosso código de produção} , integração contínua \footnote{\textit{CI - Continuous Integration}: É uma prática de desenvolvimento de \textit{software} em que os desenvolvedores, juntam suas alterações de código em um repositório central e os testes são executados. Geralmente, a integração contínua se refere ao estágio de criação ou integração do processo de lançamento de software  }, refatoração de código e outras técnicas, que são úteis para garantir que as alterações na infraestrutura sejam exaustivamente testadas, repetíveis e transparentes.
+A abordagem da infraestrutura como código ou também conhecida como IaC reduz os riscos operacionais, permitindo revisar o código e salvar todas as revisões anteriores de uma infraestrutura codificada, podendo restaurar a infraestrutura em qualquer revisão anterior, quando necessário. \cite{Morris:2016:ICM:3006361}
+
+No entanto, implantar a infraestrutura como código, pode ser uma barreira para empresas que estão migrando do modelo tradicional de infraestrutura, para uma infraestrutura baseada na nuvem, pelo fato de que os recursos(financeiro, pessoal e tempo) competem com as demandas atuais e além disso, as equipes tradicionais de infraestrutura precisam desenvolver novas habilidades, mudanças de paradigmas, como, entender os conceitos de computação na nuvem, desenvolver a habilidades de codificação em linguagens usadas pela equipe de desenvolvimento, entender de metodologias ágeis, testes, conceitos de IaC e suas ferramentas e também estabelecer um processo de gerenciamento de infraestrutura que esteja alinhado com o desenvolvimento ágil e que seja totalmente nivelado com os princípios de práticas \textit{DevOps}. 
+
 
 \subsection{Problema}
 
-O problema a ser resolvido é baseado em cenário onde a automação de infraestrutura é atualmente ineficiente, em que a equipe não conseguem acompanhar a carga de mudanças, acarretando em um tempo considerável da equipe para disponibilizar recursos e para dificultar ainda não tem conhecimento ou experiência sobre infraestrutura como código e suas ferramentas e ainda um outro agravante e que existem inúmeras ferramentas disponíveis no mercado, o que acaba intensificando a dificuldade de adoção de alguma ferramenta. Conforme indicado neste artigo, ele traz um comparativo entre ferramentas para que auxiliem a equipe a ter um certo conhecimento e confiança para adoção de alguma apresentada. Vale ressaltar que só adoção de uma ferramenta não resolverá o problema como todo e deve ser integrada com outras ferramentas quando necessário.  
-
+O problema a ser resolvido é baseado em cenário onde, uma empresa que migrou toda a arquitetura de uma aplicação comercial, baseado em \textit{Windows} para um aplicação \textit{Web} que atualmente esta sendo desenvolvida sob a nuvem e possui uma equipe de infraestrutura que não tem conhecimento satisfatório e experiência com \textit{cloud}, não tem conhecimento em \textit{IaC} e de ferramentas de automatização de infraestrutura e um outro agravante é a competição com outras atividades, como por exemplo, gerenciamento de servidores legados. O que acaba intensificando o tempo para atender e acompanhar a carga de mudanças dessa nova aplicação baseada na nuvem. A adoção de ferramentas que automatizem o provisionamento e gerenciamento de recursos, diminuíra a dependência da equipe de infraestrutura. O que conforme indicado neste artigo é realizar um comparativo entre ferramentas para que auxiliem a equipe a ter um certo conhecimento e confiança para adoção de alguma apresentada. Vale ressaltar que só adoção de uma ferramenta não resolverá o problema como todo e deve ser integrada com outras ferramentas quando necessário. 
 
   Como motivação os benefícios com a implantação de ferramentas permite-se:  
 \begin{itemize}
@@ -36,57 +38,52 @@ O problema a ser resolvido é baseado em cenário onde a automação de infraest
 
 \item As equipes serão capazes de se recuperar fácil e rapidamente das falhas, em vez de assumir que a falha pode ser completamente evitada;
 
-\item Permite que ambientes inteiros sejam replicados;
+\item Permitir: A replicação parcial ou gradual da infraestrutura;
 
-\item Permitir que se teste a infraestrutura antes de ser disponibilizada em um cenário real;
+\item Permitir: Criar uma infraestrutura testável;
 \end{itemize} 
 
 
 \subsection{Objetivos}
 
-Neste artigo será apresentado uma abordagem geral de \textit{IAC}, um comparativo entre duas ferramentas e apresentar os resultados obtidos e uma conclusão. Os objetivos específicos serão explicar as diferenças entre \textit{softwares} de gerenciamento de configuração e \textit{softwares} de provisionamento, infraestrutura imutável e mutável, descrever e avaliar as características de cada ferramenta escolhida e apresentar resultados. Este trabalho não abordará itens como: integração de ferramentas \textit{IAC} com ferramentas de \textit{CI}, aplicações de metodologias de desenvolvimento de software. 
-
-\subsection{Contextualização}
-Os processos de desenvolvimento passaram por uma transformação ao longo dos anos, devido aos movimentos ágeis que mudaram a maneira como as equipes interagem na construção de sistemas, focando cada vez mais em qualidade e entrega de produtos incrementais. Para responder rápido a essas mudanças, um processo de desenvolvimento deve ser bem definido e bem estabelecido, o que compreende desde a etapa de desenvolvimento, teste e a entrega. No entanto, estabelecer estas etapas podem ser difíceis, uma vez que os recursos(financeiro, pessoal e tempo) competem com as demandas de entregas do sistema. A medida em que os sistemas são evoluídos a complexidade dos requisitos aumenta e do ponto de vista da parte da infraestrutura, um sistema pode necessitar, por exemplo, que ele seja distribuído, exigir centenas de máquinas para o funcionamento e uma grande capacidade de processamento. E se o ciclo de provisionamento e gerenciamento de infraestrutura não estiver totalmente automatizado, um grande tempo será gasto para gerenciar recursos, que são geralmente distribuídos em tarefas rotineiras e repetitivas o que pode se tornar um empecilho para que as entregas cheguem até o cliente. 
-
-Desenvolver uma infraestrutura que seja totalmente resiliente e automatizada, seguindo os princípios de práticas \textit{DevOps}, não é uma tarefa fácil considerando um ambiente computacional na nuvem, onde os recursos são ilimitados e escaláveis e que exigem uma mudança de paradigma e novas habilidades para se trabalhar com \textit{cloud}.  
+Neste artigo será apresentado uma abordagem geral de \textit{IAC}, um comparativo entre duas ferramentas e apresentar os resultados obtidos. Os objetivos específicos serão explicar as diferenças entre \textit{softwares} de gerenciamento de configuração e \textit{softwares} de provisionamento, infraestrutura imutável e mutável, descrever e avaliar as características de cada ferramenta escolhida e apresentar resultados. Este trabalho não abordará itens como: integração de ferramentas \textit{IAC} com ferramentas de \textit{CI}, aplicações de metodologias de desenvolvimento de software. 
 
 
 \section{\esp Metodologia}
 
-A escolha das ferramentas obedeceram critérios da tabela de \citeonline{masek} e dentre as ferramentas que atendem às características descritas na tabela, foram escolhidas o \textit{Ansible} e o \textit{Terraform} usando critérios extras como aceitação do mercado, suporte comercial e maturidade da ferramenta.
+A escolha das ferramentas obedeceram critérios da tabela de \citeonline{masek} e dentre as ferramentas que atendem às características descritas nesta tabela, foram escolhidas o \textit{Ansible} e o \textit{Terraform} e usando critérios extras como, aceitação do mercado, suporte comercial e maturidade da ferramenta.
 
-Para medir a aceitação do mercado foram realizadas pesquisas em sites especializados de comparação de tipos de ferramentas. Um outro aspecto consideração foi se é uma ferramenta \textit{open source}(um ponto importante para permitir adaptação da ferramenta),se possui um plano de suporte pago, para critério de desempate foi considerado o preço do suporte. Para medir a maturidade foram considerados o tempo de mercado, documentação, tempo de lançamento entre versões e a integração com outras ferramentas.
+Para medir a aceitação do mercado foram realizadas pesquisas em sites especializados de comparação de tipos de ferramentas. Um outro aspecto consideração foi se é uma ferramenta \textit{open source}(um ponto importante para permitir adaptação da ferramenta),se possui um plano de suporte pago, para critério de desempate foi considerado o preço do suporte. Para medir a maturidade foram consideradas o tempo de mercado, documentação, tempo de lançamento entre versões e a integração entre ferramentas.
 
 A realização dos testes foram consideradas as últimas versões estáveis de lançadas no momento da escritas desse artigo, o \textit{Ansible}(2.4.6) e o \textit{Terraform}(0.12.13). Os testes foram usando o fornecedor de computação na nuvem  \textit{Digital Ocean}. \footnote{https://www.digitalocean.com/}. Utilizando uma máquina com um processador de 7 núcleos e 16 Gigabtyes de memória RAM.   
 
-As métricas comparativas consideradas foram a linguagem de escrita, a performance(o tempo em que cada ferramenta leva para criar um determinado número de recursos. O controle de estado(capacidade da ferramenta  de controlar e identificar o estado real dos recursos) e a extensibilidade da ferramenta(Se possui um conjunto de \textit{SDK's} \footnote{\textit{SDK - Software Development Kit}} em que permite a programadores estender as funcionalidades da ferramenta).  
+Os aspectos comparativos consideradas foram a linguagem de escrita, a performance(o tempo em que cada ferramenta leva para criar um determinado número de recursos. O controle de estado(capacidade da ferramenta  de controlar e identificar o estado real dos recursos) e a extensibilidade da ferramenta(Se possui um conjunto de \textit{SDK's} \footnote{\textit{SDK - Software Development Kit}} em que permite a programadores estender as funcionalidades da ferramenta).  
 
 
 \section{\esp Trabalhos Relacionados} \label{relacionados}
 
 
-\citeonline{Carnegie} explicam que o \textit{design} da infraestrutura é a fase do ciclo de vida do produto em que se define e configura os recursos necessários para o funcionamento dele. A Infraestrutura como código é um conjunto de práticas que usam código para configurar recursos, como máquinas e redes (virtuais), instalar programas, configurar um banco de dados e definir uma regra de segurança. As práticas IaC permitem a criação de vários recursos de maneira automatizada e padronizada, controlando o estado da infraestrutura, além disso permitem o controle de versão, ou seja, pode-se desfazer de qualquer mudança na infraestrutura, somente alterando o código do recursos. Ele também cita que antes mesmo do surgimento da IaC os administradores de sistemas já utilizavam automação, através de \textit{script} para realizar as tarefas de configuração de infraestrutura. E que a IaC surgiu com a popularização da computação da nuvem como serviço e que todos os recursos oferecidos são virtuais. No artigo ele ainda descreve que os provedores de serviços em nuvem fornecem um console de gerenciamento(uma interface \textit{web}) para a administração de recursos. Porém, para um sistema de larga escala, usar o console não é muito prático, devido à dificuldade de gerenciar centenas de recursos que são criados e destruídos com uma grande frequência. Deve-se usar as \textit{application program interface} \footnote{É um conjunto de rotinas e padrões de programação para acesso a um aplicativo de \textit{software} ou plataforma baseada na \textit{Web}, permitindo que dois aplicativos se comuniquem. } (API) disponibilizadas pelo provedor ou ferramentas IaC que interagem com essas API que resolvem a questão da criação e destruição de alta frequência desses recursos. Por fim, ele cita a relação entre infraestrutura como código \textit{Agile} e o DevOps. 
+\citeonline{Carnegie} explicam que o desenho da infraestrutura é a fase do ciclo de vida do produto em que se define e configura os recursos necessários para o funcionamento dele. A Infraestrutura como código é um conjunto de práticas que usam código para configurar recursos, como máquinas e redes (virtuais), instalar programas, configurar um banco de dados e definir uma regra de segurança. As práticas IaC permitem a criação de vários recursos de maneira automatizada e padronizada, controlando o estado da infraestrutura, além disso permitem o controle de versão, ou seja, pode-se desfazer de qualquer mudança na infraestrutura, somente alterando o código do recursos. Ele também cita que antes mesmo do surgimento da IaC os administradores de sistemas já utilizavam automação, através de \textit{script's} para realizar as tarefas de configuração de infraestrutura. E que a IaC surgiu com a popularização da computação da nuvem como serviço e que todos os recursos oferecidos são virtuais. No artigo ele ainda descreve que os provedores de serviços em nuvem fornecem um console de gerenciamento(uma interface \textit{web}) para a administração de recursos. Porém, para um sistema de larga escala, usar o console não é muito prático, devido à dificuldade de gerenciar centenas de recursos que são criados e destruídos com uma grande frequência. Deve-se usar as \textit{application program interface} \footnote{É um conjunto de rotinas e padrões de programação para acesso a um aplicativo de \textit{software} ou plataforma baseada na \textit{Web}, permitindo que dois aplicativos se comuniquem. } (API) disponibilizadas pelo provedor ou ferramentas IaC que interagem com essas API que resolvem a questão da criação e destruição de alta frequência desses recursos. Por fim, ele cita a relação entre infraestrutura como código \textit{Agile} e o DevOps. 
 
 \hfill
 
-Segundo \citeonline{masek}, a popularização da virtualização e o crescente poder dos servidores e a disponibilidade da computação em nuvem levaram a um aumento significativo no número de servidores e estações de trabalho que precisam ser gerenciados. Nesse ponto, as ferramentas de gerenciamento de orquestração e gerenciamento de configuração se aplicam nesses casos. Os administradores de sistema gerenciam grupos de servidores ou estações de trabalho idênticas (máquinas físicas ou máquinas virtuais) que executam aplicativos e serviços idênticos. Em seu artigo ele apresenta um estudo sobre o uso da ferramenta \textit{Ansible} nos laboratórios da \textit{Brno University of Technology (BUT)}. Ele descreve que o objetivo de utilizar uma ferramenta de IaC é fornecer uma plataforma para gerenciar com eficiência a infraestrutura de larga escala dos laboratórios universitários, com o mínimo de contribuição de desenvolvedores ou administradores.
+Segundo \citeonline{masek}, a popularização da virtualização e o crescente poder de processamento dos servidores e a disponibilidade da computação em nuvem levaram a um aumento expressivo no número de servidores e estações de trabalho que precisam ser gerenciados. Nesse ponto, as ferramentas provisionamento e gerenciamento de configuração se aplicam nesses casos. Os administradores de sistema gerenciam grupos de servidores ou estações de trabalho idênticas (máquinas físicas ou máquinas virtuais) que executam aplicativos e serviços idênticos. Em seu artigo ele apresenta um estudo sobre o uso da ferramenta \textit{Ansible} nos laboratórios da \textit{Brno University of Technology (BUT)}. Ele descreve que o objetivo de utilizar uma ferramenta de IaC é fornecer uma plataforma para gerenciar com eficiência a infraestrutura de larga escala dos laboratórios universitários, com o mínimo de contribuição de desenvolvedores ou administradores.
 O autor cita dois grupos de ferramentas de infraestrutura como código mais populares: \textit{Chef, Puppet, Ansible e SaltStack}, sendo todas “ferramentas de gerenciamento de configuração”, o que significa que elas foram projetadas para instalar e gerenciar \textit{software} em servidores e estações de trabalho já existentes. E as ferramentas \textit{CloudFormation, Terraform} são “ferramentas de orquestração”, o que significa que eles são projetados para provisionar os servidores.
 
 \hfill
 
- \citeonline{steve} menciona da importância de escolher ferramentas de IaC, como por exemplo, \textit{ Chef, Ansible, Puppet, SaltStack, Terraform } se deve levar em consideração o conjunto de casos em que essas ferramentas se propõem a resolver. Estas ferramentas são classificadas em dois domínios: gerenciamento de configurações e orquestração de configuração e quais casos elas resolvem. O autor ainda explica os conceitos de infraestrutura mutável e imutável, escrita de código procedural e declarativa. Este conceitos serão abordados na seção \ref{IaC}. 
+ \citeonline{steve} menciona a importância de escolher ferramentas de IaC, como por exemplo, \textit{ Chef, Ansible, Puppet, SaltStack, Terraform } se deve levar em consideração o conjunto de casos em que essas ferramentas se propõem a resolver. Estas ferramentas são classificadas em dois tipos: gerenciamento de configurações e provisionamento e quais casos elas resolvem. O autor ainda explica os conceitos de infraestrutura mutável e imutável, escrita de código procedural e declarativa. Este conceitos serão abordados na seção \ref{IaC}. 
 
-\citeonline{steve} expressa que se deve escolher uma ferramenta focada na orquestração de infraestrutura e outra em gerenciamento de configuração de aplicativos reunindo os benefícios de ambas, pois os desafios do gerenciamento de provisionamento e configuração estão intimamente relacionados, porque as organizações geralmente provisionam os servidores e implantam aplicativos neles. Sendo que neste ponto os tipos de ferramentas de IaC vão se convergir.   
+\citeonline{steve} expressa que se deve escolher uma ferramenta focada no provisionamento de infraestrutura e outra em gerenciamento de configuração, reunindo os benefícios de ambas, pois os desafios do gerenciamento de provisionamento e configuração estão intimamente relacionados, porque as organizações geralmente provisionam os servidores e implantam aplicativos neles. Sendo que neste ponto os tipos de ferramentas de IaC vão se convergir.   
 
 \section{\esp IaC ou Infraestrutura como código} \label{IaC}
 
 Os items apresentados neste capítulo foram levantados de acordo com assuntos abordados na seção \ref{relacionados}. A ideia dessa seção é descrever os conceitos básicos da infraestrutura como código de forma sucinta para um entendimento geral do assunto.  
 
 \subsection{Tipos de Ferramentas IaC}
-As ferramentas de gerenciamento de configuração como \textit{Chef, Puppet, Ansible,Saltack} foram projetadas para instalar e gerenciar softwares em servidores já existentes. Por exemplo, na instalação de um banco de dados, adicionar uma regra de \textit{firewall}, realizar uma atualização no sistema operacional. 
+As ferramentas de gerenciamento de configuração como \textit{Chef, Puppet, Ansible,Saltack} foram projetadas para instalar e gerenciar softwares em servidores já existentes. Por exemplo, na instalação de banco de dados, adicionar uma regra de \textit{firewall} e etc.
 
-As ferramentas de Provisionamento como \textit{Terraform, Heat, Cloudformation} e foram projetadas criar as próprias instâncias \footnote{Uma instância é um servidor virtual na nuvem. Por exemplo: Uma instância rodando o sistema operacional LINUX} e a inicialização de seus recursos. 
+As ferramentas de Provisionamento como \textit{Terraform, Heat, Cloudformation} foram projetadas criar as próprias instâncias \footnote{Uma instância é um servidor virtual na nuvem. Por exemplo: Uma instância rodando o sistema operacional LINUX} e a inicialização de seus recursos. 
 
 Segundo \citeonline{Carnegie}, existem sobreposições e esses termos não são mutuamente exclusivos para ambas as ferramentas. As ferramentas de provisionamento podem realizar tarefas de configuração e ferramentas de configuração podem realizar tarefas de provisionamento, porém elas se concentram naquilo que são melhores. 
 
@@ -137,16 +134,16 @@ As ferramentas de IaC usam arquivos de definição como \textit{DSL} \footnote{\
   Um exemplo hipotético seria a migração do \textit{JAVA}\footnote{Java é uma linguagem de programação e plataforma computacional.} para uma versão superior. Na infraestrutura mutável cada servidor precisaria receber esta atualização do JAVA. A infraestrutura mutável é como a maioria dos ambientes computacionais funcionam hoje.
  
  Segundo \citeonline{Dadgar}, a noção de imutabilidade é a ideia de que, uma vez criada uma coisa, não a mudamos após a criação.
- Na infraestrutura imutável qualquer alteração a ser realizada deve ser feita através da substituição completa dos servidores. Estas alterações são feitas criando novas configurações e novos servidores são criados a partir delas. Isso aumenta a previsibilidade porque este servidor já foi testado antes de ir para a produção. Em outras palavras, as implantações se tornam atômicas. As ferramentas de provisionamento desempenham este papel.\cite{Morris:2016:ICM:3006361}.
+ Na infraestrutura imutável qualquer alteração a ser realizada deve ser feita através da substituição completa dos servidores. Estas alterações são feitas criando novas configurações e novos servidores são criados a partir delas. Isso aumenta a previsibilidade porque este servidor já foi testado antes de ir para a produção. Em outras palavras, as implantações se tornam granulares. As ferramentas de provisionamento desempenham este papel.\cite{Morris:2016:ICM:3006361}.
  
- Seguindo o mesmo exemplo de atualizar o JAVA. Em modelo de infraestrutura imutável, um novo servidor seria criado com essa atualização e testado e então, os antigos seriam destruídos e substituídos por novos. A infraestrutura imutável só faz sentindo em um ambiente virtualizado. 
+ Seguindo o mesmo exemplo de atualização do JAVA. Em modelo de infraestrutura imutável, um novo servidor seria criado com essa atualização e testado e então, os antigos seriam destruídos e substituídos por novos. A infraestrutura imutável só faz sentindo em um ambiente virtualizado. 
  
 \subsection{Arquitetura}
 
-Nesta seção é apresenta dois conceitos de como as ferramentas foram projetadas para funcionar. Não serão discutidos ou comparados qual o melhor modelo ou suas vantagens e desvantagens. 
+Nesta seção são apresentados conceitos de como as ferramentas foram projetadas para funcionar. Não serão discutidos ou comparados qual o melhor modelo ou suas vantagens e desvantagens. 
 
 \subsubsection{Cliente ou Masterless} \label{semagent}
-Segundo \citeonline{Jan-Piet}, conforme citado por \citeonline{Morris:2016:ICM:3006361}, na arquitetura cliente não existe um servidor central e não é necessário instalar agentes nos nós gerenciados, o que torna a configuração mais simples. A configuração é feita escolhendo uma máquina e instalando o cliente e informando os IP's \footnote{\textit{Internet Protocol}} dos nós. A autenticação é feita por meio do protocolo \textit{SSH} \footnote{\textit{SSH - Sever Secure Shell:}  É um protocolo de rede criptográfico para operação de serviços de rede de forma segura sobre uma rede insegura, permitindo a execução remota de comandos.}. Ao alterar algum recurso, ele se conecta ao no \textit{IP} e executa as alterações. Veja a Figura  \ref{fig:figura3}. 
+Segundo \citeonline{Jan-Piet}, conforme citado por \citeonline{Morris:2016:ICM:3006361}, na arquitetura cliente não existe um servidor central e não é necessário instalar agentes nos nós gerenciados, o que torna a configuração mais simples. A configuração é feita escolhendo uma máquina e instalando o cliente e informando os IP's \footnote{\textit{Internet Protocol}} dos nós. A autenticação é feita por meio do protocolo \textit{SSH} \footnote{\textit{SSH - Sever Secure Shell:}  É um protocolo de rede criptográfico para operação de serviços de rede de forma segura sobre uma rede insegura, permitindo a execução remota de comandos.}. Ao alterar algum recurso, ele se conecta ao no \textit{IP} e executa as alterações.  Veja a Figura  \ref{fig:figura3}. 
 
 \begin{figure}[ht]
 	\centering	
@@ -160,23 +157,19 @@ Segundo \citeonline{Jan-Piet}, conforme citado por \citeonline{Morris:2016:ICM:3
 \vspace{-0.5cm}
 
 
-As ferramentas de provisionamento se comunicam diretamente com a \textit{API} do provedor de serviços de nuvem \footnote{Um provedor de serviços de nuvem é uma empresa contratada que fornece uma plataforma, infraestrutura, aplicativo ou serviços de armazenamento baseados em nuvem. Por exemplo: \textit{Amazon Web Service, Azure, Digital Ocean, Google Cloud.}. Eles também são conhecido pelo termo \textit{IaaS - Infrastructure as a service} }
+No caso de ferramentas de provisionamento, elas se comunicam diretamente com a \textit{API} do provedor de serviços de nuvem \footnote{Um provedor de serviços de nuvem é uma empresa contratada que fornece uma plataforma, infraestrutura, aplicativo ou serviços de armazenamento baseados em nuvem. Por exemplo: \textit{Amazon Web Service, Azure, Digital Ocean, Google Cloud.}. Eles também são conhecido pelo termo \textit{IaaS - Infrastructure as a service} }
 
 
 \subsubsection{Mestre/Agente ou Cliente/Servidor} \label{cliente-servidor}
  
-  Nessa arquitetura (Figura \ref{fig:figura4}), um servidor \footnote{Dependendo da ferramenta o \textit{master} pode ser representado por mais de um servidor} central denominado mestre controla as informações de configuração de cada nó(cada servidor tem instalado  um agente, geralmente rodando como um processo em segundo plano \footnote{Processos em que não há interação com o usuário}). Este agente solicita seu próprio catálogo de configuração ao mestre.  
+  Nessa arquitetura (Figura \ref{fig:figura4}), um servidor \footnote{Dependendo da ferramenta o \textit{master} pode ser representado por mais de um servidor} central denominado mestre que controla as informações de configuração de cada nó(cada servidor tem instalado  um agente, geralmente rodando como um processo em segundo plano \footnote{Processos em que não há interação com o usuário}). Periodicamente, cada agente solicita informações ao mestre. O mestre gera informações e retorna um conjunto alterações desse nó. Ao receber esse conjunto com as alterações a serem realizadas, o agente aplica as alterações no nó. \cite{puppetlabs}, 
  
- Periodicamente, cada agente envia informações ao mestre e solicita um catálogo. O mestre compila e retorna o catálogo de alterações desse nó, usando várias fontes de informações às quais ele tem acesso. Ao receber este catálogo com as alterações a serem realizadas, o agente aplica as alterações no nó. \cite{puppetlabs}, 
- 
- Em outras palavras, o fluxo básico de funcionamento é: quando se altera as definições de um recurso, por exemplo, uma nova versão do \textit{Apache} \footnote{É um servidor \textit{web}, compatível com o protocolo HTTP, mantido pela \textit{Apache Software Foundation }}, estas são submetidas para o mestre. Quando o Agente solicita informações do mestre, o mestre compila e retorna um catálogo com as alterações para o nó desse agente usando as fontes de informação às quais o mestre tem acesso. O agente recebe essas alterações e as aplica no nó correspondente, alterando a versão do \textit{Apache}.   
+ Em outras palavras, o fluxo básico de funcionamento é: quando se altera as definições de um recurso, por exemplo, uma nova versão do \textit{Apache} \footnote{É um servidor \textit{web}, compatível com o protocolo HTTP, mantido pela \textit{Apache Software Foundation }}, estas são submetidas para o mestre. Quando o Agente solicita informações do mestre, o mestre retorna um conjunto com alterações para o nó desse agente . O agente recebe essas alterações e as aplica no nó correspondente, alterando a versão do \textit{Apache}.   
 
 Segundo \cite{Morris:2016:ICM:3006361}, essa arquitetura pode ter uma leve variação entre ferramentas, podendo ter uma máquina exclusiva de onde o mestre é acessado.
 
-Embora essas ferramentes podem ser usadas para o gerenciamento de estações de trabalho não é o objetivo deste artigo. 
-\textit{Puppet} e \textit{Chef} são exemplos de ferramentas que são baseadas nesse modelo de arquitetura. 
-
-
+As ferramentas que mais se enquadram a este modelo, são as de gerenciamento de configuração, como \textit{Puppet} e \textit{Chef}. Este tipo de ferramenta não será abordada neste artigo. 
+ 
  \begin{figure}[ht]
 	\centering	
 	\caption[\hspace{0.1cm}Exemplo arquitetura Master/Agent]{Exemplo geral de arquitetura Master/Agent}
@@ -190,13 +183,13 @@ Embora essas ferramentes podem ser usadas para o gerenciamento de estações de 
 
 \section{Ferramentas}
 
-Esta seção aborda os principais conceitos das ferramentas utilizadas neste artigo. \textit{Ansible} e \textit{Terraform} operam usando uma arquitetura sem agente(conforme mencionado a seção \ref{semagent}) e promovem uma interface simplificada legível para a definição de recursos, facilitando a adoção. As definições de conceitos foram retirados diretamente da documentação oficial das ferramentas.
+Esta seção aborda os principais conceitos das ferramentas utilizadas neste artigo. \textit{Ansible} e \textit{Terraform} operam usando uma arquitetura sem agente(conforme mencionado na Seção \ref{semagent}) e promovem uma interface simplificada legível para a definição de recursos, facilitando a adoção. As definições de conceitos foram retirados diretamente da documentação oficial das ferramentas.
 
 \subsection{Ansible} \label{Ansible}
 
 A \citeonline{redhat} descreve o \textit{Ansible} como uma suíte completa de automação de processos de TI simples. Ele abrange desde o provisionamento e o gerenciamento de configurações e outras necessidades.
 
-Ele não usa agentes e nenhuma infraestrutura de segurança personalizada adicional(uma característica de ferramentas, conforme mencionado na seção \ref{cliente-servidor}), por isso é relativamente fácil de implantar. O \textit{Ansible} usa uma linguagem de marcação muito simples, o \textit{YAML}, o que é chamado como \textit{Ansible Playbooks} e o estilo de escrita de código é a procedural. E é através dos \textit{Playbooks} que se definem os recursos, sendo que estas definições se aproximam de uma escrita em inglês. 
+Ele não usa agentes e nenhuma infraestrutura de segurança personalizada adicional(uma característica de ferramentas, conforme mencionado na Seção \ref{cliente-servidor}), por isso é relativamente fácil de implantar. O \textit{Ansible} usa uma linguagem de marcação muito simples, o \textit{YAML}, o que é chamado como \textit{Ansible Playbooks} e o estilo de escrita de código é a procedural. E é através dos \textit{Playbooks} que se definem os recursos, sendo que estas definições se aproximam de uma escrita em inglês. 
 
 O \textit{Ansible} é descentralizado e depende das credenciais existentes do sistema operacional para controlar o acesso à máquinas remotas. A principal e mais usada forma dele se conectar é usando o protocolo \textit{SSH}.Se necessário, ele pode se conectar facilmente por \textit{Kerberos} \footnote{É um protocolo desenvolvido para fornecer poderosa autenticação em aplicações usuário/servidor, onde ele funciona como a terceira parte neste processo, oferendo autenticação ao usuário.}, \textit{LDAP} \footnote{\textit{LDAP - Lightweight Directory Access:} É um protocolo de aplicação aberto para acessar e manter serviços de informação de diretório distribuído sobre uma rede de IP, permitindo o compartilhamento de informações sobre usuários, sistemas, redes, serviços e aplicações através da rede.} e outros sistemas de gerenciamento de autenticação centralizados.
 
@@ -287,7 +280,7 @@ Web Service, Azure, Digital Ocean, Google Cloud, DNSimple, CloudFlare, Digital O
 
 \subsection{ Análise Comparativa }
 
-Nesta seção é apresentada algumas diferenças entre as ferramentas, diferenças extraídas pela experimentação e a leitura da documentação de ambas. O intuito dessa análise é estabelecer qual ferramenta é mais fácil implantação é utilização.
+Nesta seção são apresentadas diferenças entre as ferramentas, diferenças extraídas por experimentos realizados e pela análise da documentação de ambas. O intuito dessa análise é estabelecer qual ferramenta é mais fácil de implantação de utilizar.
 
 \subsection{Fluxo de trabalho}
 Os fluxos de trabalho  das ferramentas são bem simples e atendem a equipes de diversos tamanhos. Este item descreve o fluxo principal de cada ferramenta. No fluxo de trabalho principal do \textbf{\textit{Terraform}}(veja na Figura \ref{fig:figura7}) possuem três etapas: 
@@ -299,7 +292,7 @@ Os fluxos de trabalho  das ferramentas são bem simples e atendem a equipes de d
 \end{itemize}
 
 
-Este fluxo é resumido em três comandos  em três comandos: 
+Este fluxo é resumido em três comandos: 
 
 
 \begin{itemize}
@@ -307,6 +300,9 @@ Este fluxo é resumido em três comandos  em três comandos:
 \item \textbf{\textit{terraform init }}: Este comando é usado somente na primeira vez quando é instalado ou quando o próprio \textit{terraform} solicita. Ele realiza \textit{download} de itens de funcionamento do \textit{terraform}, como os \textit{providers, resource e modules} (\ref{terraform}). 
 
 \item \textbf{\textit{terraform apply ou destroy }}: O terraform  detecta automaticamente as alterações de recursos, como criação, atualização e exclusão e mostra um plano do que ele fará antes de aplicar ou destruir recursos.
+
+O \textit{Terraform} é executado por linha de comando. O usuário deve esta dentro do diretório onde possui os arquivos de definição de recursos(Conforme mencionado na Seção \ref{terraform} )  com a extensão \textbf{*.tf}, chamando o comando \textbf{\textit{terraform init}} ou \textbf{\textit{terraform apply}} ou \textbf{\textit{terraform destroy}}.  
+
 
 \end{itemize}
 
@@ -330,26 +326,25 @@ Considerando apenas a função de provisionamento que o \textbf{\textit{Ansible}
   \item Aplicar/Destruir: Criar, atualizar ou deletar recursos na infraestrutura. 
 \end{itemize}
 
+O \textit{Ansible} é executado por linha de comando, a sintaxe para executar um \textit{playbook} é: \textbf{\textit{ansible-playbook recurso.yaml}}, onde \textit{ansible-playbook} é o nome do comando do \textit{Ansible} e \textbf{recurso.yaml} é o recurso definido pelo usuário, conforme explicado na Seção \ref{Ansible}. Veja na Figura \ref{fig:figura7} o fluxo de trabalho do \textit{Ansible}.   
 
-Este fluxo( veja na xxxxxxx) é resumido em apenas um comando: \textbf{\textit{ansible-playbook recurso.yaml}}
 
-
-A diferença entre o fluxo das duas ferramentas é que no \textit{Terraform} ele gera um arquivo de estado, com extensão \textbf{*.tfstate}, que deve ser armazenado no controle de versão. Outra diferença é que no \textit{Ansible} o fluxo de destruir um recursos, requer um \textit{Playbook} específico para finalidade. Esta última diferença será explicada na seção \ref{idem}.  
+A diferença entre o fluxo de trabalho das duas ferramentas é que no \textit{Terraform} ele gera um arquivo de estado(veja na Seção \ref{}), com extensão \textbf{*.tfstate}, que deve ser armazenado no controle de versão. Outra diferença é que no \textit{Ansible} o fluxo de destruir um recursos, requer um \textit{Playbook} específico para essa finalidade. Esta última diferença na próxima seção.  
 
 \subsection{Controle de Estado e Idempotência} \label{idem}
-Um dos grandes desafios das ferramentas de provisionamento é garantir que determinado recurso seja único e que toda operação tenha o mesmo resultado esperado, o que é chamando de idempotência tanto  \textit{Terraform} quanto \textit{Ansible} possuem essa característica. No \textit{Terraform} isto é implícito, pois o nome associado ao recursos, tem que ser único, então o \textit{Terraform} faz o controle automaticamente pelo nome do recurso. No \textit{Ansible} essa característica é explicita deve ser na definição do recurso.
+Um dos grandes desafios das ferramentas de provisionamento é garantir que determinado recurso seja único e que toda operação tenha o mesmo resultado esperado, o que é chamando de idempotência tanto no \textit{Terraform} quanto \textit{Ansible}. No \textit{Terraform} isto é implícito, pois o nome associado ao recurso tem que ser único, então o \textit{Terraform} faz o controle automaticamente pelo nome do recurso. No \textit{Ansible} essa característica é explicita deve ser na definição do recurso.
 
-Uma característica observada no \textit{Terraform} é que ele mantém o estado da infraestrutura e detecta automaticamente alterações de estado(quando um recurso foi incluído, excluído ou alterado), sincroniza essa diferença entre, o estado do \textit{Terraform} e a infraestrutura. Essa é uma grande vantagem em relação ao \textit{Ansible} que apresenta um modelo de recursos controlado, em que o usuário deve descreve o estado desejado ou seja, os passos para atingir tal estado. O que é uma grande desvantagem, pois o usuário, deve conhecer como criar o recurso. 
+Uma característica observada no \textit{Terraform} é que ele mantém o estado da infraestrutura e detecta automaticamente alterações de estado(quando um recurso foi incluído, excluído ou alterado), sincroniza essa diferença entre, o estado do \textit{Terraform} e a infraestrutura. Além do estado local mantido pelo \textit{Terraform}, ele tem um produto comercial chamado de \textit{Terraform Cloud} em que equipes podem trabalhar com armazenamento de estado remoto. Essa é uma grande vantagem em relação ao \textit{Ansible} que apresenta um modelo de recursos controlado, em que o usuário deve descreve o estado desejado ou seja, os passos para atingir tal estado. O que é uma grande desvantagem, pois o usuário, deve conhecer como criar o recurso. 
 
 
 \subsection{Extensibilidade}
 
-\textit{Ansible} e \textit{Terraform} possui um sistema de plugins e módulos que permite estender as suas funcionalidades. Estes módulos e \textit{plugins} são escritos em linguagens de programação e podem ser compartilhados. As duas ferramentas possuem um repositório central. No \textit{Ansible} é chamado de \textit{Galaxy} e no \textit{Terraform} é chamado \textit{Registry}. No \textit{Terraform} o usuário só pode escrever um módulo em apenas uma linguagem de programação, a \textit{Golang}  \footnote{Linguagem de programação de propósito geral desenvolvida pela Google}, e no \textit{Ansible} é permitido usar qualquer linguagem de programação.  
+\textit{Ansible} e \textit{Terraform} possui um sistema de \textit{plugins} e módulos que permite estender as suas funcionalidades. Estes módulos e \textit{plugins} são escritos em linguagens de programação e podem ser compartilhados. As duas ferramentas possuem um repositório central. No \textit{Ansible} é chamado de \textit{Galaxy} e no \textit{Terraform} é chamado \textit{Registry}. No \textit{Terraform} o usuário só pode escrever um módulo em apenas uma linguagem de programação, a \textit{Golang}  \footnote{Linguagem de programação de propósito geral desenvolvida pela Google}, e no \textit{Ansible} é permitido usar qualquer linguagem de programação.  
 
 A vantagem de se poder usar qualquer linguagem para a extensibilidade permite-se usar uma linguagem em que uma organização já utiliza o que diminui a curva de aprendizado e não ter a necessidade de aprender novas linguagens de programação.  
 
 \subsection{Performance}
-A medida em que sistemas se desenvolvem as quantidades de recursos requeridos podem aumentar ou diminuir. A velocidade em que esses recursos são criados, destruídos ou atualizados, podem por exemplo, podem ocasionar em instabilidades, quedas de serviços, comprometendo o \textit{LNS} \footnote{ \textit{LNS}: Acordo de Nível de Serviço} de um sistema. É importante garantir que mudanças na infraestrutura sejam simples e rápidas. Um software de provisionamento deve ser eficaz a ponto de não compromenter toda uma atualização de recurso. Neste trabalho a medição da performance foi dada pelo tempo em minutos em que um recurso(utilizou-se apenas máquinas virtuais que é um recurso mais criado) é criado no fornecedor de computação na nuvem. As tabelas \ref{tab:tabela1} e \ref{tab:tabela2} a seguir mostram uma comparação entre \textit{Ansible} e \textit{terraform}. 
+Na medida em que sistemas se desenvolvem as quantidades de recursos requeridos podem aumentar ou diminuir. A velocidade em que esses recursos são criados, destruídos ou atualizados, podem por exemplo, ocasionar instabilidades, quedas de serviços, comprometendo o \textit{LNS} \footnote{ \textit{LNS}: Acordo de Nível de Serviço} de um sistema. É importante garantir que mudanças na infraestrutura sejam simples e rápidas. Um software de provisionamento deve ser eficaz a ponto de não prejudicar toda atualização de recurso \cite{sre_google}. Neste trabalho a medição da performance foi dada pelo tempo em minutos em que um recurso(utilizou-se apenas máquinas virtuais que, é o recurso mais criado) foi criado no fornecedor de computação na nuvem. As tabelas \ref{tab:tabela1} e \ref{tab:tabela2} mostram uma comparação entre \textit{Ansible} e \textit{Terraform}. 
 
 
 % Tabela
@@ -363,20 +358,20 @@ A medida em que sistemas se desenvolvem as quantidades de recursos requeridos po
   \hline
     \textbf{Qtde. Recursos}	& \textbf{Tempo - Ansible} & \textbf{Tempo - Terraform} \\
     \hline
-  1   & 1.5  Minutos   & 0.4  Minutos    \\
-2   & 2.10  Minutos   & 1.5  Minutos    \\
-3   & 3.17  Minutos   & 2.1  Minutos    \\
-5   & 5.32  Minutos   & 4.7  Minutos     \\
-10  & 10.3 Minutos   & 5.2  Minutos      \\
-15  & 13.8  Minutos   & 5.7 Minutos      \\
-20  & 16.6  Minutos   & 7.38  Minutos      \\
+  1   & 1.5 min   & 0.4  min    \\
+2   & 2.10  min   & 1.5  min    \\
+3   & 3.17  min   & 2.1  min    \\
+5   & 5.32  min   & 4.7  min     \\
+10  & 10.3  min   & 5.2  min      \\
+15  & 13.8  min   & 5.7  min      \\
+20  & 16.6  min   & 7.38 min      \\
 
      \hline
  \end{tabular}
  	\vspace{.1cm}  %espaço entre tabela e fonte
 	\small
 	% Fonte
-	{\footnotesize\\ \textbf{Fonte: Próprio Autor}}
+	{\footnotesize\\ \textbf{Fonte:  Elaborado pelo autor em 10/11/2019}}
 \end{table}
 
 
@@ -391,43 +386,47 @@ A medida em que sistemas se desenvolvem as quantidades de recursos requeridos po
   \hline
     \textbf{Qtde. Recursos}	& \textbf{Tempo - Ansible} & \textbf{Tempo - Terraform} \\
     \hline
-  1   & 1.2  Minutos   & 0.4  Minutos    \\
-2   & 1.9    Minutos   & 1.2  Minutos    \\
-3   & 2.5    Minutos   & 1.6  Minutos    \\
-5   & 3.6    Minutos   & 2.7  Minutos     \\
-10  & 4.20   Minutos   & 3.2  Minutos      \\
-15  & 5.8    Minutos   & 4.19 Minutos      \\
-20  & 7.4    Minutos   & 5.1  Minutos      \\
+  1   & 1.2  min   & 0.4  min    \\
+2   & 1.9    min   & 1.2  min    \\
+3   & 2.5    min   & 1.6  min    \\
+5   & 3.6    min   & 2.7  min     \\
+10  & 4.20   min   & 3.2  min      \\
+15  & 5.8    min   & 4.19 min      \\
+20  & 7.4    min   & 5.1  min      \\
 
      \hline
  \end{tabular}
  	\vspace{.1cm}  %espaço entre tabela e fonte
 	\small
 	% Fonte
-	{\footnotesize\\ \textbf{Fonte: Próprio Autor}}
+	{\footnotesize\\ \textbf{Fonte: Elaborado pelo autor em 13/11/2019}}
 \end{table}
 
 
-A titulo de comparação, para se criar uma máquina virtual no console do fornecedor leva-se um tempo estimado de 1 minutos, entre escolher os requisitos da máquina, como sistema operacional, quantidade de memória RAM, tamanho e tipos de disco rígidos. 
+A título de comparação, para se criar uma máquina virtual no console do fornecedor, leva-se um tempo estimado de 2 min para escolher os requisitos da máquina, como sistema operacional, quantidade de memória RAM, tamanho e tipos de disco rígidos. 
 
-Nesta comparação o \textit{Terraform} tem uma melhor performance, tanto para criação ou destruição de recursos. Um fato para essa diferença de performance é fato dele distribuir as execuções(criação ou destruição de recursos) por núcleo. 
+Nesta comparação o \textit{Terraform} tem uma melhor performance, tanto para criação quanto para destruição de recursos. Um fato que explica essa diferença de performance é a distribuição das execuções (criação ou destruição de recursos) por núcleo. 
 
-Segundo a \cite{hashcorp03} "Nossa regra prática é 10 execuções \textit{Terraform} por núcleo de CPU, com 2 núcleos de CPU alocados para os serviços básicos.  Portanto, uma máquina de 8 núcleos com 8 GB de memória pode executar confortavelmente 20 execuções \textit{Terraform}."
+Segundo a \citeonline{hashcorp03}, "nossa regra prática é 10 execuções \textit{Terraform} por núcleo de CPU, com 2 núcleos de CPU alocados para os serviços básicos.  Portanto, uma máquina de 8 núcleos com 8 GB de memória pode executar confortavelmente 20 execuções \textit{Terraform}." Portanto, quando existe mais de uma tarefa a ser realizada, o \textit{Terraform} as paraleliza no caso de possuir mais de um núcleo.
 
-A comparação ficou limitada em 20 máquinas virtuais, devido ao valores em dólares disponíveis para a realização dos testes. 
+A comparação máxima realizada nesse trabalho ficou limitada em 20 máquinas virtuais, devido aos valores em dólares disponíveis para a realização dos testes. Entretanto, nas Tabelas 1 e 2, pode-se perceber a evolução do tempo necessário quando se aumenta a quantidade de recursos, apresentados de 1 a 20 máquinas virtuais.
 
-\subsection{Outra Comparações}
-\textit{Ansible} e \textit{Terraform} são ferramentas de código aberto e código fonte de ambas estão no hospedadas no \textit{Github}. O \textit{github} é um repositório central de código fonte, existem atualmente mais de 40 milhões de usuários e mais de 10 milhões de projetos e pessoas do mundo inteiro podem contribuir com projetos de código aberto. No \textit{Github} é possível extrair métricas de projetos como: 
+\subsection{Outras Comparações}
+\textit{Ansible} e \textit{Terraform} são ferramentas de código aberto e o código fonte delas está hospedado no \textit{Github}. O \textit{github} é um repositório central de código fonte, onde existem atualmente mais de 40 milhões de usuários e mais de 10 milhões de projetos e pessoas do mundo inteiro, que podem contribuir com projetos de código aberto. 
+
+Com base nos valores indicados pelo \textit{Github}, é ainda possível extrair os seguintes aspectos comparativos: 
 
 \begin{itemize}
-    \item  \textit{Contributors}: Número de pessoas que contribuíram de alguma forma no projeto, corrigindo \textit{bugs}, adicionando novas funcionalidades.
-     \item \textit{Code Frequency}: Número de linhas de código inseridas no código fonte principal anualmente. 
+    \item  Contribuidores (\textit{Contributors}): número de pessoas que contribuíram de alguma forma no projeto, corrigindo \textit{bugs}, adicionando novas funcionalidades.
+     \item Frequência de atualização do código (\textit{Code Frequency}): número de linhas de código inseridas no código fonte principal anualmente. 
 \end{itemize}
 
-A tabela a seguir foi montada com base nas métricas fornecidas do \textit{Github}: 
+Esses aspectos são apresentados na Tabela 3.
+
+ \textit{Github}: 
    \begin{table}[ht]
 	\centering
-	\caption{\hspace{0.1cm} Github - Insights}
+	\caption{\hspace{0.1cm} Outros aspectos comparativos}
 	\vspace{-0.3cm} % espaço entre titulo e tabela
 	\label{tab:tabela3}
 	% Conteúdo da tabela
@@ -442,16 +441,79 @@ A tabela a seguir foi montada com base nas métricas fornecidas do \textit{Githu
  	\vspace{.1cm}  %espaço entre tabela e fonte
 	\small
 	% Fonte
-	{\footnotesize\\ \textbf{Fonte: Próprio Autor}}
+	{\footnotesize\\ \textbf{Fonte: Elaborado pelo autor em 13/11/2019 com base nos dados do \textit{Github}}}
 \end{table}
 
-As métricas do \textit{Github} demonstram que são projetos bem consolidados e bem aceitos no mercado. O número de contribuidores e a frequência de alteração no código mostra a maturidade dos projetos e que os ambos são sempre evoluídos. Além de serem mantidos por empresas bem avaliadas no mercado.  
+Os aspectos comparativos obtidos a partir dos dados do \textit{Github} demonstram que essas ferramentas são projetos bem consolidados e bem aceitas no mercado. O número de contribuidores e a frequência de alteração no código mostra a maturidade dos projetos e que ambos estão em evolução constante. Além disso, essas ferramentas são mantidas por empresas bem avaliadas no mercado.  
+
+Uma outra caracteristca observada são as versões das ferramentas \textit{Ansible} e \textit{Terraform} com suporte comercial. O \textit{Ansible Tower} é uma interface \textit{Web} que visa simplifica o uso do \textbf{Ansible}. Nele é possível executar \textit{playbook} e visualizar os status das tarefas concluídas. O \textit{Tower} pode ser integrado com diversas ferramentas de desenvolvimento de \textit{Software} como, controle de versões, \textit{CI/CD}. O \textit{Terraform Cloud} é uma interface \textit{web} que permite gerenciar as execuções do \textit{Terraform} em ambiente consistente e confiável com compartilhados de estado e controles de acesso. O \textit{Terraform Cloud} pode ser integrado com diversas ferramentas.  A tabela a seguir mostra a comparação de preços entre as ferramentas. 
+
+   \begin{table}[ht]
+	\centering
+	\caption{\hspace{0.1cm} Comparação de Preços}
+	\vspace{-0.3cm} % espaço entre titulo e tabela
+	\label{tab:tabela4}
+	% Conteúdo da tabela
+	\begin{tabular}{l|c|c}
+  \hline
+    \textbf{Produto}	& \textbf{Preço em dolar} & \textbf{Modelo de Cobrança} \\
+    \hline
+  Terraform Team & 20  & Usuário\\
+  Terraform Team-Governace  & 70 &   Usuário  \\
+  Ansible Tower  & 50-175 &   Máquina  \\
+     \hline
+ \end{tabular}
+ 	\vspace{.1cm}  %espaço entre tabela e fonte
+	\small
+	% Fonte
+	{\footnotesize\\ \textbf{Fonte: Elaborado pelo autor em 19/11/2019 com base nos dados de \textit{\cite{opensource.io}} e  \textit{\cite{hashcorp3}}}}
+\end{table}
+
+A diferença entre os produtos é que o \textit{Ansible Tower} deve ser instalado na infraestrutura local, já o \textit{Terraform Cloud} é uma aplicação hospedada pela \textit{Hashcorp}(empresa criadora do \textit{Terraform}). É importante salientar que o \textit{Terraform} também um produto com o \textit{Terraform Enterprise} que é semelhante ao \textit{Terraform cloud} e  que pode ser instalada em uma infraestrutura local, semelhante ao \textit{Ansible Tower} no entanto, não foi possível obter valores de licenciamento desta versão.  
+
+
+A tabela a seguir mostra uma simulação  do custo de obtenção das ferramentas nas versões comerciais, considerando o menor valor de ambas:
+
+
+   \begin{table}[ht]
+	\centering
+	\caption{\hspace{0.1cm} Comparação de Preços}
+	\vspace{-0.3cm} % espaço entre titulo e tabela
+	\label{tab:tabela5}
+	% Conteúdo da tabela
+	\begin{tabular}{l|c|c|c}
+  \hline
+    \textbf{Produto} & \textbf{Preço em Dolar} & \textbf{Quantidade}  & \textbf{Valor total em Dolar} \\
+    \hline
+  Terraform Team & 20  & 10 & 200\\
+  Ansible Tower  & 50 & 10 & 500\\
+     \hline
+ \end{tabular}
+ 	\vspace{.1cm}  %espaço entre tabela e fonte
+	\small
+	% Fonte	
+	{\footnotesize\\ \textbf{Fonte: Elaborado pelo autor em 19/11/2019 com base nos dados da Tabela \ref{tab:tabela4}}}
+\end{table}
+
+A diferença de preço entre as ferramentas chega a ser 150\% . Neste aspecto o \textit{Terraform} tem um modelo de licenciamento bem mais vantajoso do que o \textit{Ansible}. 
+
+
 
 \subsection{Conclusão e Trabalho Futuros}
-Na infraestrutura como código todos recursos, como rede, maquinas virtuais, bancos de dados e outros são descritos em uma linguagem de alto nível, trazendo muitos benefícios como: criar uma infraestrutura dinâmica, onde recursos podem facilmente serem criados ou destruídos ou substituídos. Uma infraestrutura reproduzível e testável, já que os recursos podem ser aplicados novamente em uma infraestrutura auxiliar. Escalável, uma vez que os recursos podem ser redimensionados de acordo com as necessidades, alterando apenas no código do recurso. Rastreabilidade de recursos, pois a infraestrutura é tratada com o mesmo processo de desenvolvimento. 
+Na infraestrutura como código (IaC), todos os recursos, como rede, máquinas virtuais, bancos de dados e outros, são descritos em uma linguagem de alto nível. A IaC contribui com muitos benefícios, tais como criar uma infraestrutura dinâmica, onde recursos podem facilmente serem criados, destruídos ou substituídos. Além disso, ela proporciona uma infraestrutura reproduzível e testável, já que os recursos podem ser aplicados novamente em uma infraestrutura auxiliar. Ela é escalável, uma vez que os recursos podem ser redimensionados de acordo com as necessidades, alterando apenas o código do recurso. É possível realizar a rastreabilidade dos recursos, pois a infraestrutura é tratada com o mesmo processo de desenvolvimento. 
 
-Softwares como \textit{Ansible}, \textit{Terraform} e outros auxiliam nesse processo de tratar a infraestrutura como código, no entanto não resolvem toda a questão é preciso alinhar com outras ferramentas e mudar a mentalidade nos times de tecnologia. Na comparação entre elas, foi observado que o \textit{Terraform} é uma ferramenta mais madura para lidar com provisionamento de infraestrutura, devido ao fato de ter uma linguagem mais alto nível para descrever recursos do que o \textit{Ansible}. Um ponto que merece destaque e a detecção de estado automático do \textit{Terraform} é um grande diferencial da ferramenta, pois o gerenciamento de código se torna simples, uma vez que não é necessário conhecido os passo necessários para se chegar no estado final desejado. Por outro lado, o \textit{Ansible} é uma ferramenta bastante popular e já conta com recursos de provisionamento, conforme mencionado neste artigo \ref{Ansible} e talvez em versões futura o suporte a provisionamento melhore. 
+Softwares como \textit{Ansible}, \textit{Terraform} e outros auxiliam nesse processo de tratar a infraestrutura como código. No entanto, elas não resolvem toda a questão, sendo ainda necessário alinhar com outras ferramentas e mudar a mentalidade nas equipes de tecnologia nas organizações. 
 
-O \textit{Terraform} sem dúvidas é uma ferramenta que melhor se encaixa em um cenário de infraestrutura como código, pelo fato da ferramenta já ter sido pensada para essa finalidade. 
+Na análise comparativa dessa ferramentas realizada nesse trabalho, foi observado que o \textit{Terraform} é uma ferramenta mais nova, porém mais madura para lidar com provisionamento de infraestrutura, devido ao fato de ter uma linguagem de mais alto nível para descrever os recursos do que o \textit{Ansible}. Um ponto que merece destaque é a detecção do estado automático do \textit{Terraform}, sendo esse um grande diferencial da ferramenta, pois o gerenciamento de código se torna simples, uma vez que não é necessário conhecer os passos necessários para se chegar no estado final desejado. Por outro lado, o \textit{Ansible} é uma ferramenta bastante popular e já conta com recursos de provisionamento, conforme mencionado na Seção \ref{Ansible}. Talvez em versões futuras o suporte e o provisionamento dela melhore. 
 
-Além dos benefícios da infraestrutura como código ela traz novas abordagens como por exemplo, a infraestrutura imutável no qual este artigo abordou de forma superficial por ser um assunto extenso e exige um conhecimento mais profundo, além de uma gama novas ferramentas. O que pode ser tratado em um trabalho futuro. 
+O \textit{Terraform} sem dúvidas é uma ferramenta que melhor se encaixa em um cenário de infraestrutura como código, pelo fato da ferramenta já ter sido pensada para essa finalidade. Além dos benefícios da infraestrutura como código, ela traz novas abordagens, como por exemplo a infraestrutura imutável, abordada nesse trabalho.  
+
+Como trabalhos futuros, pode-se fazer uma análise criteriosa que avalie se é vantajoso ou não o uso de infraestrutura imutável. Além disso, pode-se incluir a análise de outras ferramentas de IaC, tais como a \textit{Packer} \footnote{https://www.packer.io}. 
+Como as equipes de infraestrutura não possuem atualmente experiência com IaC, não existe uma análise que indique para as organizações o custo/benefício do uso de infraestrutura como código (IaC). Dessa forma, um outro trabalho seria a análise financeira da economia que poderia ser gerada com o emprego da infraestrutura como código.
+
+"\textit{Terraform} é uma ferramenta está se tornando rapidamente a escolha para criar e gerenciar infraestruturas de nuvem por meio de definições declarativas. Ele possui uma a sintaxe de seus arquivos é bastante legível e suporta vários provedores de nuvem. Possui uma comunidade uma comunidade ativa que adiciona suporte para as últimas funcionalidades da maioria dos provedores de nuvem." \cite{thoughtworks} 
+
+No caso das versões comerciais o \textit{Terraform} tem um modelo de licenciamento mais vantajoso, pois o valor é cobrado por usuário o que não final o custo é menor em relação ao \textit{Ansible} que contabiliza o valor por máquina gerenciada. Uma outra vantagem é o \textit{Terraform Cloud} é gratuito para equipes pequenas de até 5 usuário o que é ideal para empresas pequenas ou para testar essa versão do produto. Outro ponto a destacar é que o \textit{Terraform Cloud} é disponibilizado no modelo de \textit{SaaS}, o que significa software como serviço. Este modelo é vantajoso porque se permite apenas se preocupar com a infraestrutura da organização em contraponto com \textit{Ansible Tower} que deve ser instalado na infraestrutura local. 
+
+A conclusão desse estudo é que o \textit{Ansible} apesar de ser uma suíte completa para se trabalhar com infraestrutura, como ferramenta de provisionamento ainda não é um produto maduro o suficiente, pois um dos principais recursos necessários para lidar com infraestrutura é a capacidade de trabalhar com o gerenciamento de estado, por exemplo identificar quando um recurso precisa ser criado, modificado ou destruído automaticamente. Outro ponto é a velocidade de manipular recursos tanto na sua criação ou destruição de recursos. Outra característica é o modelo de licenciamento que é menos vantajoso do que o \textit{Terraform} é uma solução mais completa.
+
