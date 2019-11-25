@@ -10,7 +10,7 @@
  \urlstyle{same}
 \usepackage{footnotebackref}
 \usepackage{abakos}  %pacote com padrão da Abakos baseado no padrão da PUC
-
+\usepackage{float}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Capa da revista
@@ -77,9 +77,8 @@
 
 \begin{abstract}
 \noindent
-
-  Infraestrutura como código ou também conhecida como IaC , frequentemente descrita como "infraestrutura programável". É um modelo de gerenciamento de recursos computacionais através de arquivos de definição legíveis para humanos e interpretados por ferramentas específicas para essa finalidade para construir e implantar componentes de uma infraestrutura. A infraestrutura como código é adotada primordialmente na computação em nuvem, permitindo um fluxo de trabalho totalmente automatizado e a infraestrutura é tratada como código, passando a fazer parte do fluxo de desenvolvimento de software. Este trabalho trata-se de apresentar conceitos e uma análise de uma categoria de ferramentas de infraestruturas como código.  Ele é organizado por uma introdução que descreve um contexto geral onde a IaC é aplicada , uma contextualização de um problema e o que a infraestrutura como código se propõem a resolver, as motivações para adoção de ferramentas de IaC, uma análise comparativa entre ferramentas de IaC e uma conclusão.   
-   \\\textbf{\keyword{Palavras-chave: }}  Infraestrutura como código,Automação, Provisionamento, Computação na nuvem, Terraform, Ansible 
+A infraestrutura como código ou também conhecida como IaC, surgiu principalmente com a popularização de metodologias ágeis e computação na nuvem e além do movimento cultural denominado \textit{DevOps}. A \textit{IaC} define como fundamento a automatização de processos das operações de infraestrutura, utilizando uma abordagem para provisionar e gerenciar recursos de computação por meio de codificação ao invés do processo tradicional. Ao tratar a infraestrutura como código, as organizações podem usar as melhores práticas de desenvolvimento de software, incluindo revisão de código e controle de versão, documentação e testes da infraestrutura. Com \textit{Iac} novos conceito e ferramentas surgem, o que pode ser um dificultador para equipes inexperientes com computação na nuvem, pois trata-se uma nova abordagem e uma necessidade de mudança de paradigmas. Para adoção da infraestrutura como código, as equipes precisam escolher uma ferramenta ideal que atendam as necessidades. Neste artigo é proposto um estudo comparativo entre ferramentas de \textit{IaC}, e elenca aspectos positivos e negativos dessas ferramentas. 
+\\\textbf{\keyword{Palavras-chave: }}  Infraestrutura como código,Automação, Provisionamento, Computação na nuvem, Terraform, Ansible 
 \end{abstract}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -87,7 +86,9 @@
 \selectlanguage{english}
 \begin{abstract}
 \noindent
-Infrastructure as code or also known as IaC or often described as "programmable infrastructure". It is a model of computational resource management through definition files that are interpreted by tools specific to the requirements for creating and deploying infrastructure components. Infrastructure as code is primarily adopted in the cloud allowing for fully automated workflow and infrastructure is treated as code and becomes part of the software development flow. This paper presents concepts and an analysis of a category of infrastructure tools such as code.
+Infrastructure as Code also known as IaC first emerged with the popularization of agile methodologies, cloud computing and the cultural movement denominated DevOps. IaC's purpose is the automation of the processes of infrastructure operations using an approach to the provision and manage computational resources via codification instead of the traditional process.
+By treating infrastructure as code organizations can use the best practices of software development, including code review and version management, documentation and infrastructure testing. IaC new concepts and tools appear, which can be a challenge for a team that is inexperience with cloud computing because it involves a new approach and a need to change the paradigm.
+To adopt infrastructure as code teams must choose an ideal tool that will fulfill their needs. A comparison between IaC tools is proposed in this article listing the positive and negative aspects of those tools.
 \\\textbf{\keyword{Keywords: }} Infrastructure as Code, Automation, Provisioning, Cloud Computing, Terraform, Ansible 
 \end{abstract}
 
