@@ -11,7 +11,7 @@
 As tecnologias da informação se tornaram fundamentais para o auxílio da gestão das empresas em suas atividades rotineiras e também no suporte a tomadas de decisões e possibilidade de desenvolvimento de novos modelos de negócio e a modificação dos valores estratégicos das empresas. \cite{audy}.
 
 Visando a adequação às mudanças mercadológicas, organizacionais e à manutenibilidade em relação a concorrência, o investimento em sistemas de informação tem uma grande parcela do orçamento das empresas, buscando o alinhamento da Tecnologia da informação e negócios. \cite{luftman}  
-Para atender a essas necessidades, os requisitos de sistemas têm se tornado cada vez mais complexos, voláteis e robustos diante das demandas das organizações. As denominadas metodologias ágeis permitem a entrega de software funcionais em ciclos de desenvolvimento mais curtos, considerando a velocidade demandada para a sua construção. \cite{sbbrocco} 
+Para atender a essas necessidades, os requisitos de sistemas têm se tornado cada vez mais complexos e mutáveis diante das demandas das organizações. As denominadas metodologias ágeis permitem a entrega de software funcionais em ciclos de desenvolvimento mais curtos, considerando a velocidade demandada para a sua construção. \cite{sbbrocco} 
           
 No entanto, as equipes que lidam com a infraestrutura têm a difícil tarefa de implantar um \textit{software} em produção a medida em que são criados ou modificados, pois estes sistemas requerem dependências de componentes externos, como configurações de \textit{hardware}, sistemas operacionais, banco de dados, servidores de aplicação e web e ainda configurações específicas da aplicação. Isto demanda um tempo considerável para a implantação destes sistemas.\cite{sato}.
 
@@ -47,8 +47,9 @@ O problema a ser resolvido é baseado em cenário onde, uma empresa que migrou t
 
 \subsection{Objetivos}
 
-Neste artigo será apresentada uma abordagem geral de \textit{IaC}, um comparativo entre duas ferramentas, os resultados obtidos. Os objetivos específicos irão explicar as diferenças entre softwares de gerenciamento de configuração e \textit{softwares} de provisionamento, infraestrutura imutável e mutável, descrever e avaliar as características de cada ferramenta escolhida e apresentar resultados. Este trabalho não abordará itens como: integração de ferramentas IaC com ferramentas de \textit{CI}, aplicação de metodologias de desenvolvimento de software.
-
+Neste artigo será apresentado uma abordagem geral de \textit{IaC}, um comparativo entre duas ferramentas e apresentar os resultados obtidos. Os objetivos específicos serão explicar as diferenças entre softwares de gerenciamento de configuração e softwares de provisionamento, infraestrutura imutável e mutável, descrever e avaliar as características de cada ferramenta escolhida
+e apresentar resultados. Este trabalho não abordará itens como: integração de ferramentas \textit{IaC}
+com ferramentas de \textit{CI}, aplicações de metodologias de desenvolvimento de software.
 
 \section{\esp Metodologia}
 
@@ -56,7 +57,7 @@ Para o desenvolvimento desse trabalho foram realizadas buscas sistêmicas em bas
 
 Impulsionado pelo movimento \textit{Agile} que alterou a forma como \textit{softwares} são construídos, priorizando ciclos curtos de desenvolvimento e entregas incrementais. Como resultado a infraestrutura também passou por essa transformação, buscando a máxima disponibilidade e flexibilidade. Essa transformação veio através do movimento chamado \textit{DevOps} que requer processos de trabalho ágeis e fluxos de trabalho automatizados, e que só podem ser alcançados com a garantia de infraestrutura de TI prontamente disponível necessária para executar e testa o código desenvolvido. Isso só pode acontecer dentro de um fluxo de trabalho automatizado, o que pode ser entendido como infraestrutura como código ou IaC. As ferramentas de IaC tem um papel fundamental para criar esses fluxos de trabalhos automatizados.
 
-A grande quantidade de opções de ferramentas de IAC levada pela inexperiência de equipes com este assunto pode dificultar, a escolha da ferramenta certa que atendam o cenário ideal para que a equipe consiga implantar uma infraestrutura que acompanhe as demandas 
+A grande quantidade de opções de ferramentas de \textit{IAC}, levada pela inexperiência da equipe pelo assunto, pode dificultar que a equipe escolha ferramentas que atendam o cenário ideal, sejam fáceis de utilizar de implantar e que tenham uma sinergia com ferramentas e o processo de desenvolvimento. Estabelecendo assim, um processo ágil que abrande desenvolvimento e operações de infraestrutura.  
 
 A escolha das ferramentas obedeceram critérios da tabela de \citeonline{masek} e dentre as ferramentas que atendem às características descritas nesta tabela, foram escolhidas o \textit{Ansible} e o \textit{Terraform} e usando critérios extras como, aceitação do mercado, suporte comercial e maturidade da ferramenta.
 
@@ -137,7 +138,9 @@ Segundo \citeonline{Morris:2016:ICM:3006361} as ferramentas de IaC usam arquivos
 
  \subsection{Tipos de Infraestrutura}
  
- Nesta seção são abordadas duas característica de como as infraestruturas são tratadas atualmente e apresentar uma a ideia central dos conceitos. Não serão discutidos qual modelo é melhor ou qual as vantagens de se utilizar um ou outro. 
+Nesta seção são abordadas duas características de como a infraestrutura é tratada atualmente e apresenta uma ideia central dos conceitos. Não serão discutidos qual modelo é melhor ou qual as vantagens de se utilizar um ou outro.
+
+Segundo \citeonline{Morris:2016:ICM:3006361}, na infraestrutura mutável, a cada mudança de algum componente, seja por uma demanda de serviço, aplicação ou segurança, essas atualizações precisam ser replicadas em todos os servidores que dependem dessas mudanças. A medida que atualizações são realizadas, cada servidor tem um histórico único de alterações, possuindo sutis diferenças de configuração. As ferramentas de gerenciamento de configuração normalmente são padronizadas para este paradigma de infraestrutura mutável.
 
  Segundo \citeonline{Morris:2016:ICM:3006361}, na infraestrutura mutável, a cada mudança de algum componente, seja por uma demanda de serviço, aplicação, segurança, estas atualizações precisam ser replicadas em todos os servidores que dependem dessas mudanças. A medida que atualizações são realizadas, cada servidor tem um histórico único de alterações, possuindo sutis diferenças de configuração. As ferramentas de gerenciamento de configuração normalmente são padronizadas para este paradigma de infraestrutura mutável. 
   
@@ -367,9 +370,34 @@ Uma característica observada no \textit{Terraform} é que ele mantém o estado 
 
 \subsection{Extensibilidade}
 
-\textit{Ansible} e \textit{Terraform} possui um sistema de \textit{plugins} e módulos que permite estender as suas funcionalidades. Estes módulos e \textit{plugins} são escritos em linguagens de programação e podem ser compartilhados. As duas ferramentas possuem um repositório central. No \textit{Ansible} é chamado de \textit{Galaxy} e no \textit{Terraform} é chamado \textit{Registry}. No \textit{Terraform} o usuário só pode escrever um módulo em apenas uma linguagem de programação, a \textit{Golang}  \footnote{Linguagem de programação de propósito geral desenvolvida pela Google}, e no \textit{Ansible} é permitido usar qualquer linguagem de programação.  
+\textit{Ansible} e \textit{Terraform} possui um sistema de \textit{plugins} e módulos que permite estender as suas funcionalidades. Estes módulos e \textit{plugins} são escritos em linguagens de programação e podem ser compartilhados. As duas ferramentas possuem um repositório central. No \textit{Ansible} é chamado de \textit{Galaxy}(Veja na Figura \ref{fig:figura9}) e no \textit{Terraform} é chamado \textit{Registry}(Veja na Figura \ref{fig:figura10}). No \textit{Terraform} o usuário só pode escrever um módulo em apenas uma linguagem de programação, a \textit{Golang}  \footnote{Linguagem de programação de propósito geral desenvolvida pela Google}, e no \textit{Ansible} é permitido usar qualquer linguagem de programação.  
 
-A vantagem de se poder usar qualquer linguagem para a extensibilidade permite-se usar uma linguagem em que uma organização já utiliza o que diminui a curva de aprendizado e não ter a necessidade de aprender novas linguagens de programação.  
+A vantagem de se poder usar qualquer linguagem para a extensibilidade permite-se usar uma linguagem em que uma organização já utiliza o que diminui a curva de aprendizado e não ter a necessidade de aprender novas linguagens de programação.
+
+\begin{figure}[H]
+	\centering	
+	\caption[\hspace{0.1cm} Interface do Ansible Galaxy]{Interface do Ansible Galaxy}
+	\vspace{-0.4cm}
+	\includegraphics[width=1.0\textwidth]{artigo/figuras/galaxy_2.png}
+	 \vspace{-0.2cm}
+	\\\textbf{\footnotesize Fonte: \cite{ansible_galaxy}}
+	\label{fig:figura9}
+\end{figure}
+\vspace{-0.5cm}
+
+\begin{figure}[H]
+	\centering	
+	\caption[\hspace{0.1cm} Interface do Terraform Registry]{Interface do Terraform Registry}
+	\vspace{-0.4cm}
+	\includegraphics[width=1.0\textwidth]{artigo/figuras/terraform_registy.png}
+	 \vspace{-0.2cm}
+	\\\textbf{\footnotesize Fonte: \cite{terraform_registry}}
+	\label{fig:figura10}
+\end{figure}
+\vspace{-0.5cm}
+
+\hfill
+
 
 \subsection{Performance}
 Na medida em que sistemas se desenvolvem as quantidades de recursos requeridos podem aumentar ou diminuir. A velocidade em que esses recursos são criados, destruídos ou atualizados, podem por exemplo, ocasionar instabilidades, quedas de serviços, comprometendo o \textit{LNS} \footnote{ \textit{LNS}: Acordo de Nível de Serviço} de um sistema. É importante garantir que mudanças na infraestrutura sejam simples e rápidas. Um software de provisionamento deve ser eficaz a ponto de não prejudicar toda atualização de recurso \cite{sre_google}. Neste trabalho a medição da performance foi dada pelo tempo em minutos em que um recurso(utilizou-se apenas máquinas virtuais que, é o recurso mais criado) foi criado no fornecedor de computação na nuvem. As Tabelas \ref{tab:tabela1} e \ref{tab:tabela2} mostram uma comparação entre \textit{Ansible} e \textit{Terraform}. 
@@ -497,7 +525,7 @@ Uma outra caracteristca observada são as versões das ferramentas \textit{Ansib
 	{\footnotesize\\ \textbf{Fonte: Elaborado pelo autor em 19/11/2019 com base nos dados de \textit{\cite{opensource.io}} e  \textit{\cite{hashcorp3}}}}
 \end{table}
 
-A diferença entre os produtos é que o \textit{Ansible Tower} deve ser instalado na infraestrutura local, já o \textit{Terraform Cloud} é uma aplicação hospedada pela \textit{Hashcorp}(empresa criadora do \textit{Terraform}). É importante salientar que o \textit{Terraform} também possui um produto com o \textit{Terraform Enterprise} que é semelhante ao \textit{Terraform cloud} e  que pode ser instalada em uma infraestrutura local, semelhante ao \textit{Ansible Tower}. No entanto, não foi possível obter valores de licenciamento desta versão.  
+A diferença entre os produtos é que o \textit{Ansible Tower}(Veja na Figura \ref{fig:figura11}.) deve ser instalado na infraestrutura local, já o \textit{Terraform Cloud}(Veja na Figura \ref{fig:figura12})  é uma aplicação hospedada pela \textit{Hashcorp}(empresa criadora do \textit{Terraform}). É importante salientar que o \textit{Terraform} também possui um produto com o \textit{Terraform Enterprise} que é semelhante ao \textit{Terraform cloud} e  que pode ser instalada em uma infraestrutura local, semelhante ao \textit{Ansible Tower}. No entanto, não foi possível obter valores de licenciamento desta versão.  
 
 
 A Tabela \ref{tab:tabela5} mostra uma simulação  do custo de obtenção das ferramentas nas versões comerciais, considerando o menor valor de ambas. A diferença de preço entre as ferramentas chega a ser 150\% . Neste aspecto o \textit{Terraform} tem um modelo de licenciamento bem mais vantajoso que o \textit{Ansible}.  
@@ -522,6 +550,31 @@ A Tabela \ref{tab:tabela5} mostra uma simulação  do custo de obtenção das fe
 	% Fonte	
 	{\footnotesize\\ \textbf{Fonte: Elaborado pelo autor em 19/11/2019 com base nos dados da Tabela \ref{tab:tabela4}}}
 \end{table}
+
+\begin{figure}[H]
+	\centering	
+	\caption[\hspace{0.1cm} Interface do Ansible Tower]{ Interface do Ansible Tower}
+	\vspace{-0.4cm}
+	\includegraphics[width=1.0\textwidth]{artigo/figuras/RH-Ansible-Tower-job-details.png}
+	 \vspace{-0.2cm}
+	\\\textbf{\footnotesize Fonte: \cite{ansible_tower}}
+	\label{fig:figura11}
+\end{figure}
+\vspace{-0.5cm}
+
+\begin{figure}[H]
+	\centering	
+	\caption[\hspace{0.1cm} Interface do Terraform Cloud]{ Interface do Terraform Cloud}
+	\vspace{-0.4cm}
+	\includegraphics[width=1.0\textwidth]{artigo/figuras/terraform_cloud.png}
+	 \vspace{-0.2cm}
+	\\\textbf{\footnotesize Fonte: \cite{terraform_cloud}}
+	\label{fig:figura11}
+\end{figure}
+\vspace{-0.5cm}
+
+\hfill
+
 
 
 
